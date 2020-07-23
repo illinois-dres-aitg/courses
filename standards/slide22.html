@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "">
+<html lang="en">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Slide 22: ARIA Practcies: Menu Button Design Pattern</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
+<link rel="stylesheet" type="text/css" href="../css/xml-slides.css">
+<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/xml-slides.js"></script>
+<style id="style"></style>
+</head>
+<body>
+<nav id="nav" class="navbar navbar-default">
+<div class="container">
+<div class="navbar-header">
+<button class="navbar-toggle collapsed navbar-left" data-toggle="collapse" data-target="#slide-nav"><span class="sr-only">
+                  Toggle navigation
+                </span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+</div>
+<div id="slide-nav" class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li>
+<a id="ID_SLIDE_INDEX" href="index.html">
+                        Index
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_FIRST" href="slide1.html" title="Slide 1">
+                        First
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_PREVIOUS" href="slide21.html" title="Slide 21">
+                        Previous
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_NEXT" href="slide23.html" title="Slide 23">
+                        Next
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_LAST" href="slide28.html" title="Slide 28">
+                        Last
+                      </a>
+</li>
+</ul>
+<ul class="nav navbar-nav pull-right">
+<li style="float: left">
+<a target="transcript" href="transcript.html#slide22">
+                        Full Audio Transcript
+                    </a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main id="content" class="container">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-9">
+<h1 id="h1_title" class="title">ARIA Practcies: Menu Button Design Pattern</h1>
+<p>
+        
+<a href="https://www.w3.org/TR/wai-aria-practices/#menubutton" target="_specification">Menu Button Design Pattern</a>
+      
+</p>
+<h2>Important Features</h2>
+<ul>
+        
+<li>Description</li>
+        
+<li>Keyboard Support</li>
+        
+<li>Properties and States</li>
+        
+<li>Example implementations</li>
+      
+</ul>
+<iframe src="https://www.w3.org/TR/wai-aria-practices/#menubutton" width="99%" height="600px" title="ARIA Practices: Menu Button Design Patter"></iframe>
+</div>
+<div class="col"></div>
+</div>
+</main>
+<aside class="container" aria-label="Transcript">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-9">
+<details class="transcript-container">
+<summary id="id-slide-transcript-button" class="btn-primary btn-sm" title="Audio transcript of the portion of the video for this slide">
+                          Audio Transcript
+                        </summary>
+<div class="slide-transcript">
+
+The ARIA practices contain information about how to use ARIA widget roles to create WCAG compliant custom interactive components on a web page.   This slide shows the design pattern for a menu button.   The pattern includes a description defining what ARIA means by a menu button, the keyboard support and the properties and states used in the pattern.  It is important to understand the ARIA definition of user interface components when using ARIA roles, properties and states, since the same or similar terms are often used by designers and Javascript component libraries that do not have the same function or behaviors.
+
+The menu button pattern describes using the SPACE or ENTER key to open the popup menu and move focus to the first item in the menu.  It also recommends supporting the UP ARROW and DOWN ARROW keys to open the menu, with UP ARROW moving focus to the last item in the menu instead of the first item.
+
+The two key features that identify the button as a menu button are the element having the role=button and aria-haspopup equal to &ldquo;true&rdquo; or&rdquo; menu&rdquo;.  It also describes how other aria-expanded and aria-controls should be used.
+    </div>
+</details>
+</div>
+<div class="col"></div>
+</div>
+</aside>
+<footer class="container">
+<div id="footer" class="well well-sm">
+<a href="https://illinois.edu" alt="University of Illinois">
+      <img src="..\images\block-i.png">
+    </a>
+    
+      
+    
+    Copyright &copy; 2020 University of Illinois
+  </div>
+</footer>
+</body>
+</html>

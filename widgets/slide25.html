@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "">
+<html lang="en">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Slide 25: Typical Inaccessible Disclosure FAQ</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
+<link rel="stylesheet" type="text/css" href="../css/xml-slides.css">
+<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/xml-slides.js"></script>
+<style id="style">
+        .faq h3 {
+            margin: 0;
+            padding: 0;
+            margin-top: 1em;
+            font-weight: bold;
+            font-size: 110%;
+            border: thin solid transparent;
+            background-color: transparent;
+            padding-left: 0.125em;
+        }
+
+
+        .faq .desc {
+            margin: 0;
+            padding: 0.5em;
+            font-size: 110%;
+            display: none;
+            background-color: #FFFEDB;
+        }
+
+        .faq h3:hover {
+          background-color: #eee;
+        }
+
+        .faq h3:focus {
+          border-color: #663300;
+        }
+
+        .faq h3:active {
+          background-color: #bbb;
+        }
+
+        .faq h3:before {
+          content: url('http://w3c.github.io/aria-practices/examples/disclosure/images/right-arrow-brown.png');
+          padding-right: 0.35em;
+        }
+
+        .faq h3.expanded:before {
+          content: url('http://w3c.github.io/aria-practices/examples/disclosure/images/down-arrow-brown.png');
+          padding-right: 0.35em;
+        }
+    </style>
+</head>
+<body>
+<nav id="nav" class="navbar navbar-default">
+<div class="container">
+<div class="navbar-header">
+<button class="navbar-toggle collapsed navbar-left" data-toggle="collapse" data-target="#slide-nav"><span class="sr-only">
+                  Toggle navigation
+                </span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+</div>
+<div id="slide-nav" class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li>
+<a id="ID_SLIDE_INDEX" href="index.html">
+                        Index
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_FIRST" href="slide1.html" title="Slide 1">
+                        First
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_PREVIOUS" href="slide24.html" title="Slide 24">
+                        Previous
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_NEXT" href="slide26.html" title="Slide 26">
+                        Next
+                      </a>
+</li>
+<li>
+<a id="ID_SLIDE_LAST" href="slide67.html" title="Slide 67">
+                        Last
+                      </a>
+</li>
+</ul>
+<ul class="nav navbar-nav pull-right">
+<li class="nav navbar-text">Slide 25 of 67</li>
+</ul>
+</div>
+</div>
+</nav>
+<main id="content" class="container">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-9">
+<h1 id="h1_title" class="title">Typical Inaccessible Disclosure FAQ</h1>
+<ul>
+        
+<li>Headings are not really appropriate for identifying an interactive element.</li>
+        
+<li>Only the mouse can be used to hide and show the description asociated with each FAQ.</li>
+        
+<li>No information on the heading being an interactive element.</li>
+      
+</ul>
+<script id="script" type="text/javascript">
+        function toggleDescription(event, id) {
+          var target = event.currentTarget;
+          var desc   = document.getElementById(id);
+
+          if (target.classList.toggle('expanded')) {
+              desc.style.display = 'block';
+          }
+          else {
+              desc.style.display = 'none';
+          }
+        };
+      </script>
+<h2>Example</h2>
+<p>
+<a id="id_disclosure_inaccessible" href="https://webedit.disability.illinois.edu/user/jongund/aria-disclosure-not-accessible/output/" target="_webedit">Inaccessible disclosure on WebEdit</a> (<a href="https://webedit.disability.illinois.edu/user/jongund/aria-disclosure-not-accessible/copy/" aria-describedby="id_disclosure_inaccessible">Copy to Webedit</a>)</p>
+<div id="example">
+        
+<div class="faq">
+          
+<h3 onclick="toggleDescription(event,'faq1_desc')">
+            What do I do if I have a permit for an assigned lot, but can't find a space there?
+          </h3>
+          
+<p id="faq1_desc" class="desc">
+
+                Park at the nearest available parking meter without paying the meter
+                and call 999-999-9999 to report the problem. We will note and approve your alternate
+                location and will investigate the cause of the shortage in your assigned facility.
+
+          </p>
+
+          
+<h3 onclick="toggleDescription(event,'faq2_desc')">
+            What do I do if I lose my permit or if my permit is stolen?
+          </h3>
+          
+<p id="faq2_desc" class="desc">
+            You should come to the Parking office and report the
+                loss. There is a fee to replace your lost permit. However, if your permit was stolen, a
+                copy of a police report needs to be submitted along with a stolen parking permit form for
+                a fee replacement exemption.
+
+          </p>
+
+          
+<h3 onclick="toggleDescription(event,'faq3_desc')">
+            Is there free parking on holidays?
+          </h3>
+          
+<p id="faq3_desc" class="desc">
+
+                All facilities are restricted from 2:00 am - 6:00 am on all days. No
+                exceptions are made for any holiday or recess except those officially listed as a
+
+            <q>
+              Holidays
+            </q>
+             in the calendar. Please note: 24-hour rental spaces, 24-hour rental lots, and
+                disabled parking is enforced at all times.
+
+          </p>
+
+          
+<h3 onclick="toggleDescription(event,'faq4_desc')">
+            Do all parking facilities have the same enforcement rules?
+          </h3>
+          
+<p id="faq4_desc" class="desc">
+
+                Some parking facility restrictions differ from others. Be sure to
+                take note of the signs at each lot entrance.
+
+          </p>
+        
+</div>
+     
+</div>
+<h2>HTML Source Code</h2>
+<pre>
+<code id="sc1"></code>
+</pre>
+<h2>CSS Source Code</h2>
+<pre>
+<code id="sc2"></code>
+</pre>
+<h2>Javascript Source Code</h2>
+<pre>
+<code id="sc3"></code>
+</pre>
+<script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+</div>
+<div class="col"></div>
+</div>
+</main>
+<footer class="container">
+<div id="footer" class="well well-sm">
+<a href="https://illinois.edu" alt="University of Illinois">
+      <img src="..\images\block-i.png">
+    </a>
+    
+      
+    
+    Copyright &copy; 2020 University of Illinois
+  </div>
+</footer>
+</body>
+</html>
