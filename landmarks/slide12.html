@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
-<link rel="stylesheet" type="text/css" href="../css/xml-slides.css">
-<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/xml-slides.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/html-slides.css">
+<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
 <style id="style"></style>
 </head>
 <body>
@@ -62,90 +62,90 @@
 <div class="col-md-9">
 <h1 id="h1_title" class="title">MAIN Landmark</h1>
 <table class="table table-striped table-hover" aria-labelledby="id1">
-        
+
 <tbody>
-          
+
 <tr>
-            
+
 <th>Definition</th>
             <td>
               A <code>main</code> landmark identifies the primary content of the page.
             </td>
-          
+
 </tr>
-          
+
 <tr>
-            
+
 <th>ARIA 1.1 Specification</th>
             <td>
               <a href="https://www.w3.org/TR/wai-aria/#main" target="_specification"><code>main</code> landmark</a>
             </td>
-          
+
 </tr>
-          
+
 <tr>
-            
+
 <th>Coding Patterns</th>
             <td>
-              
+
 <ul>
-                
+
 <li>Each page should have one <code>main</code> landmark.</li>
-                
+
 <li>The <code>main</code> landmark should be a top-level landmark.</li>
-                
+
 <li>When a page contains nested <code>document</code> and/or <code>application</code> roles (e.g. typically through the use of <code>iframe</code> and <code>frame</code> elements),
                   each <code>document</code> or <code>application</code> role may have one <code>main</code> landmark.</li>
-                
+
 <li>If a page includes more than one <code>main</code> landmark, each should have a unique label.</li>
-              
+
 </ul>
-            
+
 </td>
-          
+
 </tr>
-          
+
 <tr>
-            
+
 <th>Techniques</th>
             <td>
-              
+
 <ul>
-                
+
 <li>Use the HTML5 <code>main</code> element to define a <code>main</code> landmark.</li>
-                
+
 <li>If the HTML5 <code>main</code> element technique is not being used, use a <code>role="main"</code> attribute to define a <code>main</code> landmark.</li>
-              
+
 </ul>
-            
+
 </td>
-          
+
 </tr>
-          
+
 <tr>
-            
+
 <th>Headings</th>
             <td>
-              
+
 <ul>
-                
+
 <li>Each main landmark should have an <code>h1</code> element describing the main content.</li>
-                
+
 <li>If there are more than one main landmarks on the page, use <code>aria-labelledby</code> to reference the <code>h1</code> elements for labeling each landmark.</li>
-              
+
 </ul>
-            
+
 </td>
-          
+
 </tr>
-        
+
 </tbody>
-      
+
 </table>
 <h2>One Main Landmark</h2>
 <h3>HTML5 <code>main</code> element technique</h3>
 <div class="code">
-        
+
 <strong>&lt;main&gt;</strong>
 <br>
 <br>
@@ -153,9 +153,9 @@
 <br>
         &nbsp;&nbsp;.... <em>main content</em>....   <br>
 <br>
-        
+
 <strong>&lt;/main&gt;</strong>
-      
+
 </div>
 <h3>
 <code>[role="main"]</code> attribute technqiue</h3>
@@ -171,7 +171,7 @@
       </div>
 <h2>Multiple Main Landmarks</h2>
 <div class="code">
-        
+
 <strong>&lt;main  aria-labelledby="<em>title1</em>"&gt;</strong>
 <br>
 <br>
@@ -179,13 +179,13 @@
 <br>
         &nbsp;&nbsp;.... <em>main content</em>....<br>
 <br>
-        
+
 <strong>&lt;/main&gt;</strong>
 <br>
 <br>
         ....<br>
 <br>
-        
+
 <strong>&lt;main  aria-labelledby="<em>title2</em>"&gt;</strong>
 <br>
 <br>
@@ -193,11 +193,11 @@
 <br>
         &nbsp;&nbsp;.... <em>main content</em>....<br>
 <br>
-        
+
 <strong>&lt;/main&gt;</strong>
 <br>
 <br>
-      
+
 </div>
 </div>
 <div class="col"></div>

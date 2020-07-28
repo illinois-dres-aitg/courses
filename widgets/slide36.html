@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
-<link rel="stylesheet" type="text/css" href="../css/xml-slides.css">
-<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/xml-slides.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/html-slides.css">
+<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
 <style id="style">
       div {
         border: solid medium transparent;
@@ -161,179 +161,179 @@
 <h1 id="h1_title" class="title">Popup Error Example 2: label[for] references error message</h1>
 <h2>Features</h2>
 <ul>
-        
+
 <li>
 <code>label[for]</code> element is used to label form control.</li>
-        
+
 <li>
 <code>label[for]</code> element is used for error feedback.</li>
-        
+
 <li>HTML5 <code>required</code> attribute to identify a form control is required.</li>
-        
+
 <li>
 <code>aria-invalid</code> attribute is used to identify a form control has an invalid value.</li>
-      
+
 </ul>
 <div role="region" aria-label="Example">
 
-        
+
 <div id="id-errors" role="region" aria-label="Error information">
 
-        
+
 </div>
 
-        
+
 <form id="form">
-          
+
 <h2>Pizza Order Form</h2>
 
-          
+
 <div class="text">
-            
+
 <label for="id-name">Name</label>
             <input id="id-name" required="true" aria-invalid="false" type="text" size="30" onblur="checkName()">
             <label for="id-name" id="id-name-error" class="noerror"> </label>
-          
+
 </div>
 
-          
+
 <div class="text">
-            
+
 <label for="id-address">Address</label>
             <input id="id-address" required="true" aria-invalid="false" type="text" size="40" onblur="checkAddress()">
             <label for="id-address" id="id-address-error" class="noerror"> </label>
-          
+
 </div>
 
-          
+
 <div class="text">
-            
+
 <label for="id-phone">Phone</label>
             <input id="id-phone" required="true" aria-invalid="false" type="text" size="14" onblur="checkPhone()">
             <label for="id-phone" id="id-phone-error" class="noerror"> </label>
-          
+
 </div>
 
-          
+
 <div class="select">
-            
+
 <label for="id-delivery">Delivery Method</label>
             <select id="id-delivery">
               <option>Eat in store</option>
               <option>Pickup</option>
               <option>Home delivery</option>
             </select>
-          
+
 </div>
 
-          
+
 <fieldset>
-            
+
 <legend>Crust</legend>
-            
+
 <div class="button">
-              
+
 <label><input id="id-thin" name="crust" type="radio" value="Thin" required="true"> Thin</label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label><input id="id-classic" name="crust" type="radio" value="Classic" required="true"> Classic</label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label><input id="id-deep" name="crust" type="radio" value="Deep Dish" required="true"> Deep Dish</label>
-            
+
 </div>
-          
+
 </fieldset>
 
-          
+
 <fieldset>
-            
+
 <legend>Toppings</legend>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-sausage" name="topping" type="checkbox" value="Sausage">
                 Sausage
               </label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-pepperoni" name="topping" type="checkbox" value="Pepperoni">
                 Pepperoni
               </label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-mushrooms" name="topping" type="checkbox" value="Mushrooms">
                 Mushrooms
               </label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-onions" name="topping" type="checkbox" value="Onions">
                 Onions
               </label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-green" name="topping" type="checkbox" value="Green Peppers">
                 Green Peppers
               </label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-black" name="topping" type="checkbox" value="Black Olives">
                 Back Olives
               </label>
-            
+
 </div>
-            
+
 <div class="button">
-              
+
 <label>
                 <input id="id-x-cheese" name="topping" type="checkbox" value="Extra Cheese">
                 Extra cheese
               </label>
-            
+
 </div>
-          
+
 </fieldset>
 
-          
+
 <input type="submit" value="Submit Order" onclick="submitOrder(event)">
 
-        
+
 </form>
 
-        
+
 <div id="order">
 
-        
+
 </div>
 
-      
+
 </div>
 <script id="script" type="text/javascript">
 
@@ -486,9 +486,9 @@
 <a href="https://illinois.edu" alt="University of Illinois">
       <img src="..\images\block-i.png">
     </a>
-    
-      
-    
+
+
+
     Copyright &copy; 2020 University of Illinois
   </div>
 </footer>

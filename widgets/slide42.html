@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
-<link rel="stylesheet" type="text/css" href="../css/xml-slides.css">
-<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/xml-slides.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/html-slides.css">
+<script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
 <style id="style">
       div {
       border: solid medium transparent;
@@ -133,159 +133,159 @@
 <h1 id="h1_title" class="title">Popup Error Example 5: aria-labelledby attribute used for error message</h1>
 <h2>Features</h2>
 <ul>
-        
+
 <li>
 <code>aria-labelledby</code> attribute is used to label form control and includes element with error message.</li>
-        
+
 <li>HTML5 <code>required</code> attribute to identify a form control is required.</li>
-        
+
 <li>
 <code>aria-invalid="true"</code> attribute is used to identify a form control has an invalid value, otherwise the attribute is removed for compatibility with Firefox.</li>
-        
+
 <li>
 <code>role="status"</code> is used to autmatically announce errors in form controls.</li>
-      
+
 </ul>
 <div role="region" aria-label="Example">
 
-        
+
 <div id="id-errors" role="region" aria-label="Error information">
 
-        
+
 </div>
 
-        
+
 <form id="form">
-          
+
 <h2>Pizza Order Form</h2>
 
-          
+
 <div class="text">
-            
+
 <div id="id-name-label">Name</div>
-            
+
 <input id="id-name" required="true" type="text" size="30" aria-labelledby="id-name-label id-name-error" onblur="checkName()">
             <span id="id-name-error" class="noerror" role="status"> </span>
-          
+
 </div>
 
-          
+
 <div class="text">
-            
+
 <div id="id-address-label">Address</div>
-            
+
 <input id="id-address" required="true" type="text" size="40" aria-labelledby="id-address-label id-address-error" onblur="checkAddress()">
             <span id="id-address-error" class="noerror" role="status"> </span>
-          
+
 </div>
 
-          
+
 <div class="text">
-            
+
 <div id="id-phone-label">Phone</div>
-            
+
 <input id="id-phone" required="true" type="text" size="14" aria-labelledby="id-phone-label id-phone-error" onblur="checkPhone()">
             <span id="id-phone-error" class="noerror" role="status"> </span>
-          
+
 </div>
 
-          
+
 <div class="select">
-            
+
 <div id="id-delivery-label">Delivery Method</div>
-            
+
 <select id="id-delivery" aria-labelledby="id-delivery-label">
               <option>Eat in store</option>
               <option>Pickup</option>
               <option>Home delivery</option>
             </select>
-          
+
 </div>
 
-          
+
 <div class="group">
-            
+
 <div id="id-crust" class="title">Crust</div>
-            
+
 <div class="button">
-              
+
 <input id="id-thin" name="crust" type="radio" value="Thin" aria-required="true" aria-labelledby="id-thin id-crust"> Thin
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-classic" name="crust" type="radio" value="Classic" aria-required="true" aria-labelledby="id-thin id-crust"> Classic
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-deep" name="crust" type="radio" value="Deep Dish" aria-required="true" aria-labelledby="id-thin id-crust"> Deep Dish
             </div>
-          
+
 </div>
 
-          
+
 <div class="group">
-            
+
 <div id="id-toppings" class="title">Toppings</div>
-            
+
 <div class="button">
-              
+
 <input id="id-sausage" name="topping" type="checkbox" value="Sausage" aria-labelledby="id-sausage id-toppings" aria-describedby="id-special">
                 Sausage
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-pepperoni" name="topping" type="checkbox" value="Pepperoni" aria-labelledby="id-pepperoni id-toppings">
                 Pepperoni
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-mushrooms" name="topping" type="checkbox" value="Mushrooms" aria-labelledby="id-mushrooms id-toppings">
                 Mushrooms
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-onions" name="topping" type="checkbox" value="Onions" aria-labelledby="id-onions id-toppings">
                 Onions
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-green" name="topping" type="checkbox" value="Green Peppers" aria-labelledby="id-green id-toppings">
                 Green Peppers
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-black" name="topping" type="checkbox" value="Black Olives" aria-labelledby="id-black id-toppings">
                 Back Olives
             </div>
-            
+
 <div class="button">
-              
+
 <input id="id-x-cheese" name="topping" type="checkbox" value="Extra Cheese" aria-labelledby="id-x-cheese id-toppings">
                 Extra cheese
             </div>
-          
+
 </div>
 
-          
+
 <input type="submit" value="Submit Order" onclick="submitOrder(event)">
 
-        
+
 </form>
 
-        
+
 <div id="order">
 
-        
+
 </div>
 
-      
+
 </div>
 <script id="script" type="text/javascript">
 
@@ -438,9 +438,9 @@
 <a href="https://illinois.edu" alt="University of Illinois">
       <img src="..\images\block-i.png">
     </a>
-    
-      
-    
+
+
+
     Copyright &copy; 2020 University of Illinois
   </div>
 </footer>
