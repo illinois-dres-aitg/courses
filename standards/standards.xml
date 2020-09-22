@@ -311,8 +311,8 @@ The data in the table show that Tim’s vision of creating a web for everyone is
 
       <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      <script src="../highcharts/code/highcharts.js"></script>
-      <script src="../highcharts/code/modules/exporting.js"></script>
+      <script src="../js/highcharts/code/highcharts.js"></script>
+      <script src="../js/highcharts/code/modules/exporting.js"></script>
 
       <script type="text/javascript">
 
@@ -498,8 +498,8 @@ The ability to use the web will continue to be important as we age, so designing
 
       <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      <script src="../highcharts/code/highcharts.js"></script>
-      <script src="../highcharts/code/modules/exporting.js"></script>
+      <script src="../js/highcharts/code/highcharts.js"></script>
+      <script src="../js/highcharts/code/modules/exporting.js"></script>
 
       <script type="text/javascript">
 
