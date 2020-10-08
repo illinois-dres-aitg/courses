@@ -1,0 +1,33 @@
+p.title {
+  margin: 0;
+  padding: 0;
+}
+table {
+  margin-bottom: 2em;
+  font-family: verdana,arial,sans-serif;
+  font-size:11px;
+  color:#333333;
+  border-width: 1px;
+  border-color: #3A3A3A;
+  border-collapse: collapse;
+  font-size: 1em;
+}
+table th {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #13294b;
+  background-color: #13294b;
+  color: white;
+}
+table td {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #13294b;
+  background-color: #ffffff;
+}
+
+table tr:nth-child(even) {
+  background-color: #cad9ef;
+}
