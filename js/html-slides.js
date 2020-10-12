@@ -182,7 +182,6 @@ $(document).ready(function() {
 
     $(node).html(transcriptHTML);
 
-
   }
 
   var fullTranscriptNodes = document.querySelectorAll('.full-transcript');
@@ -267,19 +266,18 @@ $(document).keydown(function( event ) {
     event.preventDefault();
   }
 
-  if (event.ctrlKey) {
-    $('main').addClass('highlight');
+  if (event.altKey && event.ctrlKey && event.which == 32) {
+    if ($('main').hasClass('highlight')) {
+      $('main').removeClass('highlight');
+      $('footer').removeClass('highlight');
+    }
+    else {
+      $('main').addClass('highlight');
+      $('footer').addClass('highlight');
+    }
   }
 
 });
-
-$(document).keyup(function( event ) {
-  if (!event.ctrlKey) {
-    $('main').removeClass('highlight');
-  }
-
-});
-
 
 $(window).resize(
   function() {

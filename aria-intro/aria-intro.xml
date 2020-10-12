@@ -1,0 +1,3224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="funct.css" type="text/css"?>
+<?xm-well_formed path="funct.dtd"?>
+<slides>
+  <lang>en</lang>
+  <footer>
+    <a href="https://illinois.edu"
+      alt="University of Illinois">
+      <img src="..\images\block-i.png"/>
+    </a>
+    Copyright &#169; 2020 University of Illinois
+  </footer>
+  <title>Introduction Accessible Rich Internet Application (ARIA)</title>
+  <person>
+    <name>Jon Gunderson, Ph.D.</name>
+    <desc href="http://disability.illinois.edu">Division of Disability Resources and Educational Services</desc>
+    <desc href="http://ahs.illinois.edu">College of Applied Health Sciences</desc>
+    <desc href="http://illinois.edu">University of Illinois at Urbana-Champaign</desc>
+    <desc href="mailto:jongund@illinois.edu">jongund@illinois.edu</desc>
+  </person>
+
+  <desc href="http://disability.illinois.edu/academic-support/accessible-it-group/badging">Illinois A11y Badges</desc>
+
+  <stylesheet media="screen">../css/bootstrap.min.css</stylesheet>
+  <stylesheet media="screen">../css/bootstrap-theme.min.css</stylesheet>
+  <stylesheet media="screen">../css/bootstrap-accessibility.css</stylesheet>
+
+  <stylesheet media="screen">../css/html-slides.css</stylesheet>
+
+  <script>../js/jquery-2.1.1.min.js</script>
+  <script>../js/bootstrap.min.js</script>
+  <script>../js/bootstrap-accessibility.min.js</script>
+  <script>../js/html-slides.js</script>
+
+  <slide>
+    <title>Goals</title>
+    <contents>
+      <ul>
+        <li>Brief History of ARIA and HTML5</li>
+        <li>ARIA basics</li>
+        <li>Checkbox example</li>
+        <li>Menu Button design pattern and example</li>
+      </ul>
+      <script type="text/javascript">
+        slideShowURL()
+      </script>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Accessible Rich Internet Applications (ARIA) 1.1</title>
+    <contents>
+      <p class="center">
+        <a href="https://www.w3.org/TR/wai-aria" target="_specification">Accessible Rich Internet Applications 1.0</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/wai-aria/" title="ARIA 1.1 specfication" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>HTML Living Standard</title>
+    <contents>
+      <p class="center">
+        <a href="https://html.spec.whatwg.org/" target="_specification">HTML living standard</a>
+      </p>
+      <iframe src="https://html.spec.whatwg.org/" title="HTML living standard" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>HTML: main element</title>
+    <contents>
+      <p class="center">
+        <a href="https://html.spec.whatwg.org/#the-main-element" target="_specification">HTML: main element</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/html5/grouping-content.html#the-main-element" title="HTML5 MAIN element specfication" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+
+  <slide>
+    <title>HTML5: role restrictions</title>
+    <contents>
+      <p class="center">
+        <a href="https://www.w3.org/TR/html-aria/#el-li" target="_specification">HTML 5: role restrctions</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/html-aria/#el-li" title="HTML5 LI element specfication" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Accessible Rich Internet Application API Mappings</title>
+    <contents>
+      <p class="center">
+        <a href="https://www.w3.org/TR/core-aam-1.1/" target="_specification">Core Accessibility API Mappings for ARIA 1.1</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/core-aam-1.1/" title="Core Accessibility API Mappings for ARIA 1.1" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+
+  <slide>
+    <title>HTML API Mappings</title>
+    <contents>
+      <p class="center">
+        <a href="https://w3c.github.io/html-aam/" target="_specification">HTML5 Accessibility API Mappings 1.0</a>
+      </p>
+      <iframe src="https://w3c.github.io/html-aam/" title="HTML5 Accessibility API Mappings 1.0" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>The Problem of Custom Wigets</title>
+    <contents>
+      <h2>Problem</h2>
+      <ul>
+        <li>Starting arounf the year 2000 developers and designers started using HTML+CSS+Javascript to create <em>custom user interface widgets</em> (e.g. interactive controls) for web pages.</li>
+        <li>There was no standard and inter-operable way to make these <em>custom widgets</em> accessible.</li>
+      </ul>
+
+      <h2>Issues</h2>
+      <ul>
+        <li>Keyboard support.</li>
+        <li>Describing the widget behavior (e.g. role).</li>
+        <li>Labeling the features of the widget (e.g. accessible name).</li>
+        <li>Identifying properties and states. (e.g. checked, exapnded, has popup)</li>
+        <li>Communicating information through platform specific accessibility APIs.</li>
+        <li>Interoperability between browser and accessibility APIs.</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Purpose of ARIA is Describe Semantics and Behavior</title>
+    <contents>
+       <ul>
+         <li>Provide an inter-operable way to describe the features of <em>custom widgets</em>:
+           <ul>
+             <li><strong>Role:</strong> Describes the type of widget, which implies the <em>keyboard interaction</em>.</li>
+             <li><strong>Properties and States:</strong> Describing features like "expandable", "checked" or "selected".</li>
+             <li><strong>Language independence:</strong> Roles, properties and states can be translated by the operating systems and assistive technologies to local languages.</li>
+             <li><strong>Labeling:</strong> How to label the features of the widget and its components (e.g. accessible name).</li>
+             <li><strong>Relationships:</strong> How different components relate to each other (e.g. descriptions, controls, owns).</li>
+             <li><strong>Grouping:</strong> Groups of related components (e.g. lists, menus, trees, tab panels).</li>
+           </ul>
+        </li>
+        <li>Define markup mappings to accessibility APIs:
+          <ul>
+            <li>ATK/AT-SPI (Linux/Unix)</li>
+            <li>Microsoft Active Accessibility (MSAA) + IAccessible2</li>
+            <li>Microsoft UI Automate</li>
+            <li>MacOS Accessibility API</li>
+          </ul>
+         </li>
+      </ul>
+    </contents>
+    <transcript>
+      The basic purpose of aria which is to describe the semantics and behavior of webpages that does this in several ways.
+      Some of the important terms you will learn about today include:
+      The most basic feature of ARIA is the role attribute which describes to users of screen readers the type of keyboard interaction and the potential properties and states of a custom widget.
+      When people first look at the aria specification, they see all of these familiar roles like “menu”, “tab panel”, “dialog” and “navigation”.
+      They start looking around their webpage and feel that I have these things in my webpage and they start sprinkling the roles throughout their webpage thinking that’ll be more accessible.
+      Actually the page will be less accessible, since the keyboard interaction associated with these roles most likely is not supported.
+      Using roles that do not actually describe the behavior of a widget is analogous to someone opening up a door to what they think is a bathroom, stepping in and falling into a swimming pool.
+      The screen reader user will be disoriented.
+      For example, you use a “menu” role, but it is just a list of tab-able links, the cursor keys don’t work you just pushed the user into the pool.
+      Properties and states attributes communicate information about a widget being expanded, or if can open a pop-up menu, or a checkbox being checked or unchecked, more on that later.
+      An important feature that is often not understood about using ARIA roles, properties and states is that the translation of this information to local languages is handled by the browser and operating system.  This is an important feature when websites are used by people from all around the world.
+      Widgets and many structural roles need a label or accessible name.   ARIA defines how the accessible name is calculated.  For example, a role of “textbox” tells the user they can enter text, but the label “name” tells them this textbox is for entering your name.
+      There are other features for describing relationships between widgets and to identify groups of related content or controls.  When relationships and grouping are properly used screen readers can provide navigation features to allow users to more efficiently ignore and find content of interest to them.  When not properly used pages become more confusing and difficult to navigate.
+      The primary adage for people to developers not familiar with ARIA is “No ARIA is better than bad ARIA”.
+      ARIA does not directly interact with assistive technologies like screen readers.
+      ARIA only controls how information about a web page is communicate to screen readers through operating system accessibility APIs.
+      The current ARIA specification provides accessibility API mappings for ATK/AT-SPI (Linux/Unix), Microsoft Active Accessibility (MSAA) + IAccessible2 for Windows 10, Microsoft UI Automate for Windows 10 and the MacOS Accessibility API.
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>ARIA Contract with Browsers and Assistive Technologies</title>
+    <contents>
+      <h2>Browsers</h2>
+      <ul>
+        <li>The use of ARIA markup does not affect browser behavior or rendering.</li>
+        <li>ARIA only affects how information is represented in accessibility APIs (e.g. MSAA+IAccessible2, ATK+SPI, UIAutomate, MacOS).</li>
+      </ul>
+
+      <h2>Assistive Technologies</h2>
+      <ul>
+        <li>Do not specify what assistive technologies will do with the information.</li>
+      </ul>
+    </contents>
+    <transcript>
+        Slide 3 talks about the contract that ARIA working group made with browser developers and assistive technology developers.
+        First, for browser developers ARIA does not change the behavior of the web page.  So if I use a “menu” role or “aria-haspopup” on a web page, nothing changes about the web page in the standard graphical rendering.
+        This was important, because ARIA was originally designed to “repair” in accessible web pages, and add if adding ARIA “broke” changed the behavior of the web page is some way, it could break the page for people using the graphical rendering, it would not have been accepted by either the browser or developer community.
+        ARIA only changes what information is communicated to assistive technologies through accessibility APIs.
+        So if your page includes a “menu” role you as the author need to make sure it has the keyboard interaction for the menu role, and that keyboard interaction is available to all users of our web page.
+        ARIA if nothing else was a huge first step in standardizing how browsers map web page information to assistive technologies, which is fundamental for interoperability.
+        Before ARIA, browser developers had to make their own decisions about how to represent web content in accessibility APIS.
+        While some mapping like for headings (H1-H6) are pretty clear other content was open to interpretation, meaning which browser a screen reader was using could have a big impact on their experience.
+        The second promise was to developers of screen readers.
+        The promise to screen reader developers was not to tell them what to do with this information.
+        They said they know their users and would make use of the new information if it was reliable and important to their users.
+        This means it is not entirely predictable what adding ARIA to a web page will mean for users of different types of assistive technologies.
+        A new W3C working group called ARIA AT working group is developing test cases to see how different types of assistive technologies are rendering ARIA information.
+        This information is important to developers so they can understand how adding an ARIA feature will affect the user experience in different contexts, and also assistive technology companies for them to see where they may not be using all the ARIA information available to them.
+      </transcript>
+  </slide>
+
+  <slide>
+    <title>Tabindex and Keyboard Focus</title>
+    <contents>
+      <ul>
+        <li>
+          <a href="https://www.w3.org/TR/html4/interact/forms.html#adef-tabindex"  target="_specification">
+            HTM4 tabindex requirements
+          </a>
+        </li>
+        <li>
+          <a href="https://www.w3.org/TR/html5/editing.html#focus"  target="_specification">HTML focus</a>
+          and
+          <a href="https://html.spec.whatwg.org/multipage/interaction.html#the-tabindex-attribute"  target="_specification">tabindex</a> requirements.
+        </li>
+       <li>Actively define visual focus style, since the default browser visual focus styling of focus is typically hard to discern.</li>
+      </ul>
+
+      <h2 id="tabindex_values">Tabindex Values</h2>
+      <table class="table table-striped table-hover" aria-label="tabindex_values">
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>-1</td>
+            <td>
+              <ul>
+                <li>Support keyboard focus/blur events.</li>
+                <li>Not included in the tab order of the page.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>
+              <ul>
+                <li>Support keyboard focus/blur events.</li>
+                <li>Included in the tab order of the page.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>&gt; 0</td>
+            <td>
+              <ul>
+                <li>Support keyboard focus/blur events.</li>
+                <li>Defines the tab order of the page.</li>
+                <li><strong>Note:</strong> This technique is not recommended due to browser incompatibilities and unpredictable focus behaviors.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </contents>
+    <transcript>
+      Tabindex is an important feature for identifying which element on the page can receive keyboiard focus and keyboard events.
+      For example if I am building a web application and using DIV element to build a interactive menu with Javascript and CSS, I need to use tabindex to make the menu part of the tab sequence of the page and to allow keyboard events to change the menu selection.
+      Tabindex values of 0 are used to make elements part of the tab sequence of the page.
+      Tabindex values of -1 allow an element to receive keyboard focus and to process keyboard events, but the element is not included in the tabindex of a page.
+      Sometimes an element, like an Anchor or link element, which Is normally part of the tab sequence of the page will be used in a more complex tree or menu widget.
+      In this case we want to make sure the the link is not part of the tabindex of the web page by we setting its tabindex value to -1.
+      The only think I have to say about tabindex values besides 0 and -1 is one is don’t’ do it!
+      There are many bad things that can happen and not very much potential benefit to using tabindex values greater than 0.
+      I have never used a tabindex value greater than 0 in my 20 years of web development and we don’t have time in this presentation to do a deeper dive.
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Accessible Name Calculation</title>
+    <contents>
+        <ul>
+          <li><a href="https://www.w3.org/TR/accname-aam/">W3C Accessible Name and Description Computation Specification</a></li>
+          <li>In general only <strong>one</strong> technique should be used to define an accessible name, if more than on technique is used the following priortiy is used for the calculation.</li>
+        </ul>
+        <h2 id="heading_ant">Accessible Name Techniques</h2>
+        <table class="table table-striped table-hover" aria-labelledby="heading_ant">
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Technique</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>aria-labelledby</code></td>
+              <td>
+                <ul>
+                  <li>The <code>aria-labelledby</code> attribute contains a list of <code>IDREF</code>s to elements on the page.</li>
+                  <li>Text content of referenced elements are concatenated to compute the accessible name.</li>
+                  <li>References typically identify visible text on the screen in visual proximity to the control.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>aria-label</code></td>
+              <td>
+                <ul>
+                  <li>The <code>aria-label</code> attribute text content defines the accessible name.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>text content</td>
+              <td>
+                <ul>
+                  <li>Some ARIA widget roles allow the text content of the container element to define an accessible name (e.g. <code>role="checkbox"</code>).</li>
+                  <li>Text content includes text alternatives, for example <code>alt</code> attribute content of an <code>img</code> element.</li>
+                  <li>Text content includes text from generated CSS, for example when the <code>content</code> property is used.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>title</code></td>
+              <td>
+                <ul>
+                  <li>If no other source of an accessible name is found and the element has a <code>title</code> attribute, the content of the <code>title</code> attribute will used to define the accessible name.</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </contents>
+    <transcript>
+      Most ARIA roles need an accessible name or sometimes referred to as a label in HTML.
+
+      Using text on the screen are typically the best sources for the accessible name for controls and widgets, since the text will be the same for both the person using the graphical rendering and the person using a screen reader.
+
+      For example, in the checkbox example we will be going through shortly we will be use the text content of the DIV element for the accessible name.
+
+      This slide provides an overview of the different techniques that can use used to define an accessible name.
+
+      Browsers will first look for an aria-labelledby attribute.
+
+      Aria-labelledby attribute uses ID references to point to text on the web page to create the accessible name.
+
+      If more than one ID is provided the text is concatenated to compute the accessible name.
+
+      This is the most complex way to generate the accessible name and can also be used to include values of other controls and widgets on the page.
+
+      If aria-labelledby is not found the next item the browser will look for is the aria-label attribute.
+
+      In this case the text content of the aria-label attribute is used as a the accessible name.
+
+      If the aria-label attribute is not found and starting with the release of ARIA 1.2 the browser will look for a label role for a small subset of widget roles that can be labeled using encapsulation.
+
+      The label role will typically be ddefined using the standard HTML LABEL element.
+
+      For the group and radiogroup roles, the LEGEND element can be used to define an accessible name starting in ARIA 1.2.
+
+      Some widget roles like checkbox in our example today, can be labeled use the child text content.
+
+      If no other accessible name has been found for a widget and the element has a title attribute, the content of the title attribute will be used for the accessible name.
+
+      The title attribute is usually not considered a good source for the accessible name, since it is used by many browser to render a tooltip.  Tooltips are generally used more to provide help than a label, so therefore usually not too good as a label.
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Accessible Description Calculation</title>
+    <contents>
+        <ul>
+          <li><a href="https://www.w3.org/TR/accname-aam/">W3C Accessible Name and Description Computation Specification</a></li>
+          <li>Accessible description provides more information about a form control, link or aria widget.</li>
+          <li>Screen readers each have their own ways of rendering and sometimes ignoring the <em>description information</em> information.</li>
+        </ul>
+        <h2 id="heading_ant">Accessible Description Techniques</h2>
+        <table class="table table-striped table-hover" aria-labelledby="heading_ant">
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Technique</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>aria-describedby</code></td>
+              <td>
+                <ul>
+                  <li>The <code>aria-describedby</code> attribute contains a list of <code>IDREF</code>s to elements on the page.</li>
+                  <li>Text content of referenced elements are concatenated to compute the <em>accessible description</em>.</li>
+                  <li>Designed to reference visible text on the screen, like instructions and error feedback.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>title</code></td>
+              <td>
+                <ul>
+                  <li>If no other source of an <em>accessible description</em> is found and the element has a <code>title</code> attribute that is <strong>not</strong> being used to define an accessible name, the content of the <code>title</code> attribute is used to define the <em>accessible description</em>.</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </contents>
+    <transcript>
+      The accessible description calculation is similar to accessible name, but there are fewer options.
+
+      The description of a widget is typically spoken by a screen reader last after role, accessible name, and any properties and state information.
+
+      Screen reader also can configure their screen reader to not render most descriptions if they find they are a distraction or not very helpful on a web page.
+
+      Similar to aria-labelledby there is an aria-describedby that uses the same algorithm as aria-labelledby, but used to to identify a description.
+
+      Browsers will look for the aria-describedby attribute first.
+
+      If there is not aria-describedby attribute, in the release of ARIA 1.2 there is a new aria-description attribute that can be used, similar to aria-label.
+
+      Last the browser will use the title attribute to define a description, if it is not being used for the accessible name.
+
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Example Widget: Inaccessible Custom Checkbox</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 2px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+     margin-right: 0.25em;
+}
+ div.checkbox span:before {
+     content: '✗';
+     color: red;
+}
+
+div.checkbox.checked span {
+  margin-right: 0.375em;
+}
+
+div.checkbox.checked span:before {
+     content: '✓';
+     color: green;
+     font-size: 90%;
+}
+ label {
+}
+ label:hover,
+.checkbox:hover {
+     padding: 0;
+     border: 2px solid #000;
+     background-color: #CCD;
+}
+    </style>
+    <contents>
+     <h2>Accessibility Issues</h2>
+     <ul>
+      <li>Keyboard support</li>
+      <li>Keyboard focus styling</li>
+      <li>Role information</li>
+      <li>Accessible name</li>
+      <li>State of checkbox</li>
+     </ul>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-inaccessible/output/" target="_webedit">Checkbox example on WebEdit</a></p>
+
+     <script id="script">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+ } else {
+  node.classList.add('checked');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+     </script>
+
+     <div id="example">
+      <fieldset>
+        <legend>
+            Pizza Toppings
+        </legend>
+        <label>
+          <input type="checkbox"/>
+            Green pepper
+         </label>
+        <label>
+          <input type="checkbox"/>
+            Onion
+        </label>
+        <div class="checkbox"
+             onclick="clickCheckbox(event)">
+          <span></span>
+            Mushrooms
+        </div>
+        <div class="checkbox"
+            onclick="clickCheckbox(event)">
+          <span></span>
+            Spinach
+        </div>
+      </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+    <transcript>
+      This slide shows a set of 4 checkboxes.
+      The first 2 are standard HTML checkboxes and the next two are custom checkboxes made out of DIV elements, Javascript and CSS.
+      The accessibility issues for these custom checkboxes include:
+      Keyboard support so that screen reader and keyboard only users can interact with the checkbox.
+      Keyboard focus styling so that keyboard only users can see that they are interacting with the checkbox.
+      Role information on the custom widget being a checkbox.
+      Accessible name identifying what the checkbox is about.
+      Communicating the state of checkbox.
+
+      As we view the source code you can see that the first two checkboxes are defined using the standard HTML input type checkbox.
+
+      The last two checkbox are defined using DIV elements with event handlers and CSS to define the checked state using the psuedo technique of ::before based on the class name of "checked".
+
+      The Javascript shows a only a click event handler for operation with only the mouse.
+    </transcript>
+  </slide>
+
+ <slide>
+    <title>Basic Screen Reader Commands</title>
+    <contents>
+      <table class="table table-striped table-hover" aria-label="Basic Screen Reader Commands">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>JAWS (Windows)</th>
+            <th>NVDA (Windows)</th>
+            <th>Voice Over (OS X)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Next link, form control or widget</td>
+            <td>Tab</td>
+            <td>Tab</td>
+            <td>Tab</td>
+          </tr>
+          <tr>
+            <td>Previous link, form control or widget</td>
+            <td>Shift+Tab</td>
+            <td>Shift+Tab</td>
+            <td>Shift+Tab</td>
+          </tr>
+          <tr>
+            <td>Re-read current item</td>
+            <td>Insert+Numpad 5</td>
+            <td>NVDA+Numpad 5 or NVDA+Shift+O</td>
+            <td>Command+Option+Space</td>
+          </tr>
+          <tr>
+            <td>More information on item</td>
+            <td>Insert+SHIFT+F1 and Insert+Control+Shift+F1</td>
+            <td>NVDA+D</td>
+            <td>Control+Option+F4</td>
+          </tr>
+          <tr>
+            <td>List of Links</td>
+            <td>Insert+F7</td>
+            <td>NVDA+F7</td>
+            <td>Command+Option+U, then left/right arrow to list of links</td>
+          </tr>
+          <tr>
+            <td>Detailed Keyboard Information</td>
+            <td><a href="http://doccenter.freedomscientific.com/doccenter/archives/training/jawskeystrokes.htm">JAWS Keyboard Documentation</a></td>
+            <td><a href="http://www.nvaccess.org/files/nvda/documentation/userGuide.html">NVDA Documentation</a></td>
+            <td><a href="https://www.apple.com/voiceover/info/guide/">Voice Over Guide</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </contents>
+    <transcript>
+      This slide shows some basic keyboard commands for using screen readers.
+
+      I encourage you to try these examples with a screen reader so you can begin to understand the experience of using a screen reader and see how adding ARIA changes the user experience.
+
+      The examples I am showing today mostly just requires using the TAB key and listening to the information the screen reader is speaking.
+
+      Some screen reader like NVDA and VoiceOver have a optional panel to visually show what they are speaking if it is difficult for you to understand what is being spoken.
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Part 1 Responding to the keyboard</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 2px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+}
+
+div.checkbox span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+div.checkbox.checked span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+    </style>
+    <contents>
+      <ul>
+        <li>Adding <code>tabindex="0"</code> to make part of tab order of the page.</li>
+        <li>Add <code>onKeyDown</code> event handler to toggle checkbox when <kbd>space</kbd> key is pressed.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+ } else {
+  node.classList.add('checked');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-1/output/" target="_webedit">Part 1 on WebEdit</a></p>
+
+     <div id="example">
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    </contents>
+    <transcript>
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Part 2: Adding role, checked state and accessible name</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 2px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+}
+
+div.checkbox span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+div.checkbox.checked span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+
+label:hover,
+.checkbox:hover {
+     padding: 0;
+     border: 2px solid #000;
+     background-color: #CCD;
+}
+</style>
+    <contents>
+      <ul>
+        <li>Adding <code>role="checkbox"</code> to make part of tab order of the page.</li>
+        <li>Adding <code>aria-checked</code> attribute.</li>
+        <li>Accessible name from text content.</li>
+        <li>Removing state character (e.g. <span style="color: red">✗</span>) from accessible name using <code>aria-hidden</code>.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+  node.setAttribute('aria-checked', 'false');
+ } else {
+  node.classList.add('checked');
+  node.setAttribute('aria-checked', 'true');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-2/output/" target="_webedit">Part 2 on WebEdit</a></p>
+
+     <div id="example">
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    </contents>
+  </slide>
+
+ <slide>
+    <title>Part 3: Keyboard Focus and hover styling</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 4px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+}
+
+div.checkbox span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+div.checkbox.checked span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+
+label.focus,
+div.checkbox:focus {
+  padding: 2px;
+  border: 2px solid #999;
+  background-color: #DDE;
+}
+
+label:hover,
+div.checkbox:hover {
+  background-color: #CCD;
+}
+    </style>
+    <contents>
+      <ul>
+        <li>Keyboard <code>focus</code> and <code>hover</code> styling should be similar to to harmonize the look and feel of styling between interaction techniques.</li>
+        <li>Recommend <code>focus</code> styling has a border and <code>hover</code> does not.</li>
+        <li><code>focus</code> styling should use a 2 pixel<code>border</code> or <code>outline</code> width to make the control with focus easy for users to see and track.</li>
+        <li>If the <code>border</code> technique is used the <code>border</code> must be removed when the widget does not have focus to support focus styling to change when users select operating system high contrast modes.</li>
+        <li>Need to use <code>onfocus</code> and <code>onblur</code> events to create focus styling of standard radio buttons and checkboxes by styling their labels.</li>
+        <li>Styling background color makes the focus change much easier to detect visually.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+  node.setAttribute('aria-checked', 'false');
+ } else {
+  node.classList.add('checked');
+  node.setAttribute('aria-checked', 'true');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+
+function checkboxFocus(event) {
+  event.currentTarget.parentElement.classList.add('focus');
+}
+
+function checkboxBlur(event) {
+  event.currentTarget.parentElement.classList.remove('focus');
+}
+      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-3/output/" target="_webedit">Part 3 on WebEdit</a></p>
+
+     <div id="example">
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+  </slide>
+
+ <slide>
+    <title>Part 4: Synchronization of ARIA and visual states</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+[role="checkbox"] {
+     padding: 4px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+[role="checkbox"] span {
+     padding: 0.25em;
+}
+
+[role="checkbox"] span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+[role="checkbox"][aria-checked="true"] span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+
+label.focus,
+[role="checkbox"]:focus {
+  padding: 2px;
+  border: 2px solid #999;
+  background-color: #DDE;
+}
+
+label:hover,
+[role="checkbox"]:hover {
+  background-color: #CCD;
+}
+    </style>
+    <contents>
+      <ul>
+        <li>Using CSS attribute selectors and CSS <code>content</code> property to synchronize visual and aria states.</li>
+        <li>Use of CSS <code>content</code> property supports high contrast browser settings, unike the use of CSS <code>background-image</code>.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.getAttribute('aria-checked') === 'true') {
+  node.setAttribute('aria-checked', 'false');
+ } else {
+  node.setAttribute('aria-checked', 'true');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+
+function checkboxFocus(event) {
+  event.currentTarget.parentElement.classList.add('focus');
+}
+
+function checkboxBlur(event) {
+  event.currentTarget.parentElement.classList.remove('focus');
+}
+      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-4/output/" target="_webedit">Part 4 on WebEdit</a></p>
+
+     <div id="example">
+<h1>Part 4: Custom Checkbox Widget with synchronization of ARIA and visual states</h1>
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Example Widget: Accessible Custom Checkbox Widget using ARIA</title>
+    <style id="style">
+      fieldset {
+        border-color: #EEE;
+        width: 10em;
+      }
+
+      fieldset legend {
+        font-size: 100%;
+      }
+
+      label,
+      [role="checkbox"] {
+        display: block;
+        margin: 0.25em;
+        font-weight: normal;
+        padding: 4px;
+        border: none;
+        width: 10em;
+      }
+
+      label input[type=checkbox] {
+        padding-left: 1em;
+      }
+
+      div[role="checkbox"] span:before {
+        content: '✗';
+        color: red;
+        padding-left: 0.125em;
+        padding-right: 0.25em;
+      }
+
+      div[role="checkbox"][aria-checked="true"] span:before {
+        content: '✓';
+        color: green;
+        padding-left: 0.125em;
+        padding-right: 0.315em;
+      }
+
+      label.focus,
+      [role="checkbox"]:focus {
+        padding: 2px;
+        border: 2px solid #999;
+        background-color: #DDE;
+      }
+
+      label:hover,
+      [role="checkbox"]:hover {
+        background-color: #CCD;
+      }
+    </style>
+    <contents>
+
+
+      <script id="script" type="text/javascript">
+        function toggleCheckbox(node) {
+          if (node.getAttribute('aria-checked') === 'true') {
+            node.setAttribute('aria-checked', 'false');
+          }
+          else {
+            node.setAttribute('aria-checked', 'true');
+          }
+        }
+
+        function keydownCheckbox(event) {
+          var cb = event.currentTarget;
+          if (event.key === ' ') {
+            toggleCheckbox(cb);
+
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }
+
+        function clickCheckbox(event) {
+          var cb = event.currentTarget;
+          toggleCheckbox(cb);
+          event.stopPropagation();
+          event.preventDefault();
+        }
+
+        function checkboxFocus(event) {
+          event.currentTarget.parentNode.classList.add('focus');
+        }
+
+        function checkboxBlur(event) {
+          event.currentTarget.parentNode.classList.remove('focus');
+        }
+      </script>
+
+     <h2>Features</h2>
+     <ul>
+       <li>Responds to mouse events using <code>onClick</code> event.</li>
+       <li>Responds to <kbd>space</kbd> keyboard event using <code>onKeyDown</code> event.</li>
+       <li><code>tabindex=0</code> makes widget keyboard focusable and include in tab order of page.</li>
+       <li><code>role="checkbox"</code> identifies widget to assistive technologies as a "checkbox".</li>
+       <li><code>aria-checked</code> attribute identifies the state as being "checked" or "unchecked".</li>
+       <li>Accessible name comes from child text content of the <code>div[role="checkbox"]</code> element.</li>
+       <li><code>aria-hidden</code> attribute hides the characters used for indicating state (i.e. <span style="color: red">✗</span> and <span style="color: green">✓</span>) from being included in the accessible name calculation.</li>
+       <li>CSS attribute selectors are used to keep the visual indication of checked state snychronized with accessibility API.</li>
+       <li><code>onFocus</code> and <code>onBlur</code> event handlers are used on standard checkboxes to provide visual indication of keyboard focus.</li>
+     </ul>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-accessible/output/" target="_webedit">Checkbox example on WebEdit</a></p>
+
+     <div id="example">
+    <fieldset>
+        <legend>
+
+            Pizza Toppings
+
+        </legend>
+        <label>
+          <input type="checkbox"
+               onfocus="checkboxFocus(event)"
+               onblur="checkboxBlur(event)"/>
+
+
+              Green pepper
+
+        </label>
+        <label>
+          <input type="checkbox"
+               onfocus="checkboxFocus(event)"
+               onblur="checkboxBlur(event)"/>
+
+              Onion
+
+        </label>
+        <div role="checkbox"
+           tabindex="0"
+           aria-checked="false"
+           onkeydown="keydownCheckbox(event)"
+           onclick="clickCheckbox(event)">
+          <span aria-hidden="true"></span>
+
+              Mushrooms
+
+        </div>
+        <div role="checkbox"
+           tabindex="0"
+           aria-checked="false"
+           onkeydown="keydownCheckbox(event)"
+           onclick="clickCheckbox(event)">
+          <span aria-hidden="true"></span>
+
+              Spinach
+
+        </div>
+      </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+   </contents>
+  </slide>
+
+  <slide>
+    <title>Using ARIA in HTML (Best Practices)</title>
+    <contents>
+      <p><a href="https://w3c.github.io/using-aria/">Using ARIA in HTML (Best Practices)</a></p>
+      <ul>
+        <li>Use native semantics of HTML (e.g. <code>input[type=checkbox]</code> rather than div[role=checkbox]).</li>
+        <li>Don't override native semantics of elements (e.g. <code>h2[role="banner]</code>).</li>
+        <li>Don't redefine the native semantics of an element (e.g. <code>main[role=main]</code>).</li>
+        <li>All interactive ARIA widgets must be operable with the keyboard.</li>
+        <li>Do not use role="presentation" or aria-hidden="true" on a visible focusable elements.</li>
+        <li>All interactive elements must have an accessible name.</li>
+        <li>Live regions (e.g. <code>aria-live</code> attribute and <code>log</code>, <code>status</code>, and <code>alert</code> roles) should be used with extreme caution, only for asynchronous content changes important for the users attention.</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Example Widget: Inaccessible Custom Checkbox</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 2px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+     margin-right: 0.25em;
+}
+ div.checkbox span:before {
+     content: '✗';
+     color: red;
+}
+
+div.checkbox.checked span {
+  margin-right: 0.375em;
+}
+
+div.checkbox.checked span:before {
+     content: '✓';
+     color: green;
+     font-size: 90%;
+}
+ label {
+}
+ label:hover,
+.checkbox:hover {
+     padding: 0;
+     border: 2px solid #000;
+     background-color: #CCD;
+}
+    </style>
+    <contents>
+     <h2>Accessibility Issues</h2>
+     <ul>
+      <li>Keyboard support</li>
+      <li>Keyboard focus styling</li>
+      <li>Role information</li>
+      <li>Accessible name</li>
+      <li>State of checkbox</li>
+     </ul>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-inaccessible/output/" target="_webedit">Checkbox example on WebEdit</a></p>
+
+     <script id="script">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+ } else {
+  node.classList.add('checked');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+     </script>
+
+     <div id="example">
+      <fieldset>
+        <legend>
+            Pizza Toppings
+        </legend>
+        <label>
+          <input type="checkbox"/>
+            Green pepper
+         </label>
+        <label>
+          <input type="checkbox"/>
+            Onion
+        </label>
+        <div class="checkbox"
+             onclick="clickCheckbox(event)">
+          <span></span>
+            Mushrooms
+        </div>
+        <div class="checkbox"
+            onclick="clickCheckbox(event)">
+          <span></span>
+            Spinach
+        </div>
+      </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+    <transcript>
+      This slide shows a set of 4 checkboxes.
+      The first 2 are standard HTML checkboxes and the next two are custom checkboxes made out of DIV elements, Javascript and CSS.
+      The accessibility issues for these custom checkboxes include:
+      Keyboard support so that screen reader and keyboard only users can interact with the checkbox.
+      Keyboard focus styling so that keyboard only users can see that they are interacting with the checkbox.
+      Role information on the custom widget being a checkbox.
+      Accessible name identifying what the checkbox is about.
+      Communicating the state of checkbox.
+
+      As we view the source code you can see that the first two checkboxes are defined using the standard HTML input type checkbox.
+
+      The last two checkbox are defined using DIV elements with event handlers and CSS to define the checked state using the psuedo technique of ::before based on the class name of "checked".
+
+      The Javascript shows a only a click event handler for operation with only the mouse.
+    </transcript>
+  </slide>
+
+ <slide>
+    <title>Basic Screen Reader Commands</title>
+    <contents>
+      <table class="table table-striped table-hover" aria-label="Basic Screen Reader Commands">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>JAWS (Windows)</th>
+            <th>NVDA (Windows)</th>
+            <th>Voice Over (OS X)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Next link, form control or widget</td>
+            <td>Tab</td>
+            <td>Tab</td>
+            <td>Tab</td>
+          </tr>
+          <tr>
+            <td>Previous link, form control or widget</td>
+            <td>Shift+Tab</td>
+            <td>Shift+Tab</td>
+            <td>Shift+Tab</td>
+          </tr>
+          <tr>
+            <td>Re-read current item</td>
+            <td>Insert+Numpad 5</td>
+            <td>NVDA+Numpad 5 or NVDA+Shift+O</td>
+            <td>Command+Option+Space</td>
+          </tr>
+          <tr>
+            <td>More information on item</td>
+            <td>Insert+SHIFT+F1 and Insert+Control+Shift+F1</td>
+            <td>NVDA+D</td>
+            <td>Control+Option+F4</td>
+          </tr>
+          <tr>
+            <td>List of Links</td>
+            <td>Insert+F7</td>
+            <td>NVDA+F7</td>
+            <td>Command+Option+U, then left/right arrow to list of links</td>
+          </tr>
+          <tr>
+            <td>Detailed Keyboard Information</td>
+            <td><a href="http://doccenter.freedomscientific.com/doccenter/archives/training/jawskeystrokes.htm">JAWS Keyboard Documentation</a></td>
+            <td><a href="http://www.nvaccess.org/files/nvda/documentation/userGuide.html">NVDA Documentation</a></td>
+            <td><a href="https://www.apple.com/voiceover/info/guide/">Voice Over Guide</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </contents>
+    <transcript>
+      This slide shows some basic keyboard commands for using screen readers.
+
+      I encourage you to try these examples with a screen reader so you can begin to understand the experience of using a screen reader and see how adding ARIA changes the user experience.
+
+      The examples I am showing today mostly just requires using the TAB key and listening to the information the screen reader is speaking.
+
+      Some screen reader like NVDA and VoiceOver have a optional panel to visually show what they are speaking if it is difficult for you to understand what is being spoken.
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Part 1 Responding to the keyboard</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 2px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+}
+
+div.checkbox span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+div.checkbox.checked span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+    </style>
+    <contents>
+      <ul>
+        <li>Adding <code>tabindex="0"</code> to make part of tab order of the page.</li>
+        <li>Add <code>onKeyDown</code> event handler to toggle checkbox when <kbd>space</kbd> key is pressed.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+ } else {
+  node.classList.add('checked');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-1/output/" target="_webedit">Part 1 on WebEdit</a></p>
+
+     <div id="example">
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    </contents>
+    <transcript>
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>Part 2: Adding role, checked state and accessible name</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 2px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+}
+
+div.checkbox span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+div.checkbox.checked span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+
+label:hover,
+.checkbox:hover {
+     padding: 0;
+     border: 2px solid #000;
+     background-color: #CCD;
+}
+</style>
+    <contents>
+      <ul>
+        <li>Adding <code>role="checkbox"</code> to make part of tab order of the page.</li>
+        <li>Adding <code>aria-checked</code> attribute.</li>
+        <li>Accessible name from text content.</li>
+        <li>Removing state character (e.g. <span style="color: red">✗</span>) from accessible name using <code>aria-hidden</code>.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+  node.setAttribute('aria-checked', 'false');
+ } else {
+  node.classList.add('checked');
+  node.setAttribute('aria-checked', 'true');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-2/output/" target="_webedit">Part 2 on WebEdit</a></p>
+
+     <div id="example">
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    </contents>
+  </slide>
+
+ <slide>
+    <title>Part 3: Keyboard Focus and hover styling</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+div.checkbox {
+     padding: 4px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+div.checkbox span {
+     padding: 0.25em;
+}
+
+div.checkbox span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+div.checkbox.checked span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+
+label.focus,
+div.checkbox:focus {
+  padding: 2px;
+  border: 2px solid #999;
+  background-color: #DDE;
+}
+
+label:hover,
+div.checkbox:hover {
+  background-color: #CCD;
+}
+    </style>
+    <contents>
+      <ul>
+        <li>Keyboard <code>focus</code> and <code>hover</code> styling should be similar to to harmonize the look and feel of styling between interaction techniques.</li>
+        <li>Recommend <code>focus</code> styling has a border and <code>hover</code> does not.</li>
+        <li><code>focus</code> styling should use a 2 pixel<code>border</code> or <code>outline</code> width to make the control with focus easy for users to see and track.</li>
+        <li>If the <code>border</code> technique is used the <code>border</code> must be removed when the widget does not have focus to support focus styling to change when users select operating system high contrast modes.</li>
+        <li>Need to use <code>onfocus</code> and <code>onblur</code> events to create focus styling of standard radio buttons and checkboxes by styling their labels.</li>
+        <li>Styling background color makes the focus change much easier to detect visually.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
+  node.setAttribute('aria-checked', 'false');
+ } else {
+  node.classList.add('checked');
+  node.setAttribute('aria-checked', 'true');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+
+function checkboxFocus(event) {
+  event.currentTarget.parentElement.classList.add('focus');
+}
+
+function checkboxBlur(event) {
+  event.currentTarget.parentElement.classList.remove('focus');
+}
+      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-3/output/" target="_webedit">Part 3 on WebEdit</a></p>
+
+     <div id="example">
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+  </slide>
+
+ <slide>
+    <title>Part 4: Synchronization of ARIA and visual states</title>
+    <style id="style">
+fieldset {
+     border-color: #EEE;
+     width: 10em;
+}
+
+fieldset legend {
+     font-size: 100%;
+}
+
+label,
+[role="checkbox"] {
+     padding: 4px;
+     width: 10em;
+     display: block;
+     margin-top: 0.25em;
+     margin-bottom: 0.25em;
+}
+
+label input {
+     margin-right: 0.5em;
+}
+
+[role="checkbox"] span {
+     padding: 0.25em;
+}
+
+[role="checkbox"] span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
+}
+
+[role="checkbox"][aria-checked="true"] span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
+}
+
+label.focus,
+[role="checkbox"]:focus {
+  padding: 2px;
+  border: 2px solid #999;
+  background-color: #DDE;
+}
+
+label:hover,
+[role="checkbox"]:hover {
+  background-color: #CCD;
+}
+    </style>
+    <contents>
+      <ul>
+        <li>Using CSS attribute selectors and CSS <code>content</code> property to synchronize visual and aria states.</li>
+        <li>Use of CSS <code>content</code> property supports high contrast browser settings, unike the use of CSS <code>background-image</code>.</li>
+      </ul>
+
+      <script id="script" type="text/javascript">
+function toggleCheckbox(node) {
+ if (node.getAttribute('aria-checked') === 'true') {
+  node.setAttribute('aria-checked', 'false');
+ } else {
+  node.setAttribute('aria-checked', 'true');
+ }
+}
+
+function clickCheckbox(event) {
+ var cb = event.currentTarget;
+ toggleCheckbox(cb);
+ event.stopPropagation();
+ event.preventDefault();
+}
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+
+function checkboxFocus(event) {
+  event.currentTarget.parentElement.classList.add('focus');
+}
+
+function checkboxBlur(event) {
+  event.currentTarget.parentElement.classList.remove('focus');
+}
+      </script>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-4/output/" target="_webedit">Part 4 on WebEdit</a></p>
+
+     <div id="example">
+<h1>Part 4: Custom Checkbox Widget with synchronization of ARIA and visual states</h1>
+<fieldset>
+    <legend>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox"
+             onfocus="checkboxFocus(event)"
+             onblur="checkboxBlur(event)"/>
+        Onion
+    </label>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+         tabindex="0"
+         onclick="clickCheckbox(event)"
+         onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    <div class="checkbox"
+         role="checkbox"
+         aria-checked="false"
+        tabindex="0"
+        onclick="clickCheckbox(event)"
+        onkeydown="keydownCheckbox(event)">
+      <span aria-hidden="true"></span>
+          Spinach
+    </div>
+  </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Example Widget: Accessible Custom Checkbox Widget using ARIA</title>
+    <style id="style">
+      fieldset {
+        border-color: #EEE;
+        width: 10em;
+      }
+
+      fieldset legend {
+        font-size: 100%;
+      }
+
+      label,
+      [role="checkbox"] {
+        display: block;
+        margin: 0.25em;
+        font-weight: normal;
+        padding: 4px;
+        border: none;
+        width: 10em;
+      }
+
+      label input[type=checkbox] {
+        padding-left: 1em;
+      }
+
+      div[role="checkbox"] span:before {
+        content: '✗';
+        color: red;
+        padding-left: 0.125em;
+        padding-right: 0.25em;
+      }
+
+      div[role="checkbox"][aria-checked="true"] span:before {
+        content: '✓';
+        color: green;
+        padding-left: 0.125em;
+        padding-right: 0.315em;
+      }
+
+      label.focus,
+      [role="checkbox"]:focus {
+        padding: 2px;
+        border: 2px solid #999;
+        background-color: #DDE;
+      }
+
+      label:hover,
+      [role="checkbox"]:hover {
+        background-color: #CCD;
+      }
+    </style>
+    <contents>
+
+
+      <script id="script" type="text/javascript">
+        function toggleCheckbox(node) {
+          if (node.getAttribute('aria-checked') === 'true') {
+            node.setAttribute('aria-checked', 'false');
+          }
+          else {
+            node.setAttribute('aria-checked', 'true');
+          }
+        }
+
+        function keydownCheckbox(event) {
+          var cb = event.currentTarget;
+          if (event.key === ' ') {
+            toggleCheckbox(cb);
+
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }
+
+        function clickCheckbox(event) {
+          var cb = event.currentTarget;
+          toggleCheckbox(cb);
+          event.stopPropagation();
+          event.preventDefault();
+        }
+
+        function checkboxFocus(event) {
+          event.currentTarget.parentNode.classList.add('focus');
+        }
+
+        function checkboxBlur(event) {
+          event.currentTarget.parentNode.classList.remove('focus');
+        }
+      </script>
+
+     <h2>Features</h2>
+     <ul>
+       <li>Responds to mouse events using <code>onClick</code> event.</li>
+       <li>Responds to <kbd>space</kbd> keyboard event using <code>onKeyDown</code> event.</li>
+       <li><code>tabindex=0</code> makes widget keyboard focusable and include in tab order of page.</li>
+       <li><code>role="checkbox"</code> identifies widget to assistive technologies as a "checkbox".</li>
+       <li><code>aria-checked</code> attribute identifies the state as being "checked" or "unchecked".</li>
+       <li>Accessible name comes from child text content of the <code>div[role="checkbox"]</code> element.</li>
+       <li><code>aria-hidden</code> attribute hides the characters used for indicating state (i.e. <span style="color: red">✗</span> and <span style="color: green">✓</span>) from being included in the accessible name calculation.</li>
+       <li>CSS attribute selectors are used to keep the visual indication of checked state snychronized with accessibility API.</li>
+       <li><code>onFocus</code> and <code>onBlur</code> event handlers are used on standard checkboxes to provide visual indication of keyboard focus.</li>
+     </ul>
+
+     <h2>Example</h2>
+
+     <p><a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-accessible/output/" target="_webedit">Checkbox example on WebEdit</a></p>
+
+     <div id="example">
+    <fieldset>
+        <legend>
+
+            Pizza Toppings
+
+        </legend>
+        <label>
+          <input type="checkbox"
+               onfocus="checkboxFocus(event)"
+               onblur="checkboxBlur(event)"/>
+
+
+              Green pepper
+
+        </label>
+        <label>
+          <input type="checkbox"
+               onfocus="checkboxFocus(event)"
+               onblur="checkboxBlur(event)"/>
+
+              Onion
+
+        </label>
+        <div role="checkbox"
+           tabindex="0"
+           aria-checked="false"
+           onkeydown="keydownCheckbox(event)"
+           onclick="clickCheckbox(event)">
+          <span aria-hidden="true"></span>
+
+              Mushrooms
+
+        </div>
+        <div role="checkbox"
+           tabindex="0"
+           aria-checked="false"
+           onkeydown="keydownCheckbox(event)"
+           onclick="clickCheckbox(event)">
+          <span aria-hidden="true"></span>
+
+              Spinach
+
+        </div>
+      </fieldset>
+     </div>
+
+      <h2>HTML Source Code</h2>
+
+      <pre><code id="sc1"></code></pre>
+
+      <h2>CSS Source Code</h2>
+
+      <pre><code id="sc2"></code></pre>
+
+      <h2>Javascript Source Code</h2>
+
+      <pre><code id="sc3"></code></pre>
+
+      <script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+   </contents>
+  </slide>
+
+  <slide>
+    <title>Using ARIA in HTML (Best Practices)</title>
+    <contents>
+      <p><a href="https://w3c.github.io/using-aria/">Using ARIA in HTML (Best Practices)</a></p>
+      <ul>
+        <li>Use native semantics of HTML (e.g. <code>input[type=checkbox]</code> rather than div[role=checkbox]).</li>
+        <li>Don't override native semantics of elements (e.g. <code>h2[role="banner]</code>).</li>
+        <li>Don't redefine the native semantics of an element (e.g. <code>main[role=main]</code>).</li>
+        <li>All interactive ARIA widgets must be operable with the keyboard.</li>
+        <li>Do not use role="presentation" or aria-hidden="true" on a visible focusable elements.</li>
+        <li>All interactive elements must have an accessible name.</li>
+        <li>Live regions (e.g. <code>aria-live</code> attribute and <code>log</code>, <code>status</code>, and <code>alert</code> roles) should be used with extreme caution, only for asynchronous content changes important for the users attention.</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Design Pattern: Menu Button</title>
+    <contents>
+    <ul>
+      <li><a href="https://www.w3.org/TR/wai-aria-practices/#menubutton" target="_specification">ARIA Authoring Practices: Menu Button</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions.html">Example 1: Action Menu</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-links.html">Example 2: Navigation Menu</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-practices/examples/menu-button//menu-button-actions-active-descendant.html">Example 3: Action Menu (<code>aria-activedescendant</code>)</a></li>
+    </ul>
+    <iframe src="https://www.w3.org/TR/wai-aria-practices/#menubutton"
+            title="ARIA Menubutton Example"
+            width="98%"
+            height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Design Pattern: Navigation Menu Options</title>
+    <contents>
+       <table class="table table-striped table-hover" aria-label="Basic Screen Reader Commands">
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Keyboard Interaction</th>
+              <th>ARIA</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Keyboard Enhancement</th>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd></li>
+                  <li><kbd>left arrow</kbd></li>
+                  <li><kbd>right arrow</kbd></li>
+                  <li><kbd>up arrow</kbd></li>
+                  <li><kbd>down arrow</kbd></li>
+                </ul>
+              </td>
+              <td>
+                <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_lh_navigation" target="_specification"><code>navigation</code> landmark</a>
+              </td>
+              <td>
+                <ul>
+                  <li>Primarily <kbd>tab</kbd> key navigation.</li>
+                  <li>Cursor keys provide enhanced navigation.</li>
+                  <li>Uses hierarchical lists of links.</li>
+                  <li>Uses ARIA <code>navigation</code> landmarks.</li>
+                  <li>Examples:
+                    <ul>
+                      <li><a href="http://www.dhs.state.il.us" target="_example">Illinois Department of Human Services</a></li>
+                      <li><a href="http://illinois.edu/" target="_example">University of Illinois Home Page</a></li>
+                      <li><a href="https://adobe-accessibility.github.io/Accessible-Mega-Menu/" target="_example">Adobe Mega Menu</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>Menu Button</th>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd></li>
+                  <li><kbd>up arrow</kbd></li>
+                  <li><kbd>down arrow</kbd></li>
+                </ul>
+              </td>
+              <td>
+                <a href="http://w3c.github.io/aria-practices/#menubutton" target="_specification">Menu Button Design Pattern</a>
+              </td>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd> moves into and out of each menu button.</li>
+                  <li><kbd>up arrow</kbd> and <kbd>down arrow</kbd> move between pull down menu items.</li>
+                  <li>Uses <code>button</code>, <code>menu</code> and <code>menuitem</code>  widget roles.</li>
+                  <li>Examples:
+                    <ul>
+                      <li><a href="http://fae.disability.illinois.edu" target="_example">Functional Accessibility Evaluator 2.0</a></li>
+                      <li><a href="http://citl.illinois.edu/" target="_example">Illinois Center for Innovation in Teaching &amp; Learning</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>Disclosure</th>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd></li>
+                  <li><kbd>space/enter</kbd></li>
+                </ul>
+              </td>
+              <td>
+                <a href="http://w3c.github.io/aria-practices/#disclosure" target="_specification">Disclosure Design Pattern</a>
+              </td>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd> moves into and out menubar.</li>
+                  <li><kbd>space</kbd> or <kbd>return</kbd> opens panel of links.</li>
+                  <li><kbd>tab</kbd> and cursor keys move focus between disclosed links.</li>
+                  <li>Examples:
+                    <ul>
+                      <li><a href="http://admissions.illinois.edu" target="_example">Illinois Admissions</a></li>
+                      <li><a href="http://education.illinois.edu/" target="_example">Illinois College of Education</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>Menubar</th>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd></li>
+                  <li><kbd>left arrow</kbd></li>
+                  <li><kbd>right arrow</kbd></li>
+                  <li><kbd>up arrow</kbd></li>
+                  <li><kbd>down arrow</kbd></li>
+                </ul>
+              </td>
+              <td>
+                <a href="http://w3c.github.io/aria-practices/#menubar" target="_specification">Menubar Design Pattern</a>
+              </td>
+              <td>
+                <ul>
+                  <li><kbd>tab</kbd> moves into and out of each disclosure button.</li>
+                  <li>Cursor keys move between pull down menus and menuitems.dri</li>
+                  <li>Examples:
+                    <ul>
+                      <li><a href="http://w3c.github.io/aria-practices/examples/menubar/menubar-1/menubar-1.html" target="_example">ARIA Authoring Practices Example</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </contents>
+  </slide>
+
+ <slide>
+    <title>Design Example: Drop Down Navigation Links</title>
+    <contents>
+      <ul>
+        <li>Keyboard interaction dictates the ARIA roles</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Drop Down Navigation Links: Tab Key Operation</title>
+    <style>
+
+ul.example {
+  margin: 10px;
+  padding: 10px;
+  font-size: 110%;
+  list-style: none;
+  background-color: #EEEEEE;
+  height: 2.5em;
+}
+
+.popup {
+  display: block;
+  float: left;
+  position: relative;
+}
+
+nav > ul > li > a {
+  font-size: 110%;
+  padding: 0.25em;
+  width: 8em;
+  text-decoration: none;
+  color: black;
+  border: 2px solid transparent;
+}
+
+nav > ul > li > a:after {
+  content: url('images/down-arrow-brown.png');
+  padding-left: .25em;
+}
+
+nav > ul > li > ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 1.75em;
+  font-size: 110%;
+  list-style: none;
+  background-color: #ccddff;
+  left: -3000em;
+}
+
+nav > ul > li > ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+nav > ul > li > ul > li > a,
+nav > ul > li > ul > li > a:visited {
+  display: block;
+  text-decoration: none;
+  padding: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  background-color: #ccddff;
+  width: 10em;
+  color: black;
+}
+
+/* focus and hover styling */
+
+nav > ul > li > a:hover {
+  background-color: #ccddff;
+}
+
+nav > ul > li > a:focus {
+  border-color: black;
+  background-color: #ccddff;
+}
+
+nav > ul > li > ul > li > a:focus {
+  outline: 2px solid black;
+  background-color: #ccddff;
+}
+
+    </style>
+    <contents>
+
+    <ul>
+      <li><kbd>tab</kbd> key provides navigation to all links in the navigation menu.</li>
+      <li>Links in the popup lists of links become visible when they receive focus.</li>
+      <li>Most basic and predictable keyboard model.</li>
+    </ul>
+
+     <div id="example">
+        <nav aria-label="primary">
+          <ul class="example">
+            <li class="popup">
+              <a href="#">About</a>
+              <ul>
+                <li>
+                  <a href="#overview">Overview</a>
+                </li>
+                <li>
+                  <a href="#admin">Administration</a>
+                </li>
+                <li >
+                  <a href="#facts">Facts</a>
+                </li>
+                <li>
+                  <a href="#tours" >Campus Tours</a>
+                </li>
+              </ul>
+            </li>
+            <li class="popup">
+              <a href="#">Admissions</a>
+              <ul>
+                <li>
+                  <a href="#apply">Apply</a>
+                </li>
+                <li>
+                  <a href="#tuition">Tuition</a>
+                </li>
+                <li >
+                  <a href="#signup">Sign Up</a>
+                </li>
+                <li role="separator"></li>
+                <li>
+                  <a href="#visit">Visit</a>
+                </li>
+                <li>
+                  <a href="#photo">Photo Tour</a>
+                </li>
+                <li>
+                  <a href="#connect">Connect</a>
+                </li>
+              </ul>
+            </li>
+            <li class="popup">
+              <a href="#">Academics</a>
+              <ul>
+                <li>
+                  <a href="#colleges">Colleges &amp; Schools</a>
+                </li>
+                <li>
+                  <a href="#programs">Programs of Study</a>
+                </li>
+                <li>
+                  <a href="#honors">Honors Programs</a>
+                </li>
+                <li>
+                  <a href="#online">Online Courses</a>
+                </li>
+                <li role="separator"></li>
+                <li>
+                  <a href="#explorer">Course Explorer</a>
+                </li>
+                <li>
+                  <a href="#register">Register for Class</a>
+                </li>
+                <li>
+                  <a href="#academic">Academic Calendar</a>
+                </li>
+                <li>
+                  <a href="#tanscripts">Transcripts</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <script>
+
+        var i, l;
+
+        var topLinks = document.querySelectorAll('nav > ul > li > a');
+
+        for (i = 0; i &lt; topLinks.length; i++) {
+          l = topLinks[i];
+
+          l.addEventListener('focus', function(event) {
+            var tgt = event.currentTarget;
+
+            if (tgt.nextElementSibling) {
+              tgt.nextElementSibling.style.left = "0";
+            }
+          });
+
+          l.addEventListener('blur', function(event) {
+            var tgt = event.currentTarget;
+
+            if (tgt.nextElementSibling) {
+              tgt.nextElementSibling.style.left = '-3000em';
+            }
+          });
+
+        }
+
+        var popupLinks = document.querySelectorAll('nav > ul > li > ul > li > a');
+
+        for (i = 0; i &lt; popupLinks.length; i++) {
+          l = popupLinks[i];
+
+          l.addEventListener('focus', function(event) {
+            var tgt = event.currentTarget;
+            tgt.parentNode.parentNode.style.left = '0';
+          });
+
+          l.addEventListener('blur', function(event) {
+            var tgt = event.currentTarget;
+            tgt.parentNode.parentNode.style.left = '-3000em';
+          });
+        }
+
+
+      </script>
+
+      <h2>HTML Code</h2>
+      <pre><code id="sc1"></code></pre>
+
+      <script>
+        sourceCode.add('sc1', 'example');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+
+
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Drop Down Navigation Links: ARIA Menu Button Pattern</title>
+    <style>
+
+ul.example {
+  margin: 10px;
+  padding: 10px;
+  font-size: 110%;
+  list-style: none;
+  background-color: #EEEEEE;
+}
+
+.menu_button {
+  position: relative;
+}
+
+
+a[role="button"] {
+  font-size: 110%;
+  padding: 0.25em;
+  width: 12em;
+  text-decoration: none;
+  color: black;
+}
+
+a[role="button"]:after {
+  content: url('images/down-arrow-brown.png');
+  padding-left: .25em;
+}
+
+ul[role="menu"] {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  font-size: 110%;
+
+  list-style: none;
+  background-color: #ccddff;
+  display: none;
+}
+
+ul[role="menu"] li {
+  margin: 0;
+  padding: 0;
+}
+
+ul[role="menu"] a[role="menuitem"],
+ul[role="menu"] a[role="menuitem"]:visited {
+  display: block;
+  text-decoration: none;
+  padding: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  background-color: #ccddff;
+  width: 22em;
+  color: black;
+}
+
+/* focus and hover styling */
+
+a[role="button"]:focus,
+a[role="button"]:hover {
+  border: 2px solid black;
+  background-color: #ccddff;
+}
+
+ul[role="menu"] a[role="menuitem"]:focus,
+ul[role="menu"] a[role="menuitem"]:hover{
+  background-color: #ccddff;
+  color: black;
+}
+    </style>
+    <contents>
+
+    <ul>
+      <li><kbd>tab</kbd> key provides navigation betwen a set of menu buttons.</li>
+      <li><kbd>up</kbd> and <kbd>down</kbd> keys navigate links in popup menu.</li>
+      <li>Next step and visual affordances help people identify the popup menu of links.</li>
+    </ul>
+
+
+      <script src="js/Menubutton2.js" type="text/javascript"></script>
+      <script src="js/MenubuttonPopupMenuLinks.js" type="text/javascript"></script>
+      <script src="js/MenubuttonMenuItemLinks.js" type="text/javascript"></script>
+
+      <div id="example">
+        <nav aria-label="primary">
+          <ul class="example">
+            <li class="menu_button">
+              <a role="button" aria-haspopup="true" aria-controls="menu1" href="#">About</a>
+              <ul id="menu1" role="menu" aria-label="About">
+                <li role="none">
+                  <a role="menuitem" href="#overview">Overview</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#admin">Administration</a>
+                </li>
+                <li role="none">
+                  <a id="menubar113" role="menuitem" href="#facts">Facts</a>
+                </li>
+                <li>
+                  <a role="menuitem" href="#tours" >Campus
+                    Tours</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu_button">
+              <a role="button" aria-haspopup="true" aria-controls="menu2" href="#">Admissions</a>
+              <ul id="menu2" role="menu" aria-label="Admissions">
+                <li role="none">
+                  <a role="menuitem" href="#apply">Apply</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#tuition">Tuition</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#signup">Sign Up</a>
+                </li>
+                <li role="separator"></li>
+                <li role="none">
+                  <a role="menuitem" href="#visit">Visit</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#photo">Photo Tour</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#connect">Connect</a>
+                </li>
+              </ul>
+            </li>
+            <li  class="menu_button">
+              <a role="button" aria-haspopup="true" aria-controls="menu3" href="#">Academics</a>
+              <ul id="menu3" role="menu" aria-label="Academics">
+                <li role="none">
+                  <a role="menuitem" href="#colleges">Colleges &amp; Schools</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#programs">Programs of Study</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#honors">Honors Programs</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#online">Online Courses</a>
+                </li>
+                <li role="separator"></li>
+                <li role="none">
+                  <a role="menuitem" href="#explorer">Course Explorer</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#register">Register for Class</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#academic">Academic Calendar</a>
+                </li>
+                <li role="none">
+                  <a role="menuitem" href="#tanscripts">Transcripts</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <script>
+        var mbs = document.querySelectorAll('a[role="button"]');
+
+        for (var i = 0; i &lt; mbs.length; i++) {
+          console.log('TEST: ' + i);
+          var mb = new Menubutton(mbs[i]);
+          mb.init();
+        }
+      </script>
+
+
+      <h2>HTML Code</h2>
+      <pre><code id="sc1"></code></pre>
+
+      <script>
+        sourceCode.add('sc1', 'example');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>None/Presentation Role</title>
+    <contents>
+      <p><a href="https://www.w3.org/TR/wai-aria-practices-1.1/#presentation_role">Section 6: Intentionally Hiding Semantics with the presentation Role </a></p>
+      <iframe src="https://www.w3.org/TR/wai-aria-practices-1.1/#presentation_role" width="98%" height="600px"></iframe>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>aria-hidden property</title>
+    <contents>
+      <p><a href="https://www.w3.org/TR/wai-aria-practices-1.1/#children_presentational">Section 7. Roles That Automatically Hide Semantics by Making Their Descendants Presentational</a></p>
+      <iframe src="https://www.w3.org/TR/wai-aria-practices-1.1/#children_presentational" width="98%" height="600px"></iframe>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Live Region Roles</title>
+    <contents>
+      <p><a href="https://www.w3.org/TR/wai-aria/#live_region_roles">ARIA live region roles</a></p>
+      <iframe src="https://www.w3.org/TR/wai-aria/#live_region_roles" width="98%" height="600px" title="ARIA Live Region Roles"></iframe>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Live Region Attributes</title>
+    <contents>
+      <p><a href="https://www.w3.org/TR/wai-aria/#attrs_liveregions">ARIA live region attributes</a></p>
+      <iframe src="https://www.w3.org/TR/wai-aria/#attrs_liveregions" width="98%" height="600px" title="ARIA Live Region Atttributes"></iframe>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Next Steps for ARIA Authoring Practices Guide</title>
+    <contents>
+      <ul>
+        <li>Additional widget descriptions and examples</li>
+        <li>Grid and Table Examples</li>
+        <li>Accessible visual state and synchronization with ARIA states techniques</li>
+        <li>Form error feedback</li>
+        <li>Index of examples</li>
+      </ul>
+    </contents>
+  </slide>
+
+
+  <slide>
+    <title>Next Steps for ARIA Authoring Practices Guide</title>
+    <contents>
+      <ul>
+        <li>Additional widget descriptions and examples</li>
+        <li>Grid and Table Examples</li>
+        <li>Accessible visual state and synchronization with ARIA states techniques</li>
+        <li>Index of examples</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Open Source Tools</title>
+    <contents>
+      <ul>
+        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/ainspector-sidebar/">AInspector Sidebar for Firefox</a></li>
+        <li><a href="https://fae.disability.illinois.edu">Functional Accessibility Evaluator 2.0</a></li>
+        <li><a href="https://accessibility-bookmarklets.org/">Public Bookmarklets Website</a></li>
+      </ul>
+    </contents>
+  </slide>
+
+   <slide>
+    <title>New features in ARIA 1.2</title>
+    <contents>
+      <p><a href="https://w3c.github.io/aria/">Working Draft of ARIA 1.2 Specification</a></p>
+      <ul>
+        <li>HTML harmonization:
+          <ul>
+            <li>Define roles appropriate for every HTML element.</li>
+            <li>Assign default <a href="https://www.w3.org/TR/html-aria/" target="_spec">ARIA role mappings to every HTML element</a>.</li>
+            <li>Some new roles, like <code>generic</code> role for elements with no semantics like <code>div</code> and <code>span</code>, should not be used by developers.</li>
+          </ul>
+        </li>
+        <li>Combobox design pattern 1.2 that works with assistive technologies.</li>
+        <li>Accessible Object Model (AOM) to reflect most ARIA properties.</li>
+      </ul>
+    </contents>
+  </slide>
+
+   <slide>
+    <title>ARIA Authoring Practices 1.2</title>
+    <contents>
+      <p><a href="https://w3c.github.io/aria-practices/">ARIA Authoring Practices 1.2</a></p>
+      <ul>
+        <li>Combobox design pattern 1.2 that works with assistive technologies.</li>
+        <li>Unit testing of examples for:
+          <ul>
+            <li>Keyboard interaction.</li>
+            <li>Proper use of ARIA roles.</li>
+            <li>Proper use of ARIA properties and states.</li>
+          </ul>
+        </li>
+        <li>Linting code quality:
+          <ul>
+            <li>HTML code</li>
+            <li>CSS code</li>
+            <li>Javascript code</li>
+          </ul>
+        </li>
+        <li>High contrast support in new and some updated examples:
+          <ul>
+            <li>Carousel</li>
+            <li>Combobox</li>
+            <li>Date Pickers</li>
+            <li>Menubar</li>
+            <li>Menu Button</li>
+            <li>Single-Thumb Slider</li>
+            <li>Toolbar</li>
+            <li>Treeview Navigation</li>
+          </ul>
+        </li>
+      </ul>
+    </contents>
+  </slide>
+
+
+   <slide>
+    <title>ARIA Assistive Technology (AT) Community Group</title>
+    <contents>
+      <p><a href="https://www.w3.org/community/aria-at/">ARIA and Assistive Technology Community Group</a></p>
+      <ul>
+        <li>Document how ARIA information is used by screen readers:
+          <ul>
+            <li>Help developers understand how ARIA features change user experience.</li>
+            <li>Help screen reader companies understand their use of ARIA.</li>
+          </ul>
+        </li>
+        <li>Develop test cases for testing ARIA features based on ARIA Authoring practice examples.</li>
+        <li>Coordinate testing of screen readers.</li>
+        <li>Develop reports of test results.</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Functional Accessibility Evaluator (FAE) 2.0</title>
+    <contents>
+      <ul>
+        <li>Two versions of Functional Accessibility Evaluator 2.0
+          <ul>
+            <li><a href="https://fae.disability.illinois.edu">FAE 2.0 Indidvidual License Version</a></li>
+            <li><a href="https://fae.illinois.edu">FAE 2.0 Institutional License Version</a> using <a href="https://www.incommon.org/">InCommon</a></li>
+          </ul>
+        </li>
+        <li>Designed for:
+          <ul>
+            <li>Managers</li>
+            <li>Web designers</li>
+            <li>Software developers</li>
+            <li>Quality assurance testers</li>
+            <li>IT Auditors</li>
+          </ul>
+        </li>
+        <li>Website rule result summaries and implementation status</li>
+        <li>Page rule result summaries</li>
+        <li>Organizes rules by Rule Categories, Rule Scope and WCAG Guidelines</li>
+        <li>Archive and share reports</li>
+      </ul>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>AInspector Sidebar for Firefox</title>
+    <contents>
+      <ul>
+        <li><a href="http://ainspector.github.io">http://ainspector.github.io</a></li>
+        <li>Designed for:
+          <ul>
+            <li>Web designers</li>
+            <li>Software developers</li>
+            <li>Quality assurance testers</li>
+          </ul>
+        </li>
+        <li>Summary Rule Results
+          <ul>
+            <li>Rule Categories</li>
+            <li>WCAG 2.0 Guideline Summary</li>
+          </ul>
+        </li>
+        <li>Analyzes the browser DOM content</li>
+        <li>Highlighting elements</li>
+        <li>DOM inspector</li>
+      </ul>
+
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Bookmarklets for Visualizing Accessibility Features</title>
+    <contents>
+      <ul>
+        <li><a href="https://accessibility-bookmarklets.org/">Public Bookmarklets Website</a></li>
+        <li>Features:
+          <ul>
+            <li>Highlight Regions and Elements on page</li>
+            <li>Element information</li>
+            <li>Default or defined <code>role</code></li>
+            <li>Accessible name</li>
+            <li>Accessible description</li>
+            <li>Important prorperties (e.g the number of items in a list)</li>
+          </ul>
+        </li>
+      </ul>
+    </contents>
+  </slide>
+
+
+  <slide>
+    <title>Questions and Discussion</title>
+    <contents>
+    </contents>
+  </slide>
+
+</slides>
+
+
