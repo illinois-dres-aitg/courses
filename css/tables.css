@@ -2,6 +2,7 @@ p.title {
   margin: 0;
   padding: 0;
 }
+
 table {
   margin-bottom: 2em;
   font-family: verdana,arial,sans-serif;
@@ -12,6 +13,7 @@ table {
   border-collapse: collapse;
   font-size: 1em;
 }
+
 table th {
   border-width: 1px;
   padding: 8px;
@@ -28,6 +30,6 @@ table td {
   background-color: #ffffff;
 }
 
-table tr:nth-child(even) {
+table tbody tr:nth-child(even) td {
   background-color: #cad9ef;
 }
