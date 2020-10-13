@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 9: Purpose of ARIA is Describe Semantics and Behavior</title>
+<title>Slide 9: ARIA Contract with Browsers and Assistive Technologies</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -56,48 +56,19 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Purpose of ARIA is Describe Semantics and Behavior</h1>
+<h1 id="h1_title" class="title">ARIA Contract with Browsers and Assistive Technologies</h1>
+<h2>Browsers</h2>
 <ul>
-         
-<li>Provide an inter-operable way to describe the features of <em>custom widgets</em>:
-           <ul>
-             
-<li>
-<strong>Role:</strong> Describes the type of widget, which implies the <em>keyboard interaction</em>.</li>
-             
-<li>
-<strong>Properties and States:</strong> Describing features like "expandable", "checked" or "selected".</li>
-             
-<li>
-<strong>Language independence:</strong> Roles, properties and states can be translated by the operating systems and assistive technologies to local languages.</li>
-             
-<li>
-<strong>Labeling:</strong> How to label the features of the widget and its components (e.g. accessible name).</li>
-             
-<li>
-<strong>Relationships:</strong> How different components relate to each other (e.g. descriptions, controls, owns).</li>
-             
-<li>
-<strong>Grouping:</strong> Groups of related components (e.g. lists, menus, trees, tab panels).</li>
-           
-</ul>
         
-</li>
+<li>The use of ARIA markup does not affect browser behavior or rendering.</li>
         
-<li>Define markup mappings to accessibility APIs:
-          <ul>
-            
-<li>ATK/AT-SPI (Linux/Unix)</li>
-            
-<li>Microsoft Active Accessibility (MSAA) + IAccessible2</li>
-            
-<li>Microsoft UI Automate</li>
-            
-<li>MacOS Accessibility API</li>
-          
+<li>ARIA only affects how information is represented in accessibility APIs (e.g. MSAA+IAccessible2, ATK+SPI, UIAutomate, MacOS).</li>
+      
 </ul>
-         
-</li>
+<h2>Assistive Technologies</h2>
+<ul>
+        
+<li>Do not specify what assistive technologies will do with the information.</li>
       
 </ul>
 </div>
