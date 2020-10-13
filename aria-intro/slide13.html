@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 13: Other ARIA Description Markup</title>
+<title>Slide 13: Accessible Description Calculation</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -41,13 +41,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide48.html" title="Slide 48">
+<a id="ID_SLIDE_LAST" href="slide47.html" title="Slide 47">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 13 of 48</li>
+<li class="nav navbar-text">Slide 13 of 47</li>
 </ul>
 </div>
 </div>
@@ -56,19 +56,28 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Other ARIA Description Markup</h1>
-<h2 id="heading_ant">Other ARIA Description Techniques</h2>
+<h1 id="h1_title" class="title">Accessible Description Calculation</h1>
+<ul>
+          
+<li>
+<a href="https://www.w3.org/TR/accname-aam/">W3C Accessible Name and Description Computation Specification</a>
+</li>
+          
+<li>Accessible description provides more information about a form control, link or aria widget.</li>
+          
+<li>Screen readers can be configured by users to ignore <em>description information</em> to reduce the amount of information spoken.</li>
+        
+</ul>
+<h2 id="heading_ant">Accessible Description Techniques</h2>
 <table class="table table-striped table-hover" aria-labelledby="heading_ant">
           
 <thead>
             
 <tr>
               
-<th>Markup</th>
-              <th>Purpose</th>
-              <th>NVDA</th>
-              <th>Jaws 2020</th>
-              <th>VoiceOver macOS</th>
+<th>Priority</th>
+              <th>Technique</th>
+              <th>Description</th>
             
 </tr>
           
@@ -78,38 +87,39 @@
             
 <tr>
               
-<td><code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details">aria-details</a></code></td>
-              <td>Provide a reference to additional visible information on the page. The screen would announce the availability of additional information and provide a means to navigate tot he descriptive content.<p>
-<strong>NOTE:</strong> This feature was added at the request of DPUB working group, so may have better support in digital book readers.</p>
-</td>
-              <td>None</td>
+<td>1</td>
+              <td><code>aria-describedby</code></td>
               <td>
                 
 <ul>
                   
-<li>Announces additional information available.</li>
+<li>The <code>aria-describedby</code> attribute contains a list of <code>IDREF</code>s to elements on the page.</li>
                   
-<li>Announces when entering or leaving a details container, similar to landmarks.</li>
+<li>Text content of referenced elements are concatenated to compute the <em>accessible description</em>.</li>
                   
-<li>Does NOT provide information relationships between references and containers.</li>
+<li>Designed to reference visible text on the screen, like instructions and error feedback.</li>
                   
-<li>Does not provide a means to navigate between references and details containers.</li>
+<li>Screen readers can be configured not to rendered accessible descriptions to reduce the amount of information spoken.</li>
                 
 </ul>
               
 </td>
-              <td>None</td>
             
 </tr>
             
 <tr>
               
-<td><code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage">aria-errormessage</a></code></td>
+<td>2</td>
+              <td><code>title</code></td>
               <td>
-              </td>
-              <td>None</td>
-              <td>Partial</td>
-              <td>None</td>
+                
+<ul>
+                  
+<li>If no other source of an <em>accessible description</em> is found and the element has a <code>title</code> attribute that is <strong>not</strong> being used to define an accessible name, the content of the <code>title</code> attribute is used to define the <em>accessible description</em>.</li>
+                
+</ul>
+              
+</td>
             
 </tr>
           

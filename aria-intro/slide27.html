@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 27: Part 4: Synchronization of ARIA and visual states</title>
+<title>Slide 27: Part 1 Responding to the keyboard</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -19,8 +19,8 @@ fieldset legend {
 }
 
 label,
-[role="checkbox"] {
-     padding: 4px;
+div.checkbox {
+     padding: 2px;
      width: 10em;
      display: block;
      margin-top: 0.25em;
@@ -31,32 +31,20 @@ label input {
      margin-right: 0.5em;
 }
 
-[role="checkbox"] span {
+div.checkbox span {
      padding: 0.25em;
 }
 
-[role="checkbox"] span:before {
+div.checkbox span:before {
     content: '✗';
     color: red;
     padding-right: 0.125em;
 }
 
-[role="checkbox"][aria-checked="true"] span:before {
+div.checkbox.checked span:before {
     content: '✓';
     color: green;
     padding-right: 0.190em;
-}
-
-label.focus,
-[role="checkbox"]:focus {
-  padding: 2px;
-  border: 2px solid #999;
-  background-color: #DDE;
-}
-
-label:hover,
-[role="checkbox"]:hover {
-  background-color: #CCD;
 }
     </style>
 </head>
@@ -91,13 +79,13 @@ label:hover,
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide48.html" title="Slide 48">
+<a id="ID_SLIDE_LAST" href="slide47.html" title="Slide 47">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 27 of 48</li>
+<li class="nav navbar-text">Slide 27 of 47</li>
 </ul>
 </div>
 </div>
@@ -106,20 +94,20 @@ label:hover,
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Part 4: Synchronization of ARIA and visual states</h1>
+<h1 id="h1_title" class="title">Part 1 Responding to the keyboard</h1>
 <ul>
         
-<li>Using CSS attribute selectors and CSS <code>content</code> property to synchronize visual and aria states.</li>
+<li>Adding <code>tabindex="0"</code> to make part of tab order of the page.</li>
         
-<li>Use of CSS <code>content</code> property supports high contrast browser settings, unike the use of CSS <code>background-image</code>.</li>
+<li>Add <code>onKeyDown</code> event handler to toggle checkbox when <kbd>space</kbd> key is pressed.</li>
       
 </ul>
 <script id="script" type="text/javascript">
 function toggleCheckbox(node) {
- if (node.getAttribute('aria-checked') === 'true') {
-  node.setAttribute('aria-checked', 'false');
+ if (node.classList.contains('checked')) {
+  node.classList.remove('checked');
  } else {
-  node.setAttribute('aria-checked', 'true');
+  node.classList.add('checked');
  }
 }
 
@@ -138,23 +126,12 @@ function keydownCheckbox(event) {
     event.stopPropagation();
     event.preventDefault();
   }
-}
-
-function checkboxFocus(event) {
-  event.currentTarget.parentElement.classList.add('focus');
-}
-
-function checkboxBlur(event) {
-  event.currentTarget.parentElement.classList.remove('focus');
-}
-      </script>
+}      </script>
 <h2>Example</h2>
 <p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-4/output/" target="_webedit">Part 4 on WebEdit</a>
+<a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-1/output/" target="_webedit">Part 1 on WebEdit</a>
 </p>
 <div id="example">
-
-<h1>Part 4: Custom Checkbox Widget with synchronization of ARIA and visual states</h1>
 
 <fieldset>
     
@@ -162,23 +139,23 @@ function checkboxBlur(event) {
         Pizza Toppings
     </legend>
     <label>
-      <input type="checkbox" onfocus="checkboxFocus(event)" onblur="checkboxBlur(event)">
+      <input type="checkbox">
         Green pepper
      </label>
     <label>
-      <input type="checkbox" onfocus="checkboxFocus(event)" onblur="checkboxBlur(event)">
+      <input type="checkbox">
         Onion
     </label>
     
-<div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
+<div class="checkbox" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
       
-<span aria-hidden="true"></span>
+<span></span>
         Mushrooms
     </div>
     
-<div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
+<div class="checkbox" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
       
-<span aria-hidden="true"></span>
+<span></span>
           Spinach
     </div>
   

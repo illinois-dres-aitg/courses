@@ -36,7 +36,8 @@
     <title>Goals</title>
     <contents>
       <ul>
-        <li>Brief History of ARIA and HTML5</li>
+        <li>Brief History of ARIA and HTML</li>
+        <li>W3C specifications and resources</li>
         <li>ARIA basics</li>
         <li>Checkbox example</li>
         <li>Menu Button design pattern and example</li>
@@ -48,62 +49,11 @@
   </slide>
 
   <slide>
-    <title>Accessible Rich Internet Applications (ARIA) 1.1</title>
-    <contents>
-      <p class="center">
-        <a href="https://www.w3.org/TR/wai-aria" target="_specification">Accessible Rich Internet Applications 1.0</a>
-      </p>
-      <iframe src="https://www.w3.org/TR/wai-aria/" title="ARIA 1.1 specfication" width="90%" height="600px"/>
-    </contents>
-  </slide>
-
-  <slide>
-    <title>HTML Living Standard</title>
-    <contents>
-      <p class="center">
-        <a href="https://html.spec.whatwg.org/" target="_specification">HTML living standard</a>
-      </p>
-      <iframe src="https://html.spec.whatwg.org/" title="HTML living standard" width="90%" height="600px"/>
-    </contents>
-  </slide>
-
-  <slide>
-    <title>HTML: main element</title>
-    <contents>
-      <p class="center">
-        <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-main-element" target="_specification">HTML: main element</a>
-      </p>
-      <iframe src="https://www.w3.org/TR/html5/grouping-content.html#the-main-element" title="HTML5 MAIN element specfication" width="90%" height="600px"/>
-    </contents>
-  </slide>
-
-
-  <slide>
-    <title>HTML Accessibility API Mappings: roles and role restrictions</title>
-    <contents>
-      <p class="center">
-        <a href="https://www.w3.org/TR/html-aria/#el-li" target="_specification">HTML Accessibility API Mappings 1.0: roles and role restrctions</a>
-      </p>
-      <iframe src="https://www.w3.org/TR/html-aria/#el-li" title="HTML Accessibility API Mappings 1.0" width="90%" height="600px"/>
-    </contents>
-  </slide>
-
-  <slide>
-    <title>Core Accessibility API Mappings for ARIA</title>
-    <contents>
-      <p class="center">
-        <a href="https://w3c.github.io/core-aam/#mapping_role" target="_specification">Core Accessibility API Mappings for ARIA</a> (Editor's Draft)
-      </p>
-      <iframe src="https://w3c.github.io/core-aam/#mapping_role" title="Core Accessibility API Mappings for ARIA 1.1 Editors Draft" width="90%" height="600px"/>
-    </contents>
-  </slide>
-
-  <slide>
     <title>The Problem of Custom Widgets</title>
     <contents>
       <h2>Problem</h2>
       <ul>
-        <li>Starting arounf the year 2000 developers and designers started using HTML + CSS + Javascript to create <em>custom user interface widgets</em> (e.g. interactive controls) for web pages.</li>
+        <li>Starting around the year 2000 developers and designers began using HTML + CSS + Javascript to create <em>custom user interface widgets</em> (e.g. interactive controls) for web pages that were not available from the standard set of HTML form controls.</li>
         <li>There was no standard and inter-operable way to make these <em>custom widgets</em> accessible.</li>
       </ul>
 
@@ -112,12 +62,46 @@
         <li>Keyboard support.</li>
         <li>Describing the widget behavior (e.g. role).</li>
         <li>Labeling the features of the widget (e.g. accessible name).</li>
-        <li>Identifying properties and states. (e.g. checked, exapnded, has popup)</li>
+        <li>Identifying properties and states. (e.g. checked, expanded, has popup)</li>
         <li>Communicating information through platform specific accessibility APIs.</li>
         <li>Interoperability between browser and accessibility APIs.</li>
       </ul>
     </contents>
   </slide>
+
+
+  <slide>
+    <title>ARIA Contract with Browsers and Assistive Technologies</title>
+    <contents>
+      <h2>Browsers</h2>
+      <ul>
+        <li>The use of ARIA markup does not affect browser behavior or rendering.</li>
+        <li>ARIA only affects how information is represented in accessibility APIs (e.g. MSAA+IAccessible2, ATK+SPI, UIAutomate, MacOS).</li>
+      </ul>
+
+      <h2>Assistive Technologies</h2>
+      <ul>
+        <li>Do not specify what assistive technologies will do with the information.</li>
+      </ul>
+    </contents>
+    <transcript>
+        Slide 3 talks about the contract that ARIA working group made with browser developers and assistive technology developers.
+        First, for browser developers ARIA does not change the behavior of the web page.  So if I use a “menu” role or “aria-haspopup” on a web page, nothing changes about the web page in the standard graphical rendering.
+        This was important, because ARIA was originally designed to “repair” in accessible web pages, and add if adding ARIA “broke” changed the behavior of the web page is some way, it could break the page for people using the graphical rendering, it would not have been accepted by either the browser or developer community.
+        ARIA only changes what information is communicated to assistive technologies through accessibility APIs.
+        So if your page includes a “menu” role you as the author need to make sure it has the keyboard interaction for the menu role, and that keyboard interaction is available to all users of our web page.
+        ARIA if nothing else was a huge first step in standardizing how browsers map web page information to assistive technologies, which is fundamental for interoperability.
+        Before ARIA, browser developers had to make their own decisions about how to represent web content in accessibility APIS.
+        While some mapping like for headings (H1-H6) are pretty clear other content was open to interpretation, meaning which browser a screen reader was using could have a big impact on their experience.
+        The second promise was to developers of screen readers.
+        The promise to screen reader developers was not to tell them what to do with this information.
+        They said they know their users and would make use of the new information if it was reliable and important to their users.
+        This means it is not entirely predictable what adding ARIA to a web page will mean for users of different types of assistive technologies.
+        A new W3C working group called ARIA AT working group is developing test cases to see how different types of assistive technologies are rendering ARIA information.
+        This information is important to developers so they can understand how adding an ARIA feature will affect the user experience in different contexts, and also assistive technology companies for them to see where they may not be using all the ARIA information available to them.
+      </transcript>
+  </slide>
+
 
   <slide>
     <title>Purpose of ARIA is Describe Semantics and Behavior</title>
@@ -165,36 +149,124 @@
   </slide>
 
   <slide>
-    <title>ARIA Contract with Browsers and Assistive Technologies</title>
+    <title>Accessible Rich Internet Applications (ARIA) 1.1</title>
     <contents>
-      <h2>Browsers</h2>
-      <ul>
-        <li>The use of ARIA markup does not affect browser behavior or rendering.</li>
-        <li>ARIA only affects how information is represented in accessibility APIs (e.g. MSAA+IAccessible2, ATK+SPI, UIAutomate, MacOS).</li>
-      </ul>
-
-      <h2>Assistive Technologies</h2>
-      <ul>
-        <li>Do not specify what assistive technologies will do with the information.</li>
-      </ul>
+      <p class="center">
+        <a href="https://www.w3.org/TR/wai-aria" target="_specification">Accessible Rich Internet Applications 1.0</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/wai-aria/" title="ARIA 1.1 specfication" width="90%" height="600px"/>
     </contents>
-    <transcript>
-        Slide 3 talks about the contract that ARIA working group made with browser developers and assistive technology developers.
-        First, for browser developers ARIA does not change the behavior of the web page.  So if I use a “menu” role or “aria-haspopup” on a web page, nothing changes about the web page in the standard graphical rendering.
-        This was important, because ARIA was originally designed to “repair” in accessible web pages, and add if adding ARIA “broke” changed the behavior of the web page is some way, it could break the page for people using the graphical rendering, it would not have been accepted by either the browser or developer community.
-        ARIA only changes what information is communicated to assistive technologies through accessibility APIs.
-        So if your page includes a “menu” role you as the author need to make sure it has the keyboard interaction for the menu role, and that keyboard interaction is available to all users of our web page.
-        ARIA if nothing else was a huge first step in standardizing how browsers map web page information to assistive technologies, which is fundamental for interoperability.
-        Before ARIA, browser developers had to make their own decisions about how to represent web content in accessibility APIS.
-        While some mapping like for headings (H1-H6) are pretty clear other content was open to interpretation, meaning which browser a screen reader was using could have a big impact on their experience.
-        The second promise was to developers of screen readers.
-        The promise to screen reader developers was not to tell them what to do with this information.
-        They said they know their users and would make use of the new information if it was reliable and important to their users.
-        This means it is not entirely predictable what adding ARIA to a web page will mean for users of different types of assistive technologies.
-        A new W3C working group called ARIA AT working group is developing test cases to see how different types of assistive technologies are rendering ARIA information.
-        This information is important to developers so they can understand how adding an ARIA feature will affect the user experience in different contexts, and also assistive technology companies for them to see where they may not be using all the ARIA information available to them.
-      </transcript>
   </slide>
+
+  <slide>
+    <title>HTML Living Standard</title>
+    <contents>
+      <p class="center">
+        <a href="https://html.spec.whatwg.org/" target="_specification">HTML living standard</a>
+      </p>
+      <iframe src="https://html.spec.whatwg.org/" title="HTML living standard" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>HTML: main element</title>
+    <contents>
+      <p class="center">
+        <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-main-element" target="_specification">HTML: main element</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/html5/grouping-content.html#the-main-element" title="HTML5 MAIN element specfication" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+
+  <slide>
+    <title>HTML Accessibility API Mappings: roles and role restrictions</title>
+    <contents>
+      <p class="center">
+        <a href="https://www.w3.org/TR/html-aria/#el-li" target="_specification">HTML Accessibility API Mappings 1.0: roles and role restrictions</a>
+      </p>
+      <iframe src="https://www.w3.org/TR/html-aria/#el-li" title="HTML Accessibility API Mappings 1.0" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Core Accessibility API Mappings for ARIA</title>
+    <contents>
+      <p class="center">
+        <a href="https://w3c.github.io/core-aam/#mapping_role" target="_specification">Core Accessibility API Mappings for ARIA</a> (Editor's Draft)
+      </p>
+
+      <h2>Define markup mappings to accessibility APIs:</h2>
+      <ul>
+        <li>ATK/AT-SPI (Linux/Unix)</li>
+        <li>Microsoft Active Accessibility (MSAA) + IAccessible2</li>
+        <li>Microsoft UI Automate</li>
+        <li>MacOS Accessibility API</li>
+      </ul>
+      <iframe src="https://w3c.github.io/core-aam/#mapping_role" title="Core Accessibility API Mappings for ARIA 1.1 Editors Draft" width="90%" height="600px"/>
+    </contents>
+  </slide>
+
+  <slide>
+    <title>Summary of W3C Documents</title>
+    <contents>
+      <table class="table table-striped table-hover" aria-label="tabindex_values">
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.w3.org/TR/wai-aria" target="_specification">Accessible Rich Internet Applications Specification</a></td>
+            <td>
+              <ul>
+                <li>Defines the vocabulary for the roles, properties and states to describe the features of a website.</li>
+                <li>Adding aria markup does not effect web bowser behavior or rendering, only what is communicated through accessibility APIs to screen readers.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="https://html.spec.whatwg.org/" target="_specification">HTML living standard</a></td>
+            <td>
+              <ul>
+                <li>Defines the semantics and behaviors of HTML markup.</li>
+                <li>Native HTML markup should be used instead of ARIA markup.</li>
+                <li>This document is a living standard, so it has no version number and reflects the current state of interoperability of HTML on the web.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="https://www.w3.org/TR/html-aria/#el-li" target="_specification">HTML Accessibility API Mappings 1.0</a></td>
+            <td>
+              <ul>
+                <li>Defines default ARIA roles for HTML elements.</li>
+                <li>Restricts ARIA roles that can override the default role, based on the semantics of the element.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="https://w3c.github.io/core-aam/#mapping_role" target="_specification">Core Accessibility API Mappings for ARIA</a></td>
+            <td>
+              <ul>
+                <li>Defines how ARIA roles, properties and states are mapped to specific accessibility APIs.</li>
+                <li>Currently supported APIs:
+                  <ul>
+                    <li>ATK/AT-SPI (Linux/Unix)</li>
+                    <li>Microsoft Active Accessibility (MSAA) + IAccessible2</li>
+                    <li>Microsoft UI Automate</li>
+                    <li>MacOS Accessibility API</li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </contents>
+  </slide>
+
 
   <slide>
     <title>Tabindex and Keyboard Focus</title>
@@ -349,7 +421,7 @@
 
       If the aria-label attribute is not found and starting with the release of ARIA 1.2 the browser will look for a label role for a small subset of widget roles that can be labeled using encapsulation.
 
-      The label role will typically be ddefined using the standard HTML LABEL element.
+      The label role will typically be defined using the standard HTML LABEL element.
 
       For the group and radiogroup roles, the LEGEND element can be used to define an accessible name starting in ARIA 1.2.
 
@@ -422,49 +494,132 @@
   </slide>
 
   <slide>
-    <title>Other ARIA Description Markup</title>
+    <title>Other Descriptions: aria-details property</title>
+    <style>
+      table tbody th {
+        font-weight: normal;
+      }
+    </style>
     <contents>
-        <h2 id="heading_ant">Other ARIA Description Techniques</h2>
-        <table class="table table-striped table-hover" aria-labelledby="heading_ant">
-          <thead>
-            <tr>
-              <th>Markup</th>
-              <th>Purpose</th>
-              <th>NVDA</th>
-              <th>Jaws 2020</th>
-              <th>VoiceOver macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details">aria-details</a></code></td>
-              <td>Provide a reference to additional visible information on the page. The screen would announce the availability of additional information and provide a means to navigate tot he descriptive content.<p><strong>NOTE:</strong> This feature was added at the request of DPUB working group, so may have better support in digital book readers.</p></td>
-              <td>None</td>
-              <td>
-                <ul>
-                  <li>Announces additional information available.</li>
-                  <li>Announces when entering or leaving a details container, similar to landmarks.</li>
-                  <li>Does NOT provide information relationships between references and containers.</li>
-                  <li>Does NOT provide a means to navigate between references and details containers.</li>
-                </ul>
-              </td>
-              <td>None</td>
-            </tr>
-            <tr>
-              <td><code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage">aria-errormessage</a></code></td>
-              <td>
-                Since accessible description can be configured by the user not to be rendered in somce
-              </td>
-              <td>None</td>
-              <td>Partial</td>
-              <td>None</td>
-            </tr>
-          </tbody>
-        </table>
+      <p>
+        <code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details">aria-details</a></code> provides a reference to additional visible information on the page. The screen reader would announce the availability of additional information and provide a means to navigate tot he descriptive content.
+      </p>
+      <p><strong>NOTE:</strong> This feature was added at the request of DPUB working group, so may have better support in digital book readers.</p>
+
+      <h2>Screen Reader Expectations</h2>
+      <ul>
+        <li>Announces additional information is available.</li>
+        <li>Announces when entering or leaving a details container, similar to landmarks.</li>
+        <li>Provides a means to navigate from the reference to the details content.</li>
+        <li>Provides a means to navigate from the details content to the reference.</li>
+      </ul>
+
+      <h2 id="exp_impl">Implementation</h2>
+      <table class="table table-striped table-hover" aria-labelledby="exp_impl">
+        <thead>
+          <tr>
+            <th>Expectation</th>
+            <th>NVDA for Windows</th>
+            <th>Jaws for Windows</th>
+            <th>VoiceOver for macOS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Announces additional information available.</th>
+            <td>no</td>
+            <td>Yes</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Announces when entering or leaving a details container.</th>
+            <td>no</td>
+            <td>Yes</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Navigation from reference to details content.</th>
+            <td>no</td>
+            <td>no</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <th>Navigate from details content to reference.</th>
+            <td>no</td>
+            <td>no</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
     </contents>
     <transcript>
 
     </transcript>
+  </slide>
+
+  <slide>
+    <title>Other Description: aria-invalid and aria-errormessage properties</title>
+    <contents>
+      <p><code>aria-errormessage</code> must be used in conjunction with <code>aria-invalid</code> or the <code>invalid</code> state of standard HTML form controls.  When a control is identified as invalid the content referenced will be spoken by the screen reader.</p>
+
+      <p>The coding is similar to <code>aria-describedby</code> property.  The difference is the accessible description can be configured by the user not to be spoken, the use of <code>aria-errormessage</code> is intended to always be spoken by a screen reader when the invalid state is set.</p>
+
+      <h2>Screen Reader Expectations</h2>
+      <ul>
+        <li>When form control or widget has valid value, screen reader announces nothing.</li>
+        <li>When form control or widget has invalid value, screen reader announces control has invalid value.</li>
+        <li>When form control or widget has invalid value, screen reader announces referenced message.</li>
+      </ul>
+
+      <h2 id="exp_impl">Implementation</h2>
+      <table class="table table-striped table-hover" aria-labelledby="exp_impl">
+        <thead>
+          <tr>
+            <th>Expectation</th>
+            <th>NVDA for Windows</th>
+            <th>Jaws for Windows</th>
+            <th>VoiceOver for macOS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>No announcement when valid.</th>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <th>Announcement when invalid.</th>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <th>Referenced message announced when invalid.</th>
+            <td>no</td>
+            <td>Yes</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </contents>
+    <transcript>
+    </transcript>
+  </slide>
+
+  <slide>
+    <title>ARIA Checkbox Example</title>
+    <contents>
+      <ul>
+        <li>Demonstrate accessibility issues of custom widgets.</li>
+        <li>Incrementally add accessibility features.</li>
+        <li>Observe changes in user experience as features are added.</li>
+        <li>Learn what ARIA markup does and doesn't do.</li>
+        <li>Focus and hover styling.</li>
+        <li>High contrast testing.</li>
+      </ul>
+    </contents>
   </slide>
 
   <slide>
@@ -2492,545 +2647,16 @@ function checkboxBlur(event) {
   </slide>
 
   <slide>
-    <title>Design Pattern: Navigation Menu Options</title>
-    <contents>
-       <table class="table table-striped table-hover" aria-label="Basic Screen Reader Commands">
-          <thead>
-            <tr>
-              <th>Technique</th>
-              <th>Keyboard Interaction</th>
-              <th>ARIA</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Keyboard Enhancement</th>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd></li>
-                  <li><kbd>left arrow</kbd></li>
-                  <li><kbd>right arrow</kbd></li>
-                  <li><kbd>up arrow</kbd></li>
-                  <li><kbd>down arrow</kbd></li>
-                </ul>
-              </td>
-              <td>
-                <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_lh_navigation" target="_specification"><code>navigation</code> landmark</a>
-              </td>
-              <td>
-                <ul>
-                  <li>Primarily <kbd>tab</kbd> key navigation.</li>
-                  <li>Cursor keys provide enhanced navigation.</li>
-                  <li>Uses hierarchical lists of links.</li>
-                  <li>Uses ARIA <code>navigation</code> landmarks.</li>
-                  <li>Examples:
-                    <ul>
-                      <li><a href="http://www.dhs.state.il.us" target="_example">Illinois Department of Human Services</a></li>
-                      <li><a href="http://illinois.edu/" target="_example">University of Illinois Home Page</a></li>
-                      <li><a href="https://adobe-accessibility.github.io/Accessible-Mega-Menu/" target="_example">Adobe Mega Menu</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>Menu Button</th>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd></li>
-                  <li><kbd>up arrow</kbd></li>
-                  <li><kbd>down arrow</kbd></li>
-                </ul>
-              </td>
-              <td>
-                <a href="http://w3c.github.io/aria-practices/#menubutton" target="_specification">Menu Button Design Pattern</a>
-              </td>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd> moves into and out of each menu button.</li>
-                  <li><kbd>up arrow</kbd> and <kbd>down arrow</kbd> move between pull down menu items.</li>
-                  <li>Uses <code>button</code>, <code>menu</code> and <code>menuitem</code>  widget roles.</li>
-                  <li>Examples:
-                    <ul>
-                      <li><a href="http://fae.disability.illinois.edu" target="_example">Functional Accessibility Evaluator 2.0</a></li>
-                      <li><a href="http://citl.illinois.edu/" target="_example">Illinois Center for Innovation in Teaching &amp; Learning</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>Disclosure</th>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd></li>
-                  <li><kbd>space/enter</kbd></li>
-                </ul>
-              </td>
-              <td>
-                <a href="http://w3c.github.io/aria-practices/#disclosure" target="_specification">Disclosure Design Pattern</a>
-              </td>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd> moves into and out menubar.</li>
-                  <li><kbd>space</kbd> or <kbd>return</kbd> opens panel of links.</li>
-                  <li><kbd>tab</kbd> and cursor keys move focus between disclosed links.</li>
-                  <li>Examples:
-                    <ul>
-                      <li><a href="http://admissions.illinois.edu" target="_example">Illinois Admissions</a></li>
-                      <li><a href="http://education.illinois.edu/" target="_example">Illinois College of Education</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>Menubar</th>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd></li>
-                  <li><kbd>left arrow</kbd></li>
-                  <li><kbd>right arrow</kbd></li>
-                  <li><kbd>up arrow</kbd></li>
-                  <li><kbd>down arrow</kbd></li>
-                </ul>
-              </td>
-              <td>
-                <a href="http://w3c.github.io/aria-practices/#menubar" target="_specification">Menubar Design Pattern</a>
-              </td>
-              <td>
-                <ul>
-                  <li><kbd>tab</kbd> moves into and out of each disclosure button.</li>
-                  <li>Cursor keys move between pull down menus and menuitems.dri</li>
-                  <li>Examples:
-                    <ul>
-                      <li><a href="http://w3c.github.io/aria-practices/examples/menubar/menubar-1/menubar-1.html" target="_example">ARIA Authoring Practices Example</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    </contents>
-  </slide>
-
- <slide>
-    <title>Design Example: Drop Down Navigation Links</title>
+    <title>ARIA Menu Button Example Overview</title>
     <contents>
       <ul>
-        <li>Keyboard interaction dictates the ARIA roles</li>
+        <li>Demonstrate accessibility issues of custom widgets.</li>
+        <li>Incrementally add accessibility features.</li>
+        <li>Observe changes in user experience as features are added.</li>
+        <li>Learn what ARIA markup does and doesn't do.</li>
+        <li>Focus and hover styling.</li>
+        <li>High contrast testing.</li>
       </ul>
-    </contents>
-  </slide>
-
-  <slide>
-    <title>Drop Down Navigation Links: Tab Key Operation</title>
-    <style>
-
-ul.example {
-  margin: 10px;
-  padding: 10px;
-  font-size: 110%;
-  list-style: none;
-  background-color: #EEEEEE;
-  height: 2.5em;
-}
-
-.popup {
-  display: block;
-  float: left;
-  position: relative;
-}
-
-nav > ul > li > a {
-  font-size: 110%;
-  padding: 0.25em;
-  width: 8em;
-  text-decoration: none;
-  color: black;
-  border: 2px solid transparent;
-}
-
-nav > ul > li > a:after {
-  content: url('images/down-arrow-brown.png');
-  padding-left: .25em;
-}
-
-nav > ul > li > ul {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 1.75em;
-  font-size: 110%;
-  list-style: none;
-  background-color: #ccddff;
-  left: -3000em;
-}
-
-nav > ul > li > ul > li {
-  margin: 0;
-  padding: 0;
-}
-
-nav > ul > li > ul > li > a,
-nav > ul > li > ul > li > a:visited {
-  display: block;
-  text-decoration: none;
-  padding: 0.25em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  background-color: #ccddff;
-  width: 10em;
-  color: black;
-}
-
-/* focus and hover styling */
-
-nav > ul > li > a:hover {
-  background-color: #ccddff;
-}
-
-nav > ul > li > a:focus {
-  border-color: black;
-  background-color: #ccddff;
-}
-
-nav > ul > li > ul > li > a:focus {
-  outline: 2px solid black;
-  background-color: #ccddff;
-}
-
-    </style>
-    <contents>
-
-    <ul>
-      <li><kbd>tab</kbd> key provides navigation to all links in the navigation menu.</li>
-      <li>Links in the popup lists of links become visible when they receive focus.</li>
-      <li>Most basic and predictable keyboard model.</li>
-    </ul>
-
-     <div id="example">
-        <nav aria-label="primary">
-          <ul class="example">
-            <li class="popup">
-              <a href="#">About</a>
-              <ul>
-                <li>
-                  <a href="#overview">Overview</a>
-                </li>
-                <li>
-                  <a href="#admin">Administration</a>
-                </li>
-                <li >
-                  <a href="#facts">Facts</a>
-                </li>
-                <li>
-                  <a href="#tours" >Campus Tours</a>
-                </li>
-              </ul>
-            </li>
-            <li class="popup">
-              <a href="#">Admissions</a>
-              <ul>
-                <li>
-                  <a href="#apply">Apply</a>
-                </li>
-                <li>
-                  <a href="#tuition">Tuition</a>
-                </li>
-                <li >
-                  <a href="#signup">Sign Up</a>
-                </li>
-                <li role="separator"></li>
-                <li>
-                  <a href="#visit">Visit</a>
-                </li>
-                <li>
-                  <a href="#photo">Photo Tour</a>
-                </li>
-                <li>
-                  <a href="#connect">Connect</a>
-                </li>
-              </ul>
-            </li>
-            <li class="popup">
-              <a href="#">Academics</a>
-              <ul>
-                <li>
-                  <a href="#colleges">Colleges &amp; Schools</a>
-                </li>
-                <li>
-                  <a href="#programs">Programs of Study</a>
-                </li>
-                <li>
-                  <a href="#honors">Honors Programs</a>
-                </li>
-                <li>
-                  <a href="#online">Online Courses</a>
-                </li>
-                <li role="separator"></li>
-                <li>
-                  <a href="#explorer">Course Explorer</a>
-                </li>
-                <li>
-                  <a href="#register">Register for Class</a>
-                </li>
-                <li>
-                  <a href="#academic">Academic Calendar</a>
-                </li>
-                <li>
-                  <a href="#tanscripts">Transcripts</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      <script>
-
-        var i, l;
-
-        var topLinks = document.querySelectorAll('nav > ul > li > a');
-
-        for (i = 0; i &lt; topLinks.length; i++) {
-          l = topLinks[i];
-
-          l.addEventListener('focus', function(event) {
-            var tgt = event.currentTarget;
-
-            if (tgt.nextElementSibling) {
-              tgt.nextElementSibling.style.left = "0";
-            }
-          });
-
-          l.addEventListener('blur', function(event) {
-            var tgt = event.currentTarget;
-
-            if (tgt.nextElementSibling) {
-              tgt.nextElementSibling.style.left = '-3000em';
-            }
-          });
-
-        }
-
-        var popupLinks = document.querySelectorAll('nav > ul > li > ul > li > a');
-
-        for (i = 0; i &lt; popupLinks.length; i++) {
-          l = popupLinks[i];
-
-          l.addEventListener('focus', function(event) {
-            var tgt = event.currentTarget;
-            tgt.parentNode.parentNode.style.left = '0';
-          });
-
-          l.addEventListener('blur', function(event) {
-            var tgt = event.currentTarget;
-            tgt.parentNode.parentNode.style.left = '-3000em';
-          });
-        }
-
-
-      </script>
-
-      <h2>HTML Code</h2>
-      <pre><code id="sc1"></code></pre>
-
-      <script>
-        sourceCode.add('sc1', 'example');
-        sourceCode.make();
-        hljs.initHighlightingOnLoad();
-      </script>
-
-
-    </contents>
-  </slide>
-
-  <slide>
-    <title>Drop Down Navigation Links: ARIA Menu Button Pattern</title>
-    <style>
-
-ul.example {
-  margin: 10px;
-  padding: 10px;
-  font-size: 110%;
-  list-style: none;
-  background-color: #EEEEEE;
-}
-
-.menu_button {
-  position: relative;
-}
-
-
-a[role="button"] {
-  font-size: 110%;
-  padding: 0.25em;
-  width: 12em;
-  text-decoration: none;
-  color: black;
-}
-
-a[role="button"]:after {
-  content: url('images/down-arrow-brown.png');
-  padding-left: .25em;
-}
-
-ul[role="menu"] {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  font-size: 110%;
-
-  list-style: none;
-  background-color: #ccddff;
-  display: none;
-}
-
-ul[role="menu"] li {
-  margin: 0;
-  padding: 0;
-}
-
-ul[role="menu"] a[role="menuitem"],
-ul[role="menu"] a[role="menuitem"]:visited {
-  display: block;
-  text-decoration: none;
-  padding: 0.25em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  background-color: #ccddff;
-  width: 22em;
-  color: black;
-}
-
-/* focus and hover styling */
-
-a[role="button"]:focus,
-a[role="button"]:hover {
-  border: 2px solid black;
-  background-color: #ccddff;
-}
-
-ul[role="menu"] a[role="menuitem"]:focus,
-ul[role="menu"] a[role="menuitem"]:hover{
-  background-color: #ccddff;
-  color: black;
-}
-    </style>
-    <contents>
-
-    <ul>
-      <li><kbd>tab</kbd> key provides navigation betwen a set of menu buttons.</li>
-      <li><kbd>up</kbd> and <kbd>down</kbd> keys navigate links in popup menu.</li>
-      <li>Next step and visual affordances help people identify the popup menu of links.</li>
-    </ul>
-
-
-      <script src="js/Menubutton2.js" type="text/javascript"></script>
-      <script src="js/MenubuttonPopupMenuLinks.js" type="text/javascript"></script>
-      <script src="js/MenubuttonMenuItemLinks.js" type="text/javascript"></script>
-
-      <div id="example">
-        <nav aria-label="primary">
-          <ul class="example">
-            <li class="menu_button">
-              <a role="button" aria-haspopup="true" aria-controls="menu1" href="#">About</a>
-              <ul id="menu1" role="menu" aria-label="About">
-                <li role="none">
-                  <a role="menuitem" href="#overview">Overview</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#admin">Administration</a>
-                </li>
-                <li role="none">
-                  <a id="menubar113" role="menuitem" href="#facts">Facts</a>
-                </li>
-                <li>
-                  <a role="menuitem" href="#tours" >Campus
-                    Tours</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu_button">
-              <a role="button" aria-haspopup="true" aria-controls="menu2" href="#">Admissions</a>
-              <ul id="menu2" role="menu" aria-label="Admissions">
-                <li role="none">
-                  <a role="menuitem" href="#apply">Apply</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#tuition">Tuition</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#signup">Sign Up</a>
-                </li>
-                <li role="separator"></li>
-                <li role="none">
-                  <a role="menuitem" href="#visit">Visit</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#photo">Photo Tour</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#connect">Connect</a>
-                </li>
-              </ul>
-            </li>
-            <li  class="menu_button">
-              <a role="button" aria-haspopup="true" aria-controls="menu3" href="#">Academics</a>
-              <ul id="menu3" role="menu" aria-label="Academics">
-                <li role="none">
-                  <a role="menuitem" href="#colleges">Colleges &amp; Schools</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#programs">Programs of Study</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#honors">Honors Programs</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#online">Online Courses</a>
-                </li>
-                <li role="separator"></li>
-                <li role="none">
-                  <a role="menuitem" href="#explorer">Course Explorer</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#register">Register for Class</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#academic">Academic Calendar</a>
-                </li>
-                <li role="none">
-                  <a role="menuitem" href="#tanscripts">Transcripts</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      <script>
-        var mbs = document.querySelectorAll('a[role="button"]');
-
-        for (var i = 0; i &lt; mbs.length; i++) {
-          console.log('TEST: ' + i);
-          var mb = new Menubutton(mbs[i]);
-          mb.init();
-        }
-      </script>
-
-
-      <h2>HTML Code</h2>
-      <pre><code id="sc1"></code></pre>
-
-      <script>
-        sourceCode.add('sc1', 'example');
-        sourceCode.make();
-        hljs.initHighlightingOnLoad();
-      </script>
     </contents>
   </slide>
 
@@ -3067,27 +2693,14 @@ ul[role="menu"] a[role="menuitem"]:hover{
   </slide>
 
   <slide>
-    <title>Next Steps for ARIA Authoring Practices Guide</title>
+    <title>Changes in ARIA Authoring Practices 1.2</title>
     <contents>
       <ul>
-        <li>Additional widget descriptions and examples</li>
-        <li>Grid and Table Examples</li>
-        <li>Accessible visual state and synchronization with ARIA states techniques</li>
-        <li>Form error feedback</li>
-        <li>Index of examples</li>
-      </ul>
-    </contents>
-  </slide>
-
-
-  <slide>
-    <title>Next Steps for ARIA Authoring Practices Guide</title>
-    <contents>
-      <ul>
-        <li>Additional widget descriptions and examples</li>
-        <li>Grid and Table Examples</li>
-        <li>Accessible visual state and synchronization with ARIA states techniques</li>
-        <li>Index of examples</li>
+        <li>Combobox 1.2 design pattern and examples.</li>
+        <li>New section on communicating value and limits for range widgets.</li>
+        <li>New section on navigational links using disclosure, menubar and tree widgets.</li>
+        <li>Improved support for high contrast modes in many examples.</li>
+        <li>Additional examples for many of the design patterns.</li>
       </ul>
     </contents>
   </slide>

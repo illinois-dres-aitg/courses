@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 17: Part 2: Adding role, checked state and accessible name</title>
+<title>Slide 17: Example Widget: Inaccessible Custom Checkbox</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -33,27 +33,31 @@ label input {
 
 div.checkbox span {
      padding: 0.25em;
+     margin-right: 0.25em;
+}
+ div.checkbox span:before {
+     content: '✗';
+     color: red;
 }
 
-div.checkbox span:before {
-    content: '✗';
-    color: red;
-    padding-right: 0.125em;
+div.checkbox.checked span {
+  margin-right: 0.375em;
 }
 
 div.checkbox.checked span:before {
-    content: '✓';
-    color: green;
-    padding-right: 0.190em;
+     content: '✓';
+     color: green;
+     font-size: 90%;
 }
-
-label:hover,
+ label {
+}
+ label:hover,
 .checkbox:hover {
      padding: 0;
      border: 2px solid #000;
      background-color: #CCD;
 }
-</style>
+    </style>
 </head>
 <body>
 <nav id="nav" class="navbar navbar-default">
@@ -86,13 +90,13 @@ label:hover,
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide48.html" title="Slide 48">
+<a id="ID_SLIDE_LAST" href="slide47.html" title="Slide 47">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 17 of 48</li>
+<li class="nav navbar-text">Slide 17 of 47</li>
 </ul>
 </div>
 </div>
@@ -101,26 +105,31 @@ label:hover,
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Part 2: Adding role, checked state and accessible name</h1>
+<h1 id="h1_title" class="title">Example Widget: Inaccessible Custom Checkbox</h1>
+<h2>Accessibility Issues</h2>
 <ul>
-        
-<li>Adding <code>role="checkbox"</code> to make part of tab order of the page.</li>
-        
-<li>Adding <code>aria-checked</code> attribute.</li>
-        
-<li>Accessible name from text content.</li>
-        
-<li>Removing state character (e.g. <span style="color: red">✗</span>) from accessible name using <code>aria-hidden</code>.</li>
       
+<li>Keyboard support</li>
+      
+<li>Keyboard focus styling</li>
+      
+<li>Role information</li>
+      
+<li>Accessible name</li>
+      
+<li>State of checkbox</li>
+     
 </ul>
-<script id="script" type="text/javascript">
+<h2>Example</h2>
+<p>
+<a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-inaccessible/output/" target="_webedit">Checkbox example on WebEdit</a>
+</p>
+<script id="script">
 function toggleCheckbox(node) {
  if (node.classList.contains('checked')) {
   node.classList.remove('checked');
-  node.setAttribute('aria-checked', 'false');
  } else {
   node.classList.add('checked');
-  node.setAttribute('aria-checked', 'true');
  }
 }
 
@@ -130,49 +139,35 @@ function clickCheckbox(event) {
  event.stopPropagation();
  event.preventDefault();
 }
-
-function keydownCheckbox(event) {
-  var cb = event.currentTarget;
-  if (event.key === ' ') {
-    toggleCheckbox(cb);
-
-    event.stopPropagation();
-    event.preventDefault();
-  }
-}
-      </script>
-<h2>Example</h2>
-<p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-2/output/" target="_webedit">Part 2 on WebEdit</a>
-</p>
+     </script>
 <div id="example">
-
+      
 <fieldset>
-    
+        
 <legend>
-        Pizza Toppings
-    </legend>
-    <label>
-      <input type="checkbox">
-        Green pepper
-     </label>
-    <label>
-      <input type="checkbox">
-        Onion
-    </label>
-    
-<div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
+            Pizza Toppings
+        </legend>
+        <label>
+          <input type="checkbox">
+            Green pepper
+         </label>
+        <label>
+          <input type="checkbox">
+            Onion
+        </label>
+        
+<div class="checkbox" onclick="clickCheckbox(event)">
+          
+<span></span>
+            Mushrooms
+        </div>
+        
+<div class="checkbox" onclick="clickCheckbox(event)">
+          
+<span></span>
+            Spinach
+        </div>
       
-<span aria-hidden="true"></span>
-        Mushrooms
-    </div>
-    
-<div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
-      
-<span aria-hidden="true"></span>
-          Spinach
-    </div>
-  
 </fieldset>
      
 </div>

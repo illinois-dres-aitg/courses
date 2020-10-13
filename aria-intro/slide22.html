@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 22: Example Widget: Inaccessible Custom Checkbox</title>
+<title>Slide 22: Part 4: Synchronization of ARIA and visual states</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -19,8 +19,8 @@ fieldset legend {
 }
 
 label,
-div.checkbox {
-     padding: 2px;
+[role="checkbox"] {
+     padding: 4px;
      width: 10em;
      display: block;
      margin-top: 0.25em;
@@ -31,31 +31,32 @@ label input {
      margin-right: 0.5em;
 }
 
-div.checkbox span {
+[role="checkbox"] span {
      padding: 0.25em;
-     margin-right: 0.25em;
-}
- div.checkbox span:before {
-     content: '✗';
-     color: red;
 }
 
-div.checkbox.checked span {
-  margin-right: 0.375em;
+[role="checkbox"] span:before {
+    content: '✗';
+    color: red;
+    padding-right: 0.125em;
 }
 
-div.checkbox.checked span:before {
-     content: '✓';
-     color: green;
-     font-size: 90%;
+[role="checkbox"][aria-checked="true"] span:before {
+    content: '✓';
+    color: green;
+    padding-right: 0.190em;
 }
- label {
+
+label.focus,
+[role="checkbox"]:focus {
+  padding: 2px;
+  border: 2px solid #999;
+  background-color: #DDE;
 }
- label:hover,
-.checkbox:hover {
-     padding: 0;
-     border: 2px solid #000;
-     background-color: #CCD;
+
+label:hover,
+[role="checkbox"]:hover {
+  background-color: #CCD;
 }
     </style>
 </head>
@@ -90,13 +91,13 @@ div.checkbox.checked span:before {
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide48.html" title="Slide 48">
+<a id="ID_SLIDE_LAST" href="slide47.html" title="Slide 47">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 22 of 48</li>
+<li class="nav navbar-text">Slide 22 of 47</li>
 </ul>
 </div>
 </div>
@@ -105,31 +106,20 @@ div.checkbox.checked span:before {
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Example Widget: Inaccessible Custom Checkbox</h1>
-<h2>Accessibility Issues</h2>
+<h1 id="h1_title" class="title">Part 4: Synchronization of ARIA and visual states</h1>
 <ul>
+        
+<li>Using CSS attribute selectors and CSS <code>content</code> property to synchronize visual and aria states.</li>
+        
+<li>Use of CSS <code>content</code> property supports high contrast browser settings, unike the use of CSS <code>background-image</code>.</li>
       
-<li>Keyboard support</li>
-      
-<li>Keyboard focus styling</li>
-      
-<li>Role information</li>
-      
-<li>Accessible name</li>
-      
-<li>State of checkbox</li>
-     
 </ul>
-<h2>Example</h2>
-<p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-inaccessible/output/" target="_webedit">Checkbox example on WebEdit</a>
-</p>
-<script id="script">
+<script id="script" type="text/javascript">
 function toggleCheckbox(node) {
- if (node.classList.contains('checked')) {
-  node.classList.remove('checked');
+ if (node.getAttribute('aria-checked') === 'true') {
+  node.setAttribute('aria-checked', 'false');
  } else {
-  node.classList.add('checked');
+  node.setAttribute('aria-checked', 'true');
  }
 }
 
@@ -139,35 +129,59 @@ function clickCheckbox(event) {
  event.stopPropagation();
  event.preventDefault();
 }
-     </script>
+
+function keydownCheckbox(event) {
+  var cb = event.currentTarget;
+  if (event.key === ' ') {
+    toggleCheckbox(cb);
+
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}
+
+function checkboxFocus(event) {
+  event.currentTarget.parentElement.classList.add('focus');
+}
+
+function checkboxBlur(event) {
+  event.currentTarget.parentElement.classList.remove('focus');
+}
+      </script>
+<h2>Example</h2>
+<p>
+<a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-part-4/output/" target="_webedit">Part 4 on WebEdit</a>
+</p>
 <div id="example">
-      
+
+<h1>Part 4: Custom Checkbox Widget with synchronization of ARIA and visual states</h1>
+
 <fieldset>
-        
+    
 <legend>
-            Pizza Toppings
-        </legend>
-        <label>
-          <input type="checkbox">
-            Green pepper
-         </label>
-        <label>
-          <input type="checkbox">
-            Onion
-        </label>
-        
-<div class="checkbox" onclick="clickCheckbox(event)">
-          
-<span></span>
-            Mushrooms
-        </div>
-        
-<div class="checkbox" onclick="clickCheckbox(event)">
-          
-<span></span>
-            Spinach
-        </div>
+        Pizza Toppings
+    </legend>
+    <label>
+      <input type="checkbox" onfocus="checkboxFocus(event)" onblur="checkboxBlur(event)">
+        Green pepper
+     </label>
+    <label>
+      <input type="checkbox" onfocus="checkboxFocus(event)" onblur="checkboxBlur(event)">
+        Onion
+    </label>
+    
+<div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
       
+<span aria-hidden="true"></span>
+        Mushrooms
+    </div>
+    
+<div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" onclick="clickCheckbox(event)" onkeydown="keydownCheckbox(event)">
+      
+<span aria-hidden="true"></span>
+          Spinach
+    </div>
+  
 </fieldset>
      
 </div>
