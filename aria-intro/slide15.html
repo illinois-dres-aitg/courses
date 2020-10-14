@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 15: Other Description: aria-invalid and aria-errormessage properties</title>
+<title>Slide 15: Other Descriptions: aria-details property</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
 <link rel="stylesheet" type="text/css" href="../css/html-slides.css">
 <script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
-<style id="style"></style>
+<style id="style">
+      table tbody th {
+        font-weight: normal;
+      }
+    </style>
 </head>
 <body>
 <nav id="nav" class="navbar navbar-default">
@@ -41,13 +45,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide44.html" title="Slide 44">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 15 of 43</li>
+<li class="nav navbar-text">Slide 15 of 44</li>
 </ul>
 </div>
 </div>
@@ -56,18 +60,23 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Other Description: aria-invalid and aria-errormessage properties</h1>
+<h1 id="h1_title" class="title">Other Descriptions: aria-details property</h1>
 <p>
-<code>aria-errormessage</code> must be used in conjunction with <code>aria-invalid</code> or the <code>invalid</code> state of standard HTML form controls.  When a control is identified as invalid the content referenced will be spoken by the screen reader.</p>
-<p>The coding is similar to <code>aria-describedby</code> property.  The difference is the accessible description can be configured by the user not to be spoken, the use of <code>aria-errormessage</code> is intended to always be spoken by a screen reader when the invalid state is set.</p>
+        
+<code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details">aria-details</a></code> provides a reference to additional visible information on the page. The screen reader would announce the availability of additional information and provide a means to navigate to the descriptive content.
+      </p>
+<p>
+<strong>NOTE:</strong> This feature was added at the request of DPUB working group, so may have better support in digital book readers.</p>
 <h2>Screen Reader Expectations</h2>
 <ul>
         
-<li>When form control or widget has valid value, screen reader announces nothing.</li>
+<li>Announces additional information is available.</li>
         
-<li>When form control or widget has invalid value, screen reader announces control has invalid value.</li>
+<li>Announces when entering or leaving a details container, similar to landmarks.</li>
         
-<li>When form control or widget has invalid value, screen reader announces referenced message.</li>
+<li>Provides a means to navigate from the reference to the details content.</li>
+        
+<li>Provides a means to navigate from the details content to the reference.</li>
       
 </ul>
 <h2 id="exp_impl">Implementation</h2>
@@ -90,27 +99,36 @@
           
 <tr>
             
-<th>No announcement when valid.</th>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-          
-</tr>
-          
-<tr>
-            
-<th>Announcement when invalid.</th>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-          
-</tr>
-          
-<tr>
-            
-<th>Referenced message announced when invalid.</th>
+<th>Announces additional information available.</th>
             <td>no</td>
             <td>Yes</td>
+            <td>no</td>
+          
+</tr>
+          
+<tr>
+            
+<th>Announces when entering or leaving a details container.</th>
+            <td>no</td>
+            <td>Yes</td>
+            <td>no</td>
+          
+</tr>
+          
+<tr>
+            
+<th>Navigation from reference to details content.</th>
+            <td>no</td>
+            <td>no</td>
+            <td>no</td>
+          
+</tr>
+          
+<tr>
+            
+<th>Navigate from details content to reference.</th>
+            <td>no</td>
+            <td>no</td>
             <td>no</td>
           
 </tr>

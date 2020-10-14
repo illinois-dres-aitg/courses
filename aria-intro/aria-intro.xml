@@ -69,7 +69,6 @@
     </contents>
   </slide>
 
-
   <slide>
     <title>ARIA Contract with Browsers and Assistive Technologies</title>
     <contents>
@@ -101,7 +100,6 @@
         This information is important to developers so they can understand how adding an ARIA feature will affect the user experience in different contexts, and also assistive technology companies for them to see where they may not be using all the ARIA information available to them.
       </transcript>
   </slide>
-
 
   <slide>
     <title>Purpose of ARIA is Describe Semantics and Behavior</title>
@@ -146,6 +144,18 @@
       ARIA only controls how information about a web page is communicate to screen readers through operating system accessibility APIs.
       The current ARIA specification provides accessibility API mappings for ATK/AT-SPI (Linux/Unix), Microsoft Active Accessibility (MSAA) + IAccessible2 for Windows 10, Microsoft UI Automate for Windows 10 and the MacOS Accessibility API.
     </transcript>
+  </slide>
+
+  <slide>
+    <title>Accessibility APIs and Browsers</title>
+    <contents>
+      <ul>
+        <li>HTML + CSS + Javascript combine to create a graphical rendering.</li>
+        <li>Information in accessibility APIs for browsers are based off the graphical rendering.</li>
+        <li>Accessibility APIs have a tree structure similar concepts used in the HTML DOM.</li>
+        <li>ARIA markup is the vocabulary used in the accessibility tree to communicate information about the page to assistive technologies.</li>
+      </ul>
+    </contents>
   </slide>
 
   <slide>
