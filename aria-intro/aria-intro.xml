@@ -10,7 +10,7 @@
     </a>
     Copyright &#169; 2020 University of Illinois
   </footer>
-  <title>Introduction Accessible Rich Internet Application (ARIA)</title>
+  <title>Introduction to ARIA Specification and Practices</title>
   <person>
     <name>Jon Gunderson, Ph.D.</name>
     <desc href="http://disability.illinois.edu">Division of Disability Resources and Educational Services</desc>
@@ -19,7 +19,7 @@
     <desc href="mailto:jongund@illinois.edu">jongund@illinois.edu</desc>
   </person>
 
-  <desc href="http://disability.illinois.edu/academic-support/accessible-it-group/badging">Illinois A11y Badges</desc>
+  <home href="../index.html">Courses</home>
 
   <stylesheet media="screen">../css/bootstrap.min.css</stylesheet>
   <stylesheet media="screen">../css/bootstrap-theme.min.css</stylesheet>
