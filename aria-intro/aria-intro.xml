@@ -502,7 +502,7 @@
     </style>
     <contents>
       <p>
-        <code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details">aria-details</a></code> provides a reference to additional visible information on the page. The screen reader would announce the availability of additional information and provide a means to navigate tot he descriptive content.
+        <code><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-details">aria-details</a></code> provides a reference to additional visible information on the page. The screen reader would announce the availability of additional information and provide a means to navigate to the descriptive content.
       </p>
       <p><strong>NOTE:</strong> This feature was added at the request of DPUB working group, so may have better support in digital book readers.</p>
 
@@ -520,7 +520,7 @@
           <tr>
             <th>Expectation</th>
             <th>NVDA for Windows</th>
-            <th>Jaws for Windows</th>
+            <th>JAWS for Windows</th>
             <th>VoiceOver for macOS</th>
           </tr>
         </thead>
@@ -577,7 +577,7 @@
           <tr>
             <th>Expectation</th>
             <th>NVDA for Windows</th>
-            <th>Jaws for Windows</th>
+            <th>JAWS for Windows</th>
             <th>VoiceOver for macOS</th>
           </tr>
         </thead>
