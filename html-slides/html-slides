@@ -2,7 +2,7 @@
 
 USAGE="html-slides filename.xml"
 
-SLIDE_PATH=~/Sites/presentations/common/xslt/
+SLIDE_PATH=~/Sites/courses/common/xslt/
 
 CLASS_PATH=$SLIDE_PATH/xalan/serializer.jar
 CLASS_PATH=$CLASS_PATH:$SLIDE_PATH/xalan/serializer.jar

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Navigation Menu Button: Inaccessible
+    </title>
+    <link href="nav-menu-button-inaccessible.css" rel="stylesheet"/>
+    <script src="nav-menu-button-inaccessible.js"></script>
+  </head>
+  <body>
+    <h1>Navigation Menu Button: Inaccessible</h1>
+    <div class="menu-button-links">
+      <button type="button">
+        WAI-ARIA Quick Links
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="down"
+             width="12"
+             height="9"
+             viewBox="0 0 12 9">
+          <polygon points="1 0, 11 0, 6 8"></polygon>
+        </svg>
+      </button>
+      <ul class="menu">
+        <li>
+          <a href="https://www.w3.org/">
+            W3C Home Page
+          </a>
+        </li>
+        <li>
+          <a href="https://www.w3.org/standards/webdesign/accessibility">
+            W3C Web Accessibility Initiative
+          </a>
+        </li>
+        <li>
+          <a href="https://www.w3.org/TR/wai-aria/">
+            Accessible Rich Internet Application Specification
+          </a>
+        </li>
+        <li>
+          <a href="https://www.w3.org/TR/wai-aria-practices/">
+            WAI-ARIA Authoring Practices
+          </a>
+        </li>
+        <li>
+          <a href="https://www.w3.org/TR/wai-aria-implementation/">
+            WAI-ARIA Implementation Guide
+          </a>
+        </li>
+        <li>
+          <a href="https://www.w3.org/TR/accname-aam-1.1/">
+            Accessible Name and Description
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <h2>Accessibiliy Issues</h2>
+    <ul>
+      <li>Only tab keyboard support
+        <ul>
+          <li>Menu button pattern requires the links to act like a menu, which included supporting the cursor keys.</li>
+          <li>Menu button pattern requires the <kbd>tab</kbd> key to close the menu and move to next focusable item on page.</li>
+          <li>If only <kbd>tab</kbd> key is support, the disclosure pattern should be used instead of the menu button pattern.</li>
+        </ul>
+      </li>
+      <li>No description of behaviors to assistive technologies.</li>
+      <li>No keyboard focus styling.</li>
+    </ul>
+  </body>
+</html>

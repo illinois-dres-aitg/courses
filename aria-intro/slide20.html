@@ -9,51 +9,44 @@
 <link rel="stylesheet" type="text/css" href="../css/html-slides.css">
 <script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
 <style id="style">
-fieldset {
-     border-color: #EEE;
-     width: 10em;
-}
+      fieldset {
+           border-color: #EEE;
+           width: 10em;
+      }
 
-fieldset legend {
-     font-size: 100%;
-}
+      fieldset legend {
+           font-size: 100%;
+      }
 
-label,
-div.checkbox {
-     padding: 2px;
-     width: 10em;
-     display: block;
-     margin-top: 0.25em;
-     margin-bottom: 0.25em;
-}
+      label,
+      div.checkbox {
+           padding: 2px;
+           width: 10em;
+           display: block;
+           margin-top: 0.25em;
+           margin-bottom: 0.25em;
+      }
 
-label input {
-     margin-right: 0.5em;
-}
+      label input {
+           margin-right: 0.5em;
+      }
 
-div.checkbox span {
-     padding: 0.25em;
-}
+      div.checkbox span {
+           padding: 0.25em;
+      }
 
-div.checkbox span:before {
-    content: '✗';
-    color: red;
-    padding-right: 0.125em;
-}
+      div.checkbox span:before {
+          content: '✗';
+          color: red;
+          padding-right: 0.125em;
+      }
 
-div.checkbox.checked span:before {
-    content: '✓';
-    color: green;
-    padding-right: 0.190em;
-}
-
-label:hover,
-.checkbox:hover {
-     padding: 0;
-     border: 2px solid #000;
-     background-color: #CCD;
-}
-</style>
+      div.checkbox.checked span:before {
+          content: '✓';
+          color: green;
+          padding-right: 0.190em;
+      }
+    </style>
 </head>
 <body>
 <nav id="nav" class="navbar navbar-default">
@@ -114,32 +107,32 @@ label:hover,
       
 </ul>
 <script id="script" type="text/javascript">
-function toggleCheckbox(node) {
- if (node.classList.contains('checked')) {
-  node.classList.remove('checked');
-  node.setAttribute('aria-checked', 'false');
- } else {
-  node.classList.add('checked');
-  node.setAttribute('aria-checked', 'true');
- }
-}
+        function toggleCheckbox(node) {
+         if (node.classList.contains('checked')) {
+          node.classList.remove('checked');
+          node.setAttribute('aria-checked', 'false');
+         } else {
+          node.classList.add('checked');
+          node.setAttribute('aria-checked', 'true');
+         }
+        }
 
-function clickCheckbox(event) {
- var cb = event.currentTarget;
- toggleCheckbox(cb);
- event.stopPropagation();
- event.preventDefault();
-}
+        function clickCheckbox(event) {
+         var cb = event.currentTarget;
+         toggleCheckbox(cb);
+         event.stopPropagation();
+         event.preventDefault();
+        }
 
-function keydownCheckbox(event) {
-  var cb = event.currentTarget;
-  if (event.key === ' ') {
-    toggleCheckbox(cb);
+        function keydownCheckbox(event) {
+          var cb = event.currentTarget;
+          if (event.key === ' ') {
+            toggleCheckbox(cb);
 
-    event.stopPropagation();
-    event.preventDefault();
-  }
-}
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }
       </script>
 <h2>Example</h2>
 <p>

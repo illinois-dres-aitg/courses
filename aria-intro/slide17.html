@@ -9,54 +9,46 @@
 <link rel="stylesheet" type="text/css" href="../css/html-slides.css">
 <script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
 <style id="style">
-fieldset {
-     border-color: #EEE;
-     width: 10em;
-}
+      fieldset {
+           border-color: #EEE;
+           width: 10em;
+      }
 
-fieldset legend {
-     font-size: 100%;
-}
+      fieldset legend {
+           font-size: 100%;
+      }
 
-label,
-div.checkbox {
-     padding: 2px;
-     width: 10em;
-     display: block;
-     margin-top: 0.25em;
-     margin-bottom: 0.25em;
-}
+      label,
+      div.checkbox {
+           padding: 2px;
+           width: 10em;
+           display: block;
+           margin-top: 0.25em;
+           margin-bottom: 0.25em;
+      }
 
-label input {
-     margin-right: 0.5em;
-}
+      label input {
+           margin-right: 0.5em;
+      }
 
-div.checkbox span {
-     padding: 0.25em;
-     margin-right: 0.25em;
-}
- div.checkbox span:before {
-     content: '✗';
-     color: red;
-}
+      div.checkbox span {
+           padding: 0.25em;
+           margin-right: 0.25em;
+      }
+       div.checkbox span:before {
+           content: '✗';
+           color: red;
+      }
 
-div.checkbox.checked span {
-  margin-right: 0.375em;
-}
+      div.checkbox.checked span {
+        margin-right: 0.375em;
+      }
 
-div.checkbox.checked span:before {
-     content: '✓';
-     color: green;
-     font-size: 90%;
-}
- label {
-}
- label:hover,
-.checkbox:hover {
-     padding: 0;
-     border: 2px solid #000;
-     background-color: #CCD;
-}
+      div.checkbox.checked span:before {
+           content: '✓';
+           color: green;
+           font-size: 90%;
+      }
     </style>
 </head>
 <body>
@@ -125,20 +117,20 @@ div.checkbox.checked span:before {
 <a href="https://webedit.disability.illinois.edu/user/jongund/checkbox-inaccessible/output/" target="_webedit">Checkbox example on WebEdit</a>
 </p>
 <script id="script">
-function toggleCheckbox(node) {
- if (node.classList.contains('checked')) {
-  node.classList.remove('checked');
- } else {
-  node.classList.add('checked');
- }
-}
+        function toggleCheckbox(node) {
+         if (node.classList.contains('checked')) {
+          node.classList.remove('checked');
+         } else {
+          node.classList.add('checked');
+         }
+        }
 
-function clickCheckbox(event) {
- var cb = event.currentTarget;
- toggleCheckbox(cb);
- event.stopPropagation();
- event.preventDefault();
-}
+        function clickCheckbox(event) {
+         var cb = event.currentTarget;
+         toggleCheckbox(cb);
+         event.stopPropagation();
+         event.preventDefault();
+        }
      </script>
 <div id="example">
       
