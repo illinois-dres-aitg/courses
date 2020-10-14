@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 17: Checkbox Example: Overview</title>
+<title>Slide 17: Other Description: aria-invalid and aria-errormessage properties</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -41,13 +41,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 17 of 43</li>
+<li class="nav navbar-text">Slide 17 of 45</li>
 </ul>
 </div>
 </div>
@@ -56,22 +56,68 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Checkbox Example: Overview</h1>
+<h1 id="h1_title" class="title">Other Description: aria-invalid and aria-errormessage properties</h1>
+<p>
+<code>aria-errormessage</code> must be used in conjunction with <code>aria-invalid</code> or the <code>invalid</code> state of standard HTML form controls.  When a control is identified as invalid the content referenced will be spoken by the screen reader.</p>
+<p>The coding is similar to <code>aria-describedby</code> property.  The difference is the accessible description can be configured by the user not to be spoken, the use of <code>aria-errormessage</code> is intended to always be spoken by a screen reader when the invalid state is set.</p>
+<h2>Screen Reader Expectations</h2>
 <ul>
         
-<li>Learn what ARIA markup does and doesn't do.</li>
+<li>When form control or widget has valid value, screen reader announces nothing.</li>
         
-<li>Demonstrate accessibility issues of custom widgets.</li>
+<li>When form control or widget has invalid value, screen reader announces control has invalid value.</li>
         
-<li>Incrementally add accessibility features.</li>
-        
-<li>Observe changes in user experience as features are added.</li>
-        
-<li>Focus and hover styling.</li>
-        
-<li>High contrast testing.</li>
+<li>When form control or widget has invalid value, screen reader announces referenced message.</li>
       
 </ul>
+<h2 id="exp_impl">Implementation</h2>
+<table class="table table-striped table-hover" aria-labelledby="exp_impl">
+        
+<thead>
+          
+<tr>
+            
+<th>Expectation</th>
+            <th>NVDA for Windows</th>
+            <th>JAWS for Windows</th>
+            <th>VoiceOver for macOS</th>
+          
+</tr>
+        
+</thead>
+        
+<tbody>
+          
+<tr>
+            
+<th>No announcement when valid.</th>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          
+</tr>
+          
+<tr>
+            
+<th>Announcement when invalid.</th>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          
+</tr>
+          
+<tr>
+            
+<th>Referenced message announced when invalid.</th>
+            <td>no</td>
+            <td>Yes</td>
+            <td>no</td>
+          
+</tr>
+        
+</tbody>
+      
+</table>
 </div>
 <div class="col"></div>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 29: Menu Button: Add ARIA roles, properties and states</title>
+<title>Slide 29: Menu Button: Keyboard Support</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -26,7 +26,7 @@
         border-radius: 5px;
       }
 
-      .menu-button-links [role="menu"] {
+      .menu-button-links .menu {
         margin: 0;
         padding: 7px 4px;
         list-style: none;
@@ -37,7 +37,7 @@
         background-color: #eee;
       }
 
-      .menu-button-links [role="menu"] a {
+      .menu-button-links .menu a {
         margin: 0;
         padding: 6px;
         display: block;
@@ -49,7 +49,7 @@
         text-decoration: none;
       }
 
-      .menu-button-links [role="menu"] a:hover {
+      .menu-button-links .menu a:hover {
         background-color: #034575;
         color: white;
        }
@@ -60,7 +60,7 @@
         stroke: currentColor;
       }
 
-      .menu-button-links button[aria-expanded] svg.down {
+      .menu-button-links button.open svg.down {
         transform: rotate(180deg);
       }
     </style>
@@ -96,13 +96,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 29 of 43</li>
+<li class="nav navbar-text">Slide 29 of 45</li>
 </ul>
 </div>
 </div>
@@ -111,10 +111,10 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Menu Button: Add ARIA roles, properties and states</h1>
+<h1 id="h1_title" class="title">Menu Button: Keyboard Support</h1>
 <h2>Example</h2>
 <p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-aria-markup/output/" target="_webedit">Menu Button example with ARIA markup support on WebEdit</a>
+<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-keyboard/output/" target="_webedit">Menu Button example with keyboard support on WebEdit</a>
 </p>
 <script id="script">
         class MenuButtonLinks {
@@ -123,7 +123,7 @@
 
             this.domNode       = domNode;
             this.buttonNode    = domNode.querySelector('button');
-            this.menuNode      = domNode.querySelector('[role="menu"]');
+            this.menuNode      = domNode.querySelector('.menu');
             this.menuitemNodes = []
             this.firstMenuitem = false;
             this.lastMenuitem  = false;
@@ -161,18 +161,18 @@
           openPopup() {
             var rect = this.menuNode.getBoundingClientRect();
             this.menuNode.style.display = 'block';
-            this.buttonNode.setAttribute('aria-expanded', 'true');
+            this.buttonNode.classList.add('open');
           }
 
           closePopup() {
             if (this.isOpen()) {
-              this.buttonNode.removeAttribute('aria-expanded');
+              this.buttonNode.classList.remove('open');
               this.menuNode.style.display = 'none';
             }
           }
 
           isOpen() {
-            return this.buttonNode.getAttribute('aria-expanded') === 'true';
+            return this.buttonNode.classList.contains('open');
           }
 
           // Focus management methods
@@ -441,112 +441,153 @@
 
      </script>
 <div id="example">
-        
+      
 <div class="menu-button-links">
-          
-<button type="button" id="id-button" aria-haspopup="true" aria-controls="id-menu">
-            WAI-ARIA Quick Links
-            <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
-              <polygon points="1 0, 11 0, 6 8"/>
-            </svg>
-          </button>
-          
-<ul id="id-menu" role="menu" aria-labelledby="id-button">
-            
-<li role="none">
-              
-<a role="menuitem" href="https://www.w3.org/">
-                W3C Home Page
-              </a>
-            
-</li>
-            
-<li role="none">
-              
-<a role="menuitem" href="https://www.w3.org/standards/webdesign/accessibility">
-                W3C Web Accessibility Initiative
-              </a>
-            
-</li>
-            
-<li role="none">
-              
-<a role="menuitem" href="https://www.w3.org/TR/wai-aria/">
-                ARIA Specification
-              </a>
-            
-</li>
-            
-<li role="none">
-              
-<a role="menuitem" href="https://w3c.github.io/aria-practices/">
-                Authoring Practices
-              </a>
-            
-</li>
-            
-<li role="none">
-              
-<a role="menuitem" href="https://www.w3.org/TR/html-aria/#el-li">
-                HTML Accessibility API Mappings
-              </a>
-            
-</li>
-            
-<li role="none">
-              
-<a role="menuitem" href="https://w3c.github.io/core-aam/#mapping_role">
-                Core ARIA Accessibility API Mappings
-              </a>
-            
-</li>
-            
-<li role="none">
-              
-<a role="menuitem" href="https://www.w3.org/TR/accname-aam-1.1/">
-                Accessible Name and Description
-              </a>
-            
-</li>
-          
-</ul>
         
+<button type="button">
+          WAI-ARIA Quick Links
+          <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
+            <polygon points="1 0, 11 0, 6 8"/>
+          </svg>
+        </button>
+        
+<ul class="menu">
+          
+<li>
+            
+<a href="https://www.w3.org/">
+              W3C Home Page
+            </a>
+          
+</li>
+          
+<li>
+            
+<a href="https://www.w3.org/standards/webdesign/accessibility">
+              W3C Web Accessibility Initiative
+            </a>
+          
+</li>
+          
+<li>
+            
+<a href="https://www.w3.org/TR/wai-aria/">
+              ARIA Specification
+            </a>
+          
+</li>
+          
+<li>
+            
+<a href="https://w3c.github.io/aria-practices/">
+              Authoring Practices
+            </a>
+          
+</li>
+          
+<li>
+            
+<a href="https://www.w3.org/TR/html-aria/#el-li">
+              HTML Accessibility API Mappings
+            </a>
+          
+</li>
+          
+<li>
+            
+<a href="https://w3c.github.io/core-aam/#mapping_role">
+              Core ARIA Accessibility API Mappings
+            </a>
+          
+</li>
+          
+<li>
+            
+<a href="https://www.w3.org/TR/accname-aam-1.1/">
+              Accessible Name and Description
+            </a>
+          
+</li>
+        
+</ul>
+      
 </div>
      
 </div>
-<h2>ARIA Markup</h2>
-<h3>Button Element</h3>
+<h2>New Keyboard Support</h2>
 <ul>
-        
-<li>Button element has the default role of <code>button</code>.</li>
-        
-<li>
-<code>aria-haspopup="true"</code> attribute.</li>
-        
-<li>
-<code>aria-controls</code> attribute references the <code>id</code> of the element with the <code>menu</code> role.</li>
-        
-<li>
-<code>aria-expanded="true"</code> when menu is open, otherwise attribute is not present.</li>
-        
-<li>Accessible name for the button comes from the text content of the button element.</li>
       
+<li>Button opens menu moves keyboard focus to a menu option.
+        <ul>
+          
+<li>
+<kbd>Space</kbd>
+</li>
+          
+<li>
+<kbd>Enter</kbd>
+</li>
+          
+<li>
+<kbd>Up arrow</kbd>
+</li>
+          
+<li>
+<kbd>Down arrow</kbd>
+</li>
+        
 </ul>
-<h3>Menu and Menuitem Elements</h3>
-<ul>
-        
-<li>Container <code>ul</code> element has the <code>role="menu"</code>.</li>
-        
-<li>Container <code>ul</code> element has the <code>aria-labelledby="id-mb"</code> to provide an accessible name for the menu.</li>
-        
-<li>
-<code>a</code> elements have the <code>role="menuitem"</code>.</li>
-        
-<li>
-<code>li</code> elements have the <code>role="none"</code>, since the list item semantics are not needed due to the <code>menuitem</code> roles being on the <code>a</code> elements.</li>
-        
-<li>Accessible name for the menu items comes from the text content of the anchor elements.</li>
       
+</li>
+      
+<li>Move through menu options with cursor keys.
+        <ul>
+          
+<li>
+<kbd>Up arrow</kbd>
+</li>
+          
+<li>
+<kbd>Down arrow</kbd>
+</li>
+          
+<li>
+<kbd>Home</kbd>
+</li>
+          
+<li>
+<kbd>End</kbd>
+</li>
+        
+</ul>
+      
+</li>
+      
+<li>Move through menu options with first letter keys.</li>
+        
+<ul>
+          
+<li>
+<kbd>A-Z</kbd>
+</li>
+          
+<li>
+<kbd>a-z</kbd>
+</li>
+        
+</ul>
+      
+<li>Close menu and move focus back to button.
+        <ul>
+          
+<li>
+<kbd>Escape</kbd>
+</li>
+        
+</ul>
+      
+</li>
+     
 </ul>
 <h2>HTML Source Code</h2>
 <pre>

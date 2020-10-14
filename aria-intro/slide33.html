@@ -2,13 +2,87 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 33: None/Presentation Role</title>
+<title>Slide 33: Navigation Links: Disclosure Pattern</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
 <link rel="stylesheet" type="text/css" href="../css/html-slides.css">
 <script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
-<style id="style"></style>
+<style id="style">
+      .disclosure-button-links {
+        margin: 0;
+        font-size: 110%;
+      }
+
+      .disclosure-button-links button {
+        margin: 0;
+        padding: 6px;
+        display: inline-block;
+        position: relative;
+        background-color: #034575;
+        border: 1px solid #034575;
+        font-size: 0.9em;
+        color: white;
+        border-radius: 5px;
+      }
+
+      .disclosure-button-links .menu {
+        margin: 0;
+        padding: 7px 4px;
+        list-style: none;
+        display: none;
+        position: absolute;
+        border: 2px solid #034575;
+        border-radius: 5px;
+        background-color: #eee;
+      }
+
+      .disclosure-button-links .menu a {
+        margin: 0;
+        padding: 6px;
+        display: block;
+        width: 24em;
+        background-color: #eee;
+        border: none;
+        color: black;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      .disclosure-button-links .menu a:hover {
+        background-color: #034575;
+        color: white;
+       }
+
+      .disclosure-button-links button svg.down {
+        padding-left: 0.125em;
+        fill: currentColor;
+        stroke: currentColor;
+      }
+
+      .disclosure-button-links button.open svg.down {
+        transform: rotate(180deg);
+      }
+
+      /* Focus and hover styling */
+
+      .disclosure-button-links button:focus,
+      .disclosure-button-links button:hover {
+        padding: 4px;
+        background-color: #dddddd;
+        border: 3px solid #034575;
+        color: #222222;
+
+      }
+
+      .disclosure-button-links a:focus,
+      .disclosure-button-links a:hover {
+        padding: 4px;
+        background-color: #dddddd;
+        border: 2px solid #034575;
+        color: #222222;
+      }
+    </style>
 </head>
 <body>
 <nav id="nav" class="navbar navbar-default">
@@ -41,13 +115,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 33 of 43</li>
+<li class="nav navbar-text">Slide 33 of 45</li>
 </ul>
 </div>
 </div>
@@ -56,12 +130,224 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">None/Presentation Role</h1>
-<h2>ARIA AUthoring Practices</h2>
+<h1 id="h1_title" class="title">Navigation Links: Disclosure Pattern</h1>
+<h2>Example</h2>
 <p>
-<a href="https://w3c.github.io/aria-practices/#children_presentational">Section 6: Intentionally Hiding Semantics with the presentation Role </a>
+<a href="https://webedit.disability.illinois.edu/user/jongund/nav-disclosure/output/" target="_webedit">Navigation Links: Disclosure Pattern on WebEdit</a>
 </p>
-<iframe src="https://w3c.github.io/aria-practices/#children_presentational" width="98%" height="600px"></iframe>
+<script id="script">
+        class DisclosureButtonLinks {
+
+          constructor(domNode) {
+
+            this.domNode       = domNode;
+            this.buttonNode    = domNode.querySelector('button');
+            this.containerNode = domNode.querySelector('ul');
+
+            this.buttonNode.addEventListener('click', this.onButtonClick.bind(this));
+            this.buttonNode.addEventListener('blur', this.onBlur.bind(this));
+
+            const links = this.containerNode.querySelectorAll('a');
+            for (let i = 0; i < links.length; i += 1) {
+              links[i].addEventListener('keydown', this.onLinkKeyDown.bind(this));
+              links[i].addEventListener('blur', this.onBlur.bind(this));
+            }
+            window.addEventListener('mousedown', this.onBackgroundMousedown.bind(this), true);
+          }
+
+          // Container methods
+
+          openContainer() {
+            this.containerNode.style.display = 'block';
+            this.buttonNode.setAttribute('aria-expanded', 'true');
+          }
+
+          closeContainer() {
+            if (this.isOpen()) {
+              this.buttonNode.setAttribute('aria-expanded', 'false');
+              this.containerNode.style.display = 'none';
+            }
+          }
+
+          isOpen() {
+            return this.buttonNode.getAttribute('aria-expanded') === 'true';
+          }
+
+          onButtonClick(event) {
+            if (this.isOpen()) {
+              this.closeContainer();
+            }
+            else {
+              this.openContainer();
+            }
+
+            event.stopPropagation();
+            event.preventDefault();
+          }
+
+          onLinkKeyDown(event) {
+            if (event.key === 'Esc' || event.key === 'Escape') {
+              this.closeContainer();
+              this.buttonNode.focus();
+              event.stopPropagation();
+              event.preventDefault();
+            }
+          }
+
+          onBlur(event) {
+            if (!this.domNode.contains(event.relatedTarget)) {
+              if (this.isOpen()) {
+                this.closeContainer();
+              }
+            }
+          }
+
+          onBackgroundMousedown(event) {
+            if (!this.domNode.contains(event.target)) {
+              if (this.isOpen()) {
+                this.closeContainer();
+                this.buttonNode.focus();
+              }
+            }
+          }
+        }
+
+        // Initialize navigation disclosure buttons
+
+        window.addEventListener('load', function () {
+          const disclosureButtons = document.querySelectorAll('.disclosure-button-links');
+          for(let i = 0; i < disclosureButtons.length; i += 1) {
+            new DisclosureButtonLinks(disclosureButtons[i]);
+          }
+        });
+     </script>
+<div id="example">
+        
+<div class="disclosure-button-links">
+          
+<button type="button" aria-expanded="false" aria-controls="id-container">
+            WAI-ARIA Quick Links
+            <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
+              <polygon points="1 0, 11 0, 6 8"/>
+            </svg>
+          </button>
+          
+<ul id="id-container" class="menu">
+            
+<li>
+              
+<a href="https://www.w3.org/">
+                W3C Home Page
+              </a>
+            
+</li>
+            
+<li>
+              
+<a href="https://www.w3.org/standards/webdesign/accessibility">
+                W3C Web Accessibility Initiative
+              </a>
+            
+</li>
+            
+<li>
+              
+<a href="https://www.w3.org/TR/wai-aria/">
+                ARIA Specification
+              </a>
+            
+</li>
+            
+<li>
+              
+<a href="https://w3c.github.io/aria-practices/">
+                Authoring Practices
+              </a>
+            
+</li>
+            
+<li>
+              
+<a href="https://www.w3.org/TR/html-aria/#el-li">
+                HTML Accessibility API Mappings
+              </a>
+            
+</li>
+            
+<li>
+              
+<a href="https://w3c.github.io/core-aam/#mapping_role">
+                Core ARIA Accessibility API Mappings
+              </a>
+            
+</li>
+            
+<li>
+              
+<a href="https://www.w3.org/TR/accname-aam-1.1/">
+                Accessible Name and Description
+              </a>
+            
+</li>
+          
+</ul>
+        
+</div>
+      
+</div>
+<p>More information on the <a href="https://w3c.github.io/aria-practices/#disclosure">ARIA disclosure pattern</a>.</p>
+<h2>Keyboard Features</h2>
+<ul>
+        
+<li>Button open and closes the list of links using <kbd>space</kbd> or <kbd>enter</kbd> key.</li>
+        
+<li>Pressing the <kbd>esc</kbd> key when focus is on a link closes the container element and moves focus back to the button..</li>
+      
+</ul>
+<h2>ARIA Markup</h2>
+<ul>
+        
+<li>
+<code>aria-expanded="true"</code> on the button when the container is open.</li>
+        
+<li>
+<code>aria-expanded="false"</code> on the button when the container is closed.</li>
+        
+<li>
+<code>aria-controls="id-container"</code> on the button to reference the <code>id</code> of container element that opens and closes.</li>
+      
+</ul>
+<h2>High Contrast Support</h2>
+<ul>
+        
+<li>When <code>button</code> does <em>not</em> have focus, CSS <code>border</code> property is set to <code>1px</code>.</li>
+        
+<li>When <code>button</code> does have focus, CSS <code>border</code> property is set to <code>3px</code> and padding is reduced by <code>2px</code>.</li>
+        
+<li>When <code>a</code> element does <em>not</em> have focus, CSS <code>border</code> property is set to <code>none</code>.</li>
+        
+<li>When <code>a</code> element does have focus, CSS <code>border</code> property is set to <code>2px</code> and padding is reduced by <code>2px</code>.</li>
+      
+</ul>
+<h2>HTML Source Code</h2>
+<pre>
+<code id="sc1"></code>
+</pre>
+<h2>CSS Source Code</h2>
+<pre>
+<code id="sc2"></code>
+</pre>
+<h2>Javascript Source Code</h2>
+<pre>
+<code id="sc3"></code>
+</pre>
+<script type="text/javascript">
+        sourceCode.add('sc1', 'example');
+        sourceCode.add('sc2', 'style');
+        sourceCode.add('sc3', 'script');
+        sourceCode.make();
+        hljs.initHighlightingOnLoad();
+      </script>
 </div>
 <div class="col"></div>
 </div>

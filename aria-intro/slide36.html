@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 36: Live Region Attributes</title>
+<title>Slide 36: Hiding Content Techniques</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -41,13 +41,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 36 of 43</li>
+<li class="nav navbar-text">Slide 36 of 45</li>
 </ul>
 </div>
 </div>
@@ -56,11 +56,75 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Live Region Attributes</h1>
-<p>
-<a href="https://www.w3.org/TR/wai-aria/#attrs_liveregions">ARIA live region attributes</a>
-</p>
-<iframe src="https://www.w3.org/TR/wai-aria/#attrs_liveregions" width="98%" height="600px" title="ARIA Live Region Atttributes"></iframe>
+<h1 id="h1_title" class="title">Hiding Content Techniques</h1>
+<table class="table table-striped table-hover" aria-label="tabindex_values">
+        
+<thead>
+          
+<tr>
+            
+<th>Technique</th>
+            <th>Technology</th>
+            <th>Visual Rendering</th>
+            <th>Accessibility Tree (used by screen readers)</th>
+          
+</tr>
+        
+</thead>
+        
+<tbody>
+          
+<tr>
+            
+<th><code>display: none;</code></th>
+            <td>CSS</td>
+            <td>Not rendered</td>
+            <td>Not included</td>
+          
+</tr>
+          
+<tr>
+            
+<th><code>visibility: hidden;</code></th>
+            <td>CSS</td>
+            <td>Not rendered, but visual dimension is preserved</td>
+            <td>Not included</td>
+          
+</tr>
+          
+<tr>
+            
+<th>
+              
+<pre>
+                
+<code>
+                  position: absolute;
+                  top: -300em;
+                  left: -3000em;
+                </code>
+              
+</pre>
+            
+</th>
+            <td>CSS</td>
+            <td>Not rendered</td>
+            <td>Included</td>
+          
+</tr>
+          
+<tr>
+            
+<th><code>aria-hidden="true"</code></th>
+            <td>ARIA</td>
+            <td>Rendered</td>
+            <td>Not included</td>
+          
+</tr>
+        
+</tbody>
+      
+</table>
 </div>
 <div class="col"></div>
 </div>

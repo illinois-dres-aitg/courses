@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 30: Menu Button: Keyboard Focus Styling</title>
+<title>Slide 30: Menu Button: Add ARIA roles, properties and states</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -16,11 +16,11 @@
 
       .menu-button-links button {
         margin: 0;
-        padding: 5px;
+        padding: 6px;
         display: inline-block;
         position: relative;
         background-color: #034575;
-        border: 2px solid white;
+        border: 1px solid #034575;
         font-size: 0.9em;
         color: white;
         border-radius: 5px;
@@ -39,11 +39,11 @@
 
       .menu-button-links [role="menu"] a {
         margin: 0;
-        padding: 4px;
+        padding: 6px;
         display: block;
         width: 24em;
         background-color: #eee;
-        border: 2px solid #eee;
+        border: none;
         color: black;
         border-radius: 5px;
         text-decoration: none;
@@ -63,23 +63,6 @@
       .menu-button-links button[aria-expanded] svg.down {
         transform: rotate(180deg);
       }
-
-      /* Focus and hover styling */
-
-      .menu-button-links button:focus,
-      .menu-button-links button:hover {
-        background-color: white;
-        border-color: #034575;
-        color: #222222;
-      }
-
-      .menu-button-links [role="menu"] a:focus,
-      .menu-button-links [role="menu"] a:hover {
-        background-color: white;
-        border-color: #034575;
-        color: #222222;
-      }
-
     </style>
 </head>
 <body>
@@ -113,13 +96,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 30 of 43</li>
+<li class="nav navbar-text">Slide 30 of 45</li>
 </ul>
 </div>
 </div>
@@ -128,10 +111,10 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Menu Button: Keyboard Focus Styling</h1>
+<h1 id="h1_title" class="title">Menu Button: Add ARIA roles, properties and states</h1>
 <h2>Example</h2>
 <p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-focus-style/output/" target="_webedit">Menu Button: Keyboard, ARIA and focus styling on WebEdit</a>
+<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-aria-markup/output/" target="_webedit">Menu Button example with ARIA markup support on WebEdit</a>
 </p>
 <script id="script">
         class MenuButtonLinks {
@@ -531,12 +514,6 @@
 </div>
      
 </div>
-<h2>Focus Styling</h2>
-<ul>
-        
-<li>Focus and hover provide a visual border using CSS <code>border</code> property and background color change.</li>
-      
-</ul>
 <h2>ARIA Markup</h2>
 <h3>Button Element</h3>
 <ul>

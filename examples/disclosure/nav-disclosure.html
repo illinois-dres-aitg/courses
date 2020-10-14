@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Navigation Links: Disclosure Pattern
+    </title>
+    <link href="nav-disclosure.css" rel="stylesheet"/>
+    <script src="nav-disclosure.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Navigation Links: Disclosure Pattern</h1>
+      <div class="disclosure-button-links">
+        <button type="button"
+          aria-expanded="false"
+          aria-controls="id-container">
+          WAI-ARIA Quick Links
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="down"
+               width="12"
+               height="9"
+               viewBox="0 0 12 9">
+            <polygon points="1 0, 11 0, 6 8"></polygon>
+          </svg>
+        </button>
+        <ul id="id-container" class="menu">
+          <li>
+            <a href="https://www.w3.org/">
+              W3C Home Page
+            </a>
+          </li>
+          <li>
+            <a href="https://www.w3.org/standards/webdesign/accessibility">
+              W3C Web Accessibility Initiative
+            </a>
+          </li>
+          <li>
+            <a href="https://www.w3.org/TR/wai-aria/">
+              ARIA Specification
+            </a>
+          </li>
+          <li>
+            <a href="https://w3c.github.io/aria-practices/">
+              Authoring Practices
+            </a>
+          </li>
+          <li>
+            <a href="https://www.w3.org/TR/html-aria/#el-li">
+              HTML Accessibility API Mappings
+            </a>
+          </li>
+          <li>
+            <a href="https://w3c.github.io/core-aam/#mapping_role">
+              Core ARIA Accessibility API Mappings
+            </a>
+          </li>
+          <li>
+            <a href="https://www.w3.org/TR/accname-aam-1.1/">
+              Accessible Name and Description
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <p>More information on the <a href="https://w3c.github.io/aria-practices/#disclosure">ARIA disclosure pattern</a>.</p>
+
+      <h2>Keyboard Features</h2>
+      <ul>
+        <li>Button open and closes the list of links using <kbd>space</kbd> or <kbd>enter</kbd> key.</li>
+        <li>Pressing the <kbd>esc</kbd> key when focus is on a link closes the container element and moves focus back to the button..</li>
+      </ul>
+
+      <h2>ARIA Markup</h2>
+      <ul>
+        <li><code>aria-expanded="true"</code> on the button when the container is open.</li>
+        <li><code>aria-expanded="false"</code> on the button when the container is closed.</li>
+        <li><code>aria-controls="id-container"</code> on the button to reference the <code>id</code> of container element that opens and closes.</li>
+      </ul>
+
+      <h2>High Contrast Support</h2>
+      <ul>
+        <li>When <code>button</code> does <em>not</em> have focus, CSS <code>border</code> property is set to <code>1px</code>.</li>
+        <li>When <code>button</code> does have focus, CSS <code>border</code> property is set to <code>3px</code> and padding is reduced by <code>2px</code>.</li>
+        <li>When <code>a</code> element does <em>not</em> have focus, CSS <code>border</code> property is set to <code>none</code>.</li>
+        <li>When <code>a</code> element does have focus, CSS <code>border</code> property is set to <code>2px</code> and padding is reduced by <code>2px</code>.</li>
+      </ul>
+    </main>
+  </body>
+</html>

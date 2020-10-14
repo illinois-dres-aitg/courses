@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 31: Menu Button: High Contrast Support</title>
+<title>Slide 31: Menu Button: Keyboard Focus Styling</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -16,11 +16,11 @@
 
       .menu-button-links button {
         margin: 0;
-        padding: 6px;
+        padding: 5px;
         display: inline-block;
         position: relative;
         background-color: #034575;
-        border: 1px solid white;
+        border: 2px solid white;
         font-size: 0.9em;
         color: white;
         border-radius: 5px;
@@ -39,15 +39,20 @@
 
       .menu-button-links [role="menu"] a {
         margin: 0;
-        padding: 6px;
+        padding: 4px;
         display: block;
         width: 24em;
         background-color: #eee;
-        border: none;
+        border: 2px solid #eee;
         color: black;
         border-radius: 5px;
         text-decoration: none;
       }
+
+      .menu-button-links [role="menu"] a:hover {
+        background-color: #034575;
+        color: white;
+       }
 
       .menu-button-links button svg.down {
         padding-left: 0.125em;
@@ -63,17 +68,15 @@
 
       .menu-button-links button:focus,
       .menu-button-links button:hover {
-        padding: 4px;
         background-color: white;
-        border: 3px solid #034575;
+        border-color: #034575;
         color: #222222;
       }
 
       .menu-button-links [role="menu"] a:focus,
       .menu-button-links [role="menu"] a:hover {
-        padding: 4px;
         background-color: white;
-        border: 2px solid #034575;
+        border-color: #034575;
         color: #222222;
       }
 
@@ -110,13 +113,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 31 of 43</li>
+<li class="nav navbar-text">Slide 31 of 45</li>
 </ul>
 </div>
 </div>
@@ -125,10 +128,10 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Menu Button: High Contrast Support</h1>
+<h1 id="h1_title" class="title">Menu Button: Keyboard Focus Styling</h1>
 <h2>Example</h2>
 <p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-accessible/output/" target="_webedit">Menu Button: Keyboard, ARIA and high contrast on WebEdit</a>
+<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-focus-style/output/" target="_webedit">Menu Button: Keyboard, ARIA and focus styling on WebEdit</a>
 </p>
 <script id="script">
         class MenuButtonLinks {
@@ -528,16 +531,10 @@
 </div>
      
 </div>
-<h2>High Contrast Support</h2>
+<h2>Focus Styling</h2>
 <ul>
         
-<li>When <code>button</code> does <em>not</em> have focus, CSS <code>border</code> property is set to <code>1px</code>.</li>
-        
-<li>When <code>button</code> does have focus, CSS <code>border</code> property is set to <code>3px</code> and padding is reduced by <code>2px</code>.</li>
-        
-<li>When <code>menuitem</code> does <em>not</em> have focus, CSS <code>border</code> property is set to <code>none</code>.</li>
-        
-<li>When <code>menuitem</code> does have focus, CSS <code>border</code> property is set to <code>2px</code> and padding is reduced by <code>2px</code>.</li>
+<li>Focus and hover provide a visual border using CSS <code>border</code> property and background color change.</li>
       
 </ul>
 <h2>ARIA Markup</h2>

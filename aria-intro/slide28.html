@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 28: Menu Button: Keyboard Support</title>
+<title>Slide 28: Menu Button: Inaccessible</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -63,6 +63,7 @@
       .menu-button-links button.open svg.down {
         transform: rotate(180deg);
       }
+
     </style>
 </head>
 <body>
@@ -96,13 +97,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 28 of 43</li>
+<li class="nav navbar-text">Slide 28 of 45</li>
 </ul>
 </div>
 </div>
@@ -111,10 +112,26 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Menu Button: Keyboard Support</h1>
+<h1 id="h1_title" class="title">Menu Button: Inaccessible</h1>
+<h2>Accessibility Issues</h2>
+<ul>
+      
+<li>Keyboard support</li>
+      
+<li>Role information</li>
+      
+<li>Identification of a menu button</li>
+      
+<li>Accessible names</li>
+      
+<li>State of menu open/closed</li>
+      
+<li>Keyboard focus styling</li>
+     
+</ul>
 <h2>Example</h2>
 <p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-keyboard/output/" target="_webedit">Menu Button example with keyboard support on WebEdit</a>
+<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-inaccessible/output/" target="_webedit">Menu Button: Inaccessible (on WebEdit)</a>
 </p>
 <script id="script">
         class MenuButtonLinks {
@@ -123,36 +140,15 @@
 
             this.domNode       = domNode;
             this.buttonNode    = domNode.querySelector('button');
-            this.menuNode      = domNode.querySelector('.menu');
-            this.menuitemNodes = []
-            this.firstMenuitem = false;
-            this.lastMenuitem  = false;
-            this.firstChars = [];
+            this.menuNode      = domNode.querySelector('ul');
 
-            this.buttonNode.addEventListener('keydown', this.onButtonKeydown.bind(this));
             this.buttonNode.addEventListener('click', this.onButtonClick.bind(this));
+            this.buttonNode.addEventListener('blur', this.onBlur.bind(this));
 
-            var nodes = this.menuNode.querySelectorAll('a');
-
-            for (var i = 0; i < nodes.length; i++) {
-              var menuitem = nodes[i];
-              this.menuitemNodes.push(menuitem);
-              menuitem.tabIndex = -1;
-              this.firstChars.push(menuitem.textContent.trim()[0].toLowerCase());
-
-              menuitem.addEventListener('keydown', this.onMenuitemKeydown.bind(this));
-
-              menuitem.addEventListener('mouseover', this.onMenuitemMouseover.bind(this));
-
-              if( !this.firstMenuitem) {
-                this.firstMenuitem = menuitem;
-              }
-              this.lastMenuitem = menuitem;
+            const links = domNode.querySelectorAll('a');
+            for (let i = 0; i < links.length; i += 1) {
+              links[i].addEventListener('blur', this.onBlur.bind(this));
             }
-
-            domNode.addEventListener('focusin', this.onFocusin.bind(this));
-            domNode.addEventListener('focusout', this.onFocusout.bind(this));
-
             window.addEventListener('mousedown', this.onBackgroundMousedown.bind(this), true);
           }
 
@@ -175,249 +171,24 @@
             return this.buttonNode.classList.contains('open');
           }
 
-          // Focus management methods
-
-          setFocusToMenuitem(newMenuitem) {
-            this.menuitemNodes.forEach(function(item) {
-              if (item === newMenuitem) {
-                item.tabIndex = 0;
-                newMenuitem.focus();
-              }
-              else {
-                item.tabIndex = -1;
-              }
-            });
-          }
-
-          setFocusToFirstMenuitem(currentMenuitem) {
-            this.setFocusToMenuitem(this.firstMenuitem);
-          }
-
-          setFocusToLastMenuitem(currentMenuitem) {
-            this.setFocusToMenuitem(this.lastMenuitem);
-          }
-
-          setFocusToPreviousMenuitem(currentMenuitem) {
-            var newMenuitem, index;
-
-            if (currentMenuitem === this.firstMenuitem) {
-              newMenuitem = this.lastMenuitem;
-            }
-            else {
-              index = this.menuitemNodes.indexOf(currentMenuitem);
-              newMenuitem = this.menuitemNodes[ index - 1 ];
-            }
-
-            this.setFocusToMenuitem(newMenuitem);
-
-            return newMenuitem;
-          }
-
-          setFocusToNextMenuitem(currentMenuitem) {
-            var newMenuitem, index;
-
-            if (currentMenuitem === this.lastMenuitem) {
-              newMenuitem = this.firstMenuitem;
-            }
-            else {
-              index = this.menuitemNodes.indexOf(currentMenuitem);
-              newMenuitem = this.menuitemNodes[ index + 1 ];
-            }
-            this.setFocusToMenuitem(newMenuitem);
-
-            return newMenuitem;
-          }
-
-          setFocusByFirstCharacter(currentMenuitem, char) {
-            var start, index;
-
-            if (char.length > 1) {
-              return;
-            }
-
-            char = char.toLowerCase();
-
-            // Get start index for search based on position of currentItem
-            start = this.menuitemNodes.indexOf(currentMenuitem) + 1;
-            if (start >=  this.menuitemNodes.length) {
-              start = 0;
-            }
-
-            // Check remaining slots in the menu
-            index = this.firstChars.indexOf(char, start);
-
-            // If not found in remaining slots, check from beginning
-            if (index === -1) {
-              index = this.firstChars.indexOf(char, 0);
-            }
-
-            // If match was found...
-            if (index > -1) {
-              this.setFocusToMenuitem(this.menuitemNodes[index]);
-            }
-          }
-
-          // Utilities
-
-          getIndexFirstChars(startIndex, char) {
-            for (var i = startIndex; i < this.firstChars.length; i++) {
-              if (char === this.firstChars[i]) {
-                return i;
-              }
-            }
-            return -1;
-          }
-
-
-          // Menu event handlers
-
-          onFocusin(event) {
-            this.domNode.classList.add('focus');
-          }
-
-          onFocusout(event) {
-            this.domNode.classList.remove('focus');
-          }
-
-          onButtonKeydown(event) {
-            var tgt = event.currentTarget,
-              key = event.key,
-              flag = false;
-
-            switch (key) {
-              case ' ':
-              case 'Enter':
-              case 'ArrowDown':
-              case 'Down':
-                this.openPopup();
-                this.setFocusToFirstMenuitem();
-                flag = true;
-               break;
-
-              case 'Esc':
-              case 'Escape':
-                  this.closePopup();
-                  this.buttonNode.focus();
-                  flag = true;
-                break;
-
-              case 'Up':
-              case 'ArrowUp':
-                this.openPopup();
-                this.setFocusToLastMenuitem();
-                flag = true;
-                break;
-
-              default:
-                break;
-            }
-
-            if (flag) {
-              event.stopPropagation();
-              event.preventDefault();
-            }
-          }
-
           onButtonClick(event) {
             if (this.isOpen()) {
               this.closePopup();
-              this.buttonNode.focus();
             }
             else {
               this.openPopup();
-              this.setFocusToFirstMenuitem();
             }
 
             event.stopPropagation();
             event.preventDefault();
           }
 
-          onMenuitemKeydown(event) {
-            var tgt = event.currentTarget,
-              key = event.key,
-              flag = false;
-
-            function isPrintableCharacter (str) {
-              return str.length === 1 && str.match(/\S/);
-            }
-
-            if (event.ctrlKey || event.altKey  || event.metaKey) {
-              return;
-            }
-
-            if (event.shiftKey) {
-              if (isPrintableCharacter(key)) {
-                this.setFocusByFirstCharacter(tgt, key);
-                flag = true;
-              }
-
-              if (event.key === 'Tab') {
-                this.buttonNode.focus();
+          onBlur(event) {
+            if (!this.domNode.contains(event.relatedTarget)) {
+              if (this.isOpen()) {
                 this.closePopup();
-                flag = true;
               }
             }
-            else {
-
-              switch (key) {
-                case ' ':
-                 window.location.href=tgt.href;
-                 break;
-
-                case 'Esc':
-                case 'Escape':
-                  this.closePopup();
-                  this.buttonNode.focus();
-                  flag = true;
-                  break;
-
-                case 'Up':
-                case 'ArrowUp':
-                  this.setFocusToPreviousMenuitem(tgt);
-                  flag = true;
-                  break;
-
-                case 'ArrowDown':
-                case 'Down':
-                  this.setFocusToNextMenuitem(tgt);
-                  flag = true;
-                  break;
-
-                case 'Home':
-                case 'PageUp':
-                  this.setFocusToFirstMenuitem();
-                  flag = true;
-                  break;
-
-                case 'End':
-                case 'PageDown':
-                  this.setFocusToLastMenuitem();
-                  flag = true;
-                  break;
-
-                case 'Tab':
-                  this.closePopup();
-                  break;
-
-                default:
-                  if (isPrintableCharacter(key)) {
-                    this.setFocusByFirstCharacter(tgt, key);
-                    flag = true;
-                  }
-                  break;
-              }
-
-            }
-
-            if (flag) {
-              event.stopPropagation();
-              event.preventDefault();
-            }
-          }
-
-          onMenuitemMouseover(event) {
-            var tgt = event.currentTarget;
-            tgt.focus();
           }
 
           onBackgroundMousedown(event) {
@@ -438,157 +209,82 @@
             var menuButton = new MenuButtonLinks(menuButtons[i]);
           }
         });
-
      </script>
 <div id="example">
-      
+        
 <div class="menu-button-links">
-        
+          
 <button type="button">
-          WAI-ARIA Quick Links
-          <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
-            <polygon points="1 0, 11 0, 6 8"/>
-          </svg>
-        </button>
-        
+            WAI-ARIA Quick Links
+            <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
+              <polygon points="1 0, 11 0, 6 8"/>
+            </svg>
+          </button>
+          
 <ul class="menu">
-          
-<li>
             
+<li>
+              
 <a href="https://www.w3.org/">
-              W3C Home Page
-            </a>
-          
-</li>
-          
-<li>
+                W3C Home Page
+              </a>
             
+</li>
+            
+<li>
+              
 <a href="https://www.w3.org/standards/webdesign/accessibility">
-              W3C Web Accessibility Initiative
-            </a>
-          
-</li>
-          
-<li>
+                W3C Web Accessibility Initiative
+              </a>
             
+</li>
+            
+<li>
+              
 <a href="https://www.w3.org/TR/wai-aria/">
-              ARIA Specification
-            </a>
-          
-</li>
-          
-<li>
+                ARIA Specification
+              </a>
             
+</li>
+            
+<li>
+              
 <a href="https://w3c.github.io/aria-practices/">
-              Authoring Practices
-            </a>
-          
-</li>
-          
-<li>
+                Authoring Practices
+              </a>
             
+</li>
+            
+<li>
+              
 <a href="https://www.w3.org/TR/html-aria/#el-li">
-              HTML Accessibility API Mappings
-            </a>
-          
-</li>
-          
-<li>
+                HTML Accessibility API Mappings
+              </a>
             
+</li>
+            
+<li>
+              
 <a href="https://w3c.github.io/core-aam/#mapping_role">
-              Core ARIA Accessibility API Mappings
-            </a>
-          
-</li>
-          
-<li>
+                Core ARIA Accessibility API Mappings
+              </a>
             
+</li>
+            
+<li>
+              
 <a href="https://www.w3.org/TR/accname-aam-1.1/">
-              Accessible Name and Description
-            </a>
-          
+                Accessible Name and Description
+              </a>
+            
 </li>
-        
+          
 </ul>
-      
+        
 </div>
+
      
 </div>
-<h2>New Keyboard Support</h2>
-<ul>
-      
-<li>Button opens menu moves keyboard focus to a menu option.
-        <ul>
-          
-<li>
-<kbd>Space</kbd>
-</li>
-          
-<li>
-<kbd>Enter</kbd>
-</li>
-          
-<li>
-<kbd>Up arrow</kbd>
-</li>
-          
-<li>
-<kbd>Down arrow</kbd>
-</li>
-        
-</ul>
-      
-</li>
-      
-<li>Move through menu options with cursor keys.
-        <ul>
-          
-<li>
-<kbd>Up arrow</kbd>
-</li>
-          
-<li>
-<kbd>Down arrow</kbd>
-</li>
-          
-<li>
-<kbd>Home</kbd>
-</li>
-          
-<li>
-<kbd>End</kbd>
-</li>
-        
-</ul>
-      
-</li>
-      
-<li>Move through menu options with first letter keys.</li>
-        
-<ul>
-          
-<li>
-<kbd>A-Z</kbd>
-</li>
-          
-<li>
-<kbd>a-z</kbd>
-</li>
-        
-</ul>
-      
-<li>Close menu and move focus back to button.
-        <ul>
-          
-<li>
-<kbd>Escape</kbd>
-</li>
-        
-</ul>
-      
-</li>
-     
-</ul>
 <h2>HTML Source Code</h2>
 <pre>
 <code id="sc1"></code>

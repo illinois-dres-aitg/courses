@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Slide 12: Tabindex and Keyboard Focus</title>
+<title>Slide 12: Summary of W3C Documents</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-accessibility.css">
@@ -41,13 +41,13 @@
                       </a>
 </li>
 <li>
-<a id="ID_SLIDE_LAST" href="slide43.html" title="Slide 43">
+<a id="ID_SLIDE_LAST" href="slide45.html" title="Slide 45">
                         Last
                       </a>
 </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
-<li class="nav navbar-text">Slide 12 of 43</li>
+<li class="nav navbar-text">Slide 12 of 45</li>
 </ul>
 </div>
 </div>
@@ -56,35 +56,14 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-9">
-<h1 id="h1_title" class="title">Tabindex and Keyboard Focus</h1>
-<ul>
-        
-<li>
-          
-<a href="https://www.w3.org/TR/html4/interact/forms.html#adef-tabindex" target="_specification">
-            HTM4 tabindex requirements
-          </a>
-        
-</li>
-        
-<li>
-          
-<a href="https://www.w3.org/TR/html5/editing.html#focus" target="_specification">HTML focus</a>
-          and
-          <a href="https://html.spec.whatwg.org/multipage/interaction.html#the-tabindex-attribute" target="_specification">tabindex</a> requirements.
-        </li>
-       
-<li>Actively define visual focus style, since the default browser visual focus styling of focus is typically hard to discern and varies between browsers.</li>
-      
-</ul>
-<h2 id="tabindex_values">Tabindex Values</h2>
+<h1 id="h1_title" class="title">Summary of W3C Documents</h1>
 <table class="table table-striped table-hover" aria-label="tabindex_values">
         
 <thead>
           
 <tr>
             
-<th>Value</th>
+<th>Document</th>
             <th>Description</th>
           
 </tr>
@@ -95,14 +74,14 @@
           
 <tr>
             
-<td>-1</td>
+<td><a href="https://www.w3.org/TR/wai-aria" target="_specification">Accessible Rich Internet Applications Specification</a></td>
             <td>
               
 <ul>
                 
-<li>Support keyboard focus/blur events.</li>
+<li>Defines the vocabulary for the roles, properties and states to describe the features of a website.</li>
                 
-<li>Not included in the tab order of the page.</li>
+<li>Adding aria markup does not effect web bowser behavior or rendering, only what is communicated through accessibility APIs to screen readers.</li>
               
 </ul>
             
@@ -112,14 +91,16 @@
           
 <tr>
             
-<td>0</td>
+<td><a href="https://html.spec.whatwg.org/" target="_specification">HTML living standard</a></td>
             <td>
               
 <ul>
                 
-<li>Support keyboard focus/blur events.</li>
+<li>Defines the semantics and behaviors of HTML markup.</li>
                 
-<li>Included in the tab order of the page.</li>
+<li>Native HTML markup should be used instead of ARIA markup.</li>
+                
+<li>This document is a living standard, so it has no version number and reflects the current state of interoperability of HTML on the web.</li>
               
 </ul>
             
@@ -129,17 +110,65 @@
           
 <tr>
             
-<td>&gt; 0</td>
+<td><a href="https://www.w3.org/TR/html-aria/#el-li" target="_specification">HTML Accessibility API Mappings 1.0</a></td>
             <td>
               
 <ul>
                 
-<li>Support keyboard focus/blur events.</li>
+<li>Defines default ARIA roles for HTML elements.</li>
                 
-<li>Defines the tab order of the page.</li>
+<li>Restricts ARIA roles that can override the default role, based on the semantics of the element.</li>
+              
+</ul>
+            
+</td>
+          
+</tr>
+          
+<tr>
+            
+<td>
+              <a href="https://www.w3.org/TR/accname-1.1/" target="_specification">Accessible Name and Description Computation 1.1</a>
+            </td>
+            <td>
+            
+<ul>
+              
+<li>Defines the priority and the algorithms for computing accessible name and accessible description.</li>
+              
+<li>Complexity of algorithm due to <code>aria-labelledby</code> and <code>aria-describedby</code> computation.</li>
+              
+<li>Simpler explanation of the <a href="https://w3c.github.io/aria-practices/#names_and_descriptions">basics of naming and describing</a> in ARIA Authoring Practices.</li>
+            
+</ul>
+           
+</td>
+          
+</tr>
+          
+<tr>
+            
+<td><a href="https://w3c.github.io/core-aam/#mapping_role" target="_specification">Core Accessibility API Mappings for ARIA</a></td>
+            <td>
+              
+<ul>
                 
-<li>
-<strong>Note:</strong> This technique is not recommended due to browser incompatibilities and unpredictable focus behaviors.</li>
+<li>Defines how ARIA roles, properties and states are mapped to specific accessibility APIs.</li>
+                
+<li>Currently supported APIs:
+                  <ul>
+                    
+<li>ATK/AT-SPI (Linux/Unix)</li>
+                    
+<li>Microsoft Active Accessibility (MSAA) + IAccessible2</li>
+                    
+<li>Microsoft UI Automate</li>
+                    
+<li>MacOS Accessibility API</li>
+                  
+</ul>
+                
+</li>
               
 </ul>
             
