@@ -9,7 +9,60 @@
 <link rel="stylesheet" type="text/css" href="../css/html-slides.css">
 <script src="../js/jquery-2.1.1.min.js"></script><script src="../js/bootstrap.min.js"></script><script src="../js/bootstrap-accessibility.min.js"></script><script src="../js/html-slides.js"></script>
 <style id="style">
+      .menu-button-links {
+        margin: 0;
+        font-size: 110%;
+      }
 
+      .menu-button-links button {
+        margin: 0;
+        padding: 6px;
+        display: inline-block;
+        position: relative;
+        background-color: #034575;
+        border: 1px solid #034575;
+        font-size: 0.9em;
+        color: white;
+        border-radius: 5px;
+      }
+
+      .menu-button-links [role="menu"] {
+        margin: 0;
+        padding: 7px 4px;
+        list-style: none;
+        display: none;
+        position: absolute;
+        border: 2px solid #034575;
+        border-radius: 5px;
+        background-color: #eee;
+      }
+
+      .menu-button-links [role="menu"] a {
+        margin: 0;
+        padding: 6px;
+        display: block;
+        width: 24em;
+        background-color: #eee;
+        border: none;
+        color: black;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      .menu-button-links [role="memu"] a:hover {
+        background-color: #034575;
+        color: white;
+       }
+
+      .menu-button-links button svg.down {
+        padding-left: 0.125em;
+        fill: currentColor;
+        stroke: currentColor;
+      }
+
+      .menu-button-links button[aria-expanded] svg.down {
+        transform: rotate(180deg);
+      }
     </style>
 </head>
 <body>
@@ -59,7 +112,410 @@
 <div class="col-md-1"></div>
 <div class="col-md-9">
 <h1 id="h1_title" class="title">Menu Button: Add ARIA roles, properties and states</h1>
-<h2>Button Element</h2>
+<h2>Example</h2>
+<p>
+<a href="https://webedit.disability.illinois.edu/user/jongund/nav-menu-button-add-aria-markup/output/" target="_webedit">Menu Button example with ARIA markup support on WebEdit</a>
+</p>
+<script id="script">
+        class MenuButtonLinks {
+
+          constructor(domNode) {
+
+            this.domNode       = domNode;
+            this.buttonNode    = domNode.querySelector('button');
+            this.menuNode      = domNode.querySelector('[role="menu"]');
+            this.menuitemNodes = []
+            this.firstMenuitem = false;
+            this.lastMenuitem  = false;
+            this.firstChars = [];
+
+            this.buttonNode.addEventListener('keydown', this.onButtonKeydown.bind(this));
+            this.buttonNode.addEventListener('click', this.onButtonClick.bind(this));
+
+            var nodes = this.menuNode.querySelectorAll('a');
+
+            for (var i = 0; i < nodes.length; i++) {
+              var menuitem = nodes[i];
+              this.menuitemNodes.push(menuitem);
+              menuitem.tabIndex = -1;
+              this.firstChars.push(menuitem.textContent.trim()[0].toLowerCase());
+
+              menuitem.addEventListener('keydown', this.onMenuitemKeydown.bind(this));
+
+              menuitem.addEventListener('mouseover', this.onMenuitemMouseover.bind(this));
+
+              if( !this.firstMenuitem) {
+                this.firstMenuitem = menuitem;
+              }
+              this.lastMenuitem = menuitem;
+            }
+
+            domNode.addEventListener('focusin', this.onFocusin.bind(this));
+            domNode.addEventListener('focusout', this.onFocusout.bind(this));
+
+            window.addEventListener('mousedown', this.onBackgroundMousedown.bind(this), true);
+          }
+
+          // Popup menu methods
+
+          openPopup() {
+            var rect = this.menuNode.getBoundingClientRect();
+            this.menuNode.style.display = 'block';
+            this.buttonNode.setAttribute('aria-expanded', 'true');
+          }
+
+          closePopup() {
+            if (this.isOpen()) {
+              this.buttonNode.removeAttribute('aria-expanded');
+              this.menuNode.style.display = 'none';
+            }
+          }
+
+          isOpen() {
+            return this.buttonNode.getAttribute('aria-expanded') === 'true';
+          }
+
+          // Focus management methods
+
+          setFocusToMenuitem(newMenuitem) {
+            this.menuitemNodes.forEach(function(item) {
+              if (item === newMenuitem) {
+                item.tabIndex = 0;
+                newMenuitem.focus();
+              }
+              else {
+                item.tabIndex = -1;
+              }
+            });
+          }
+
+          setFocusToFirstMenuitem(currentMenuitem) {
+            this.setFocusToMenuitem(this.firstMenuitem);
+          }
+
+          setFocusToLastMenuitem(currentMenuitem) {
+            this.setFocusToMenuitem(this.lastMenuitem);
+          }
+
+          setFocusToPreviousMenuitem(currentMenuitem) {
+            var newMenuitem, index;
+
+            if (currentMenuitem === this.firstMenuitem) {
+              newMenuitem = this.lastMenuitem;
+            }
+            else {
+              index = this.menuitemNodes.indexOf(currentMenuitem);
+              newMenuitem = this.menuitemNodes[ index - 1 ];
+            }
+
+            this.setFocusToMenuitem(newMenuitem);
+
+            return newMenuitem;
+          }
+
+          setFocusToNextMenuitem(currentMenuitem) {
+            var newMenuitem, index;
+
+            if (currentMenuitem === this.lastMenuitem) {
+              newMenuitem = this.firstMenuitem;
+            }
+            else {
+              index = this.menuitemNodes.indexOf(currentMenuitem);
+              newMenuitem = this.menuitemNodes[ index + 1 ];
+            }
+            this.setFocusToMenuitem(newMenuitem);
+
+            return newMenuitem;
+          }
+
+          setFocusByFirstCharacter(currentMenuitem, char) {
+            var start, index;
+
+            if (char.length > 1) {
+              return;
+            }
+
+            char = char.toLowerCase();
+
+            // Get start index for search based on position of currentItem
+            start = this.menuitemNodes.indexOf(currentMenuitem) + 1;
+            if (start >=  this.menuitemNodes.length) {
+              start = 0;
+            }
+
+            // Check remaining slots in the menu
+            index = this.firstChars.indexOf(char, start);
+
+            // If not found in remaining slots, check from beginning
+            if (index === -1) {
+              index = this.firstChars.indexOf(char, 0);
+            }
+
+            // If match was found...
+            if (index > -1) {
+              this.setFocusToMenuitem(this.menuitemNodes[index]);
+            }
+          }
+
+          // Utilities
+
+          getIndexFirstChars(startIndex, char) {
+            for (var i = startIndex; i < this.firstChars.length; i++) {
+              if (char === this.firstChars[i]) {
+                return i;
+              }
+            }
+            return -1;
+          }
+
+
+          // Menu event handlers
+
+          onFocusin(event) {
+            this.domNode.classList.add('focus');
+          }
+
+          onFocusout(event) {
+            this.domNode.classList.remove('focus');
+          }
+
+          onButtonKeydown(event) {
+            var tgt = event.currentTarget,
+              key = event.key,
+              flag = false;
+
+            switch (key) {
+              case ' ':
+              case 'Enter':
+              case 'ArrowDown':
+              case 'Down':
+                this.openPopup();
+                this.setFocusToFirstMenuitem();
+                flag = true;
+               break;
+
+              case 'Esc':
+              case 'Escape':
+                  this.closePopup();
+                  this.buttonNode.focus();
+                  flag = true;
+                break;
+
+              case 'Up':
+              case 'ArrowUp':
+                this.openPopup();
+                this.setFocusToLastMenuitem();
+                flag = true;
+                break;
+
+              default:
+                break;
+            }
+
+            if (flag) {
+              event.stopPropagation();
+              event.preventDefault();
+            }
+          }
+
+          onButtonClick(event) {
+            if (this.isOpen()) {
+              this.closePopup();
+              this.buttonNode.focus();
+            }
+            else {
+              this.openPopup();
+              this.setFocusToFirstMenuitem();
+            }
+
+            event.stopPropagation();
+            event.preventDefault();
+          }
+
+          onMenuitemKeydown(event) {
+            var tgt = event.currentTarget,
+              key = event.key,
+              flag = false;
+
+            function isPrintableCharacter (str) {
+              return str.length === 1 && str.match(/\S/);
+            }
+
+            if (event.ctrlKey || event.altKey  || event.metaKey) {
+              return;
+            }
+
+            if (event.shiftKey) {
+              if (isPrintableCharacter(key)) {
+                this.setFocusByFirstCharacter(tgt, key);
+                flag = true;
+              }
+
+              if (event.key === 'Tab') {
+                this.buttonNode.focus();
+                this.closePopup();
+                flag = true;
+              }
+            }
+            else {
+
+              switch (key) {
+                case ' ':
+                 window.location.href=tgt.href;
+                 break;
+
+                case 'Esc':
+                case 'Escape':
+                  this.closePopup();
+                  this.buttonNode.focus();
+                  flag = true;
+                  break;
+
+                case 'Up':
+                case 'ArrowUp':
+                  this.setFocusToPreviousMenuitem(tgt);
+                  flag = true;
+                  break;
+
+                case 'ArrowDown':
+                case 'Down':
+                  this.setFocusToNextMenuitem(tgt);
+                  flag = true;
+                  break;
+
+                case 'Home':
+                case 'PageUp':
+                  this.setFocusToFirstMenuitem();
+                  flag = true;
+                  break;
+
+                case 'End':
+                case 'PageDown':
+                  this.setFocusToLastMenuitem();
+                  flag = true;
+                  break;
+
+                case 'Tab':
+                  this.closePopup();
+                  break;
+
+                default:
+                  if (isPrintableCharacter(key)) {
+                    this.setFocusByFirstCharacter(tgt, key);
+                    flag = true;
+                  }
+                  break;
+              }
+
+            }
+
+            if (flag) {
+              event.stopPropagation();
+              event.preventDefault();
+            }
+          }
+
+          onMenuitemMouseover(event) {
+            var tgt = event.currentTarget;
+            tgt.focus();
+          }
+
+          onBackgroundMousedown(event) {
+            if (!this.domNode.contains(event.target)) {
+              if (this.isOpen()) {
+                this.closePopup();
+                this.buttonNode.focus();
+              }
+            }
+          }
+        }
+
+        // Initialize navigation menu buttons
+
+        window.addEventListener('load', function () {
+          var menuButtons = document.querySelectorAll('.menu-button-links');
+          for(var i=0; i < menuButtons.length; i++) {
+            var menuButton = new MenuButtonLinks(menuButtons[i]);
+          }
+        });
+
+     </script>
+<div id="example">
+        
+<div class="menu-button-links">
+          
+<button type="button" id="id-button" aria-haspopup="true" aria-controls="id-menu">
+            WAI-ARIA Quick Links
+            <svg xmlns="http://www.w3.org/2000/svg" class="down" width="12" height="9" viewBox="0 0 12 9">
+              <polygon points="1 0, 11 0, 6 8"/>
+            </svg>
+          </button>
+          
+<ul id="id-menu" role="menu" aria-labelledby="id-button">
+            
+<li role="none">
+              
+<a role="menuitem" href="https://www.w3.org/">
+                W3C Home Page
+              </a>
+            
+</li>
+            
+<li role="none">
+              
+<a role="menuitem" href="https://www.w3.org/standards/webdesign/accessibility">
+                W3C Web Accessibility Initiative
+              </a>
+            
+</li>
+            
+<li role="none">
+              
+<a role="menuitem" href="https://www.w3.org/TR/wai-aria/">
+                ARIA Specification
+              </a>
+            
+</li>
+            
+<li role="none">
+              
+<a role="menuitem" href="https://w3c.github.io/aria-practices/">
+                Authoring Practices
+              </a>
+            
+</li>
+            
+<li role="none">
+              
+<a role="menuitem" href="https://www.w3.org/TR/html-aria/#el-li">
+                HTML Accessibility API Mappings
+              </a>
+            
+</li>
+            
+<li role="none">
+              
+<a role="menuitem" href="https://w3c.github.io/core-aam/#mapping_role">
+                Core ARIA Accessibility API Mappings
+              </a>
+            
+</li>
+            
+<li role="none">
+              
+<a role="menuitem" href="https://www.w3.org/TR/accname-aam-1.1/">
+                Accessible Name and Description
+              </a>
+            
+</li>
+          
+</ul>
+        
+</div>
+     
+</div>
+<h2>ARIA Markup</h2>
+<h3>Button Element</h3>
 <ul>
         
 <li>Button element has the default role of <code>button</code>.</li>
@@ -76,7 +532,7 @@
 <li>Accessible name for the button comes from the text content of the button element.</li>
       
 </ul>
-<h2>Menu and Menuitem Elements</h2>
+<h3>Menu and Menuitem Elements</h3>
 <ul>
         
 <li>Container <code>ul</code> element has the <code>role="menu"</code>.</li>
@@ -92,15 +548,6 @@
 <li>Accessible name for the menu items comes from the text content of the anchor elements.</li>
       
 </ul>
-<h2>Example</h2>
-<p>
-<a href="https://webedit.disability.illinois.edu/user/jongund/menu-button-add-aria-markup/output/" target="_webedit">Menu Button example with ARIA markup support on WebEdit</a>
-</p>
-<script id="script">
-     </script>
-<div id="example">
-     
-</div>
 <h2>HTML Source Code</h2>
 <pre>
 <code id="sc1"></code>
