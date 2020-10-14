@@ -5,11 +5,11 @@
 
 .menu-button-links button {
   margin: 0;
-  padding: 4px;
+  padding: 6px;
   display: inline-block;
   position: relative;
   background-color: #034575;
-  border: 2px solid #034575;
+  border: 1px solid white;
   font-size: 0.9em;
   color: white;
   border-radius: 5px;
@@ -51,4 +51,22 @@
 
 .menu-button-links button[aria-expanded] svg.down {
   transform: rotate(180deg);
+}
+
+/* Focus and hover styling */
+
+.menu-button-links button:focus,
+.menu-button-links button:hover {
+  padding: 4px;
+  background-color: white;
+  border: 3px solid #034575;
+  color: #222222;
+}
+
+.menu-button-links [role="menu"] a:focus,
+.menu-button-links [role="menu"] a:hover {
+  padding: 4px;
+  background-color: white;
+  border: 2px solid #034575;
+  color: #222222;
 }

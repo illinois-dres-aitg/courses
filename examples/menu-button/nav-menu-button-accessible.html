@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Navigation Menu Button: Keyboard, ARIA and High Contrast Support
+    </title>
+    <link href="nav-menu-button-accessible.css" rel="stylesheet"/>
+    <script src="nav-menu-button-accessible.js"></script>
+  </head>
+  <body>
+    <h1>Navigation Menu Button: Keyboard, ARIA and High Contrast Support</h1>
+    <div class="menu-button-links">
+      <button type="button"
+        id="id-button"
+        aria-haspopup="true"
+        aria-controls="id-menu">
+        WAI-ARIA Quick Links
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="down"
+             width="12"
+             height="9"
+             viewBox="0 0 12 9">
+          <polygon points="1 0, 11 0, 6 8"></polygon>
+        </svg>
+      </button>
+      <ul id="id-menu" role="menu" aria-labelledby="id-button">
+        <li role="none">
+          <a role="menuitem" href="https://www.w3.org/">
+            W3C Home Page
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="https://www.w3.org/standards/webdesign/accessibility">
+            W3C Web Accessibility Initiative
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="https://www.w3.org/TR/wai-aria/">
+            ARIA Specification
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="https://w3c.github.io/aria-practices/">
+            Authoring Practices
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="https://www.w3.org/TR/html-aria/#el-li">
+            HTML Accessibility API Mappings
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="https://w3c.github.io/core-aam/#mapping_role">
+            Core ARIA Accessibility API Mappings
+          </a>
+        </li>
+        <li role="none">
+          <a role="menuitem" href="https://www.w3.org/TR/accname-aam-1.1/">
+            Accessible Name and Description
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <h2>Focus and Hover Styling Features</h2>
+    <ul>
+      <li>Added 2px border for button and links.</li>
+      <li>When the button or link gets focus, change the border, background and text color.</li>
+    </ul>
+
+    <h2>ARIA Markup Features</h2>
+
+    <h3>Button Element</h3>
+    <ul>
+       <li>Button element has the default role of <code>button</code>.</li>
+       <li>
+          <code>aria-haspopup="true"</code> attribute.
+       </li>
+       <li>
+          <code>aria-controls</code> attribute references the <code>id</code> of the element with the <code>menu</code> role.
+       </li>
+       <li>
+          <code>aria-expanded="true"</code> when menu is open, otherwise attribute is not present.
+       </li>
+       <li>Accessible name for the button comes from the text content of the button element.</li>
+    </ul>
+
+    <h3>Menu and Menuitem Elements</h3>
+    <ul>
+       <li>Container <code>ul</code> element has the <code>role="menu"</code>.</li>
+       <li>Container <code>ul</code> element has the <code>aria-labelledby="id-mb"</code> to provide an accessible name for the menu.</li>
+       <li>
+          <code>a</code> elements have the <code>role="menuitem"</code>.
+       </li>
+       <li>
+          <code>li</code> elements have the <code>role="none"</code>, since the list item semantics are not needed due to the <code>menuitem</code> roles being on the <code>a</code> elements.
+       </li>
+       <li>Accessible name for the menu items comes from the text content of the anchor elements.</li>
+    </ul>
+
+    <h2>Keyboard Features</h2>
+    <p>Includes keyboard support required by the menu button design pattern:
+    <ul>
+    <li>
+       Button opens menu moves keyboard focus to a menu option.
+       <ul>
+          <li><kbd>Space</kbd></li>
+          <li><kbd>Enter</kbd>
+          </li>
+          <li>
+             <kbd>Up arrow</kbd>
+          </li>
+          <li>
+             <kbd>Down arrow</kbd>
+          </li>
+       </ul>
+    </li>
+    <li>
+       Move through menu options with cursor keys.
+       <ul>
+          <li>
+             <kbd>Up arrow</kbd>
+          </li>
+          <li>
+             <kbd>Down arrow</kbd>
+          </li>
+          <li>
+             <kbd>Home</kbd>
+          </li>
+          <li>
+             <kbd>End</kbd>
+          </li>
+       </ul>
+    </li>
+    <li>Move through menu options with first letter keys.</li>
+    <ul>
+       <li>
+          <kbd>A-Z</kbd>
+       </li>
+       <li>
+          <kbd>a-z</kbd>
+       </li>
+    </ul>
+    <li>
+       Close menu and move focus back to button.
+       <ul>
+          <li>
+             <kbd>Escape</kbd>
+          </li>
+       </ul>
+     </li>
+    </ul>
+
+   <h2>Accessibility Issues</h2>
+    <ul>
+      <li>Poor high contrast support for focus styling.</li>
+    </ul>
+  </body>
+</html>
