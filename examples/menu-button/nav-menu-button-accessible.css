@@ -38,11 +38,6 @@
   text-decoration: none;
 }
 
-.menu-button-links [role="menu"] a:hover {
-  background-color: #034575;
-  color: white;
- }
-
 .menu-button-links button svg.down {
   padding-left: 0.125em;
   fill: currentColor;
