@@ -2,9 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:wai_report="http://www.w3.org/wai"
                 version="1.0"
-    xmlns:lxslt="http://xml.apache.org/xslt"
-    xmlns:redirect="org.apache.xalan.xslt.extensions.Redirect"
-    extension-element-prefixes="redirect">
+    xmlns:lxslt="http://xml.apache.org/xslt">
 
   <xsl:output method="html" doctype-public="" indent="yes"/>
 
@@ -40,9 +38,9 @@
               <xsl:attribute name="class">btn btn-default home</xsl:attribute>
               <xsl:element name="a">
                 <xsl:attribute name="href">
-                  <xsl:value-of select="/slides/home/@href"/>
+                  <xsl:value-of select="/slides/home/."/>
                 </xsl:attribute>
-                <xsl:value-of select="/slides/home/."/>
+                Home
               </xsl:element>
             </xsl:element>
           </xsl:if>
@@ -123,7 +121,7 @@
 
       <xsl:variable name="fname">slide<xsl:value-of select="position()"/>.html</xsl:variable>
 
-      <redirect:write select="$fname">
+      <xsl:result-document href="{$fname}" method="html">
 
         <xsl:element name="html">
           <xsl:attribute name="lang"><xsl:value-of select="/slides/lang/."/></xsl:attribute>
@@ -239,7 +237,7 @@
           </xsl:element>
         </xsl:element>
 
-      </redirect:write>
+      </xsl:result-document>
 
     </xsl:for-each>
 
@@ -247,7 +245,7 @@
 
       <xsl:variable name="fname">transcript.html</xsl:variable>
 
-      <redirect:write select="$fname">
+      <xsl:result-document href="{$fname}" method="html">
 
         <xsl:element name="html">
           <xsl:attribute name="lang"><xsl:value-of select="/slides/lang/."/></xsl:attribute>
@@ -328,7 +326,7 @@
           </xsl:element>
         </xsl:element>
 
-      </redirect:write>
+      </xsl:result-document>
 
     </xsl:if>
 
