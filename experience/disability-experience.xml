@@ -105,8 +105,7 @@
 
       <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      <script src="../highcharts/code/highcharts.js"></script>
-      <script src="../highcharts/code/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
 
       <script type="text/javascript">
 
@@ -274,8 +273,7 @@
 
       <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      <script src="../highcharts/code/highcharts.js"></script>
-      <script src="../highcharts/code/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
 
       <script type="text/javascript">
 
@@ -399,8 +397,7 @@
 
       <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      <script src="../highcharts/code/highcharts.js"></script>
-      <script src="../highcharts/code/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
 
       <script type="text/javascript">
 
